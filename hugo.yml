@@ -2,3 +2,8 @@ baseURL: 'https://alexforsale.github.io/'
 languageCode: 'en-us'
 title: 'alexforsale.github.io'
 theme: ["PaperMod"]
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
