@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://alexforsale.github.io/sitemap.xml
