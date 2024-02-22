@@ -21,6 +21,7 @@ pygmentsUseClasses: true
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  keywords: [Blog, PaperMod, org-roam, emacs]
   ShowCodeCopyButtons: true
   defaultTheme: auto
   disableThemeToggle: false
@@ -49,9 +50,9 @@ params:
     #imageWidth: 120 # custom size
     #imageHeight: 120 # custom size
     buttons:
-      - name: "Gitlab"
-        url: "https://gitlab.com/alexforsale"
-      - name: Github
+      - name: "Braindump"
+        url: "/braindump"
+      - name: "Github"
         url: "https://github.com/alexforsale"
 
   socialIcons: # optional
