@@ -51,9 +51,9 @@ params:
     #imageHeight: 120 # custom size
     buttons:
       - name: "Braindump"
-        url: "/braindump"
-      - name: "Github"
-        url: "https://github.com/alexforsale"
+        url: "/braindump/"
+      - name: "Blog"
+        url: "/posts/"
 
   socialIcons: # optional
     - name: "github"
