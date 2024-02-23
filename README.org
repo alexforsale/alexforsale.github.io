@@ -1,4 +1,4 @@
 * Publishing
 #+begin_src sh
-  emacs -Q --batch --load scripts/build.el --funcall export-org-files
+  emacs -q -Q --batch --load scripts/build.el --funcall export-org-files
 #+end_src
