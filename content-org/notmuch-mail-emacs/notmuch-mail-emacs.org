@@ -198,6 +198,17 @@ This will ensure each time we call ~notmuch new~, it will run offlineimap.
   if [ $newcount -gt 0 ]; then logger -t notmuch "calling notify-send '$summary' '$detail'" && notify-send -i /usr/share/icons/Papirus/symbolic/actions/mail-message-new-symbolic.svg "$summary" "$detail"; fi
   exit 0
 #+end_src
+* cron
+There's lot of ways to automate the syncing process. /systemd-timer/ is one of them, but since I'm an old-school person, I prefer /cron/.
+#+begin_src sh :results verbatim :exports both
+crontab -l
+#+end_src
+
+#+RESULTS:
+: MAILTO=alexforsale@yahoo.com
+: MAILFROM=alexforsale@yahoo.com
+: */45 * * * *    notmuch new
+
 * Footnotes
 
 [fn:1] https://wiki.archlinux.org/title/msmtp
