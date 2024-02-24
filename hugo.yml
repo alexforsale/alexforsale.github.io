@@ -47,9 +47,9 @@ params:
 
   profileMode:
     enabled: true
-    # title: "Kristian Alexander" # optional default will be site title
+    title: "Kristian Alexander" # optional default will be site title
     # subtitle: "This is subtitle"
-    # imageUrl: "/images/alexforsale2.png" # optional
+    imageUrl: "/images/riki_sneeze.png" # optional
     #imageTitle: "<title of image as alt>" # optional
     #imageWidth: 120 # custom size
     #imageHeight: 120 # custom size
