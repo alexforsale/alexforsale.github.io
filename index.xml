@@ -9,11 +9,18 @@
     <lastBuildDate>Thu, 22 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
+      <title>Github Action for hugo static site using Emacs</title>
       <link>https://alexforsale.github.io/posts/github-action-hugo-emacs/</link>
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/posts/github-action-hugo-emacs/</guid>
       <description>With a mixture of emacs-lisp and gnu makefile</description>
+    </item>
+    <item>
+      <title>Using Emacs as an email client</title>
+      <link>https://alexforsale.github.io/posts/notmuch-mail-emacs/</link>
+      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/notmuch-mail-emacs/</guid>
+      <description>Exchange mail sync with davmail, msmtp, notmuch and emacs.</description>
     </item>
     <item>
       <title></title>

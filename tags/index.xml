@@ -23,6 +23,13 @@
       <description></description>
     </item>
     <item>
+      <title>Exchange</title>
+      <link>https://alexforsale.github.io/tags/exchange/</link>
+      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/exchange/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Git</title>
       <link>https://alexforsale.github.io/tags/git/</link>
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
@@ -41,6 +48,27 @@
       <link>https://alexforsale.github.io/tags/hugo/</link>
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mail</title>
+      <link>https://alexforsale.github.io/tags/mail/</link>
+      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/mail/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Microsoft</title>
+      <link>https://alexforsale.github.io/tags/microsoft/</link>
+      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/microsoft/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Notmuch</title>
+      <link>https://alexforsale.github.io/tags/notmuch/</link>
+      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/notmuch/</guid>
       <description></description>
     </item>
   </channel>
