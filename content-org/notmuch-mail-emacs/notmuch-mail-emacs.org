@@ -1,0 +1,203 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-02-22 Thu>
+#+title: Using Emacs as an email client
+#+description: Exchange mail sync with davmail, msmtp, notmuch and emacs.
+#+hugo_tags: emacs mail notmuch microsoft exchange
+#+hugo_categories: emacs
+#+startup: inlineimages
+[[./full.png]]
+* Davmail
+In my work routines, /Microsoft/ is somewhat unavoidable, and trying to have an email client that can sync /Exchange/ in linux has always been a pain to me. This is my documentation on how to use /notmuch/, /davmail/, and /msmtp/ to sync my work emails.
+** Configuration
+#+begin_src
+davmail.server=true
+davmail.mode=Auto
+davmail.url=https://mail.domain/EWS/Exchange.asmx
+davmail.defaultDomain=DOMAIN
+davmail.ssl.nosecurecaldav=false
+davmail.ssl.nosecureimap=false
+davmail.ssl.nosecureldap=false
+davmail.ssl.nosecurepop=false
+davmail.ssl.nosecuresmtp=false
+davmail.caldavPort=1081
+davmail.imapPort=1144
+davmail.ldapPort=1390
+davmail.popPort=1111
+davmail.smtpPort=1026
+davmail.imapAutoExpunge=true
+davmail.allowRemote=false
+davmail.logFilePath=/tmp/davmail-domain.log
+davmail.logFileSize=1MB
+davmail.disableGuiNotifications=true
+davmail.disableTrayActivitySwitch=true
+davmail.showStartupBanner=false
+davmail.enableKerberos=false
+#+end_src
+*** Notes
+- ~davmail.mode~ set to auto.
+- uses port > 1024 to avoid using root privileges.
+- Also set the ~davmail.logFilePath~ to a path that is accessible.
+- ~davmail.server~ set to =true= since I don't need the GUI.
+- All the =ssl= options is not necessary since it will only be accessed locally.
+* msmtp
+It's a simple smtp client with fairly complete sendmail compatibility. This is not a full tutorial on how to setup /msmtp/, there's already much information for that online[fn:1].
+
+#+begin_src
+  # Set default values for all following accounts.
+  defaults
+  auth           on
+  tls            on
+  tls_trust_file /etc/ssl/certs/ca-certificates.crt
+  logfile        /tmp/msmtp.log
+
+  account exchange
+  host localhost
+  port 1025
+  tls off
+  tls_starttls off
+  auth plain
+  user DOMAIN\username
+  from username@domain
+  passwordeval pass domain/username
+#+end_src
+** Notes
+- ~logfile~ should be accessible (read/write) by the user.
+- ~account~ must be unique if there's more than one accounts.
+- ~tls~ options should refer to the /exchange/ server.
+- ~port~ is defined in davmail.
+* offlineimap
+#+begin_src
+[general]
+accounts = domain
+maxsyncaccounts = 4
+socktimeout = 10
+pythonfile = ~/.local/bin/offlineimap-helper.py
+
+[Account domain]
+localrepository = domain-local
+remoterepository = domain-remote
+
+[Repository domain-local]
+Type = Maildir
+localfolders = ~/.mail/domain
+sync_deletes = yes
+autorefresh = 0.5
+quick = 10
+keepalive = 240
+holdconnectionopen = yes
+
+[Repository domain-remote]
+Type = IMAP
+remotehosteval = get_credentials("domain", "host")
+remoteporteval = get_credentials("domain", "port")
+remoteusereval = get_credentials("domain", "user")
+remotepasseval = get_credentials("domain", "passeval")
+maxconnections = 1
+ssl = no
+retrycount = 4
+tls_level = tls_no_ssl
+#+end_src
+** Notes
+- We'll be using a helper script to determine the /host/, /port/, /user/, and /password/.
+** offlineimap-helper.py
+#+begin_src python
+#!/usr/bin/env python
+"""Offlineimap helper script"""
+
+from subprocess import check_output
+from os import getenv, path
+import json
+
+JSON_FILE = "credentials.json"
+if getenv("XDG_DATA_HOME") and path.exists(getenv("XDG_DATA_HOME") + "/" + "offlineimap"):
+    JSON_PATH = getenv("XDG_DATA_HOME") + "/" + "offlineimap"
+else:
+    JSON_PATH = getenv("HOME") + "/" + ".local/share/offlineimap"
+
+
+f = open(JSON_PATH + "/" + JSON_FILE)
+creds_data = json.load(f)
+
+def get_credentials(name, query):
+    for item in creds_data["accounts"]:
+        if item["name"] == name:
+            if query == "host":
+                return item["host"]
+            elif query == "port":
+                return item["port"]
+            elif query == "user":
+                return item["user"]
+            elif query == "passeval":
+                return item["passeval"]
+
+#+end_src
+**** Notes
+- This script will read a /json/ file located at ~/.local/share/offlineimap/credentials.json
+** ~/.local/share/offlineimap/credentials.json
+#+begin_src json
+{
+    "accounts": [
+        {
+            "name": "domain",
+            "host": "localhost",
+            "port": 1144,
+            "user": "username",
+            "passeval": "somepassword"
+        }
+
+    ]
+}
+#+end_src
+*** Notes:
+- use a strict permission (such as ~0700~) for this file since password is written in clear text.
+* notmuch
+#+begin_src
+[database]
+path=/home/kristian.alexander/.mail
+
+[user]
+name=Kristian Alexander P
+primary_email=username@domain
+[new]
+tags=new
+
+[search]
+
+exclude_tags=deleted;spam
+[maildir]
+synchronize_flags=true
+#+end_src
+
+** Notes:
+- This file should be generated by the command ~notmuch setup~.
+* notmuch hooks
+We'll be using two hooks, one is =pre-new=, which will be sourced whenever /notmuch/ is running. And the other one is =post-new=, which we'll be sourced after all new emails is synced.
+#+begin_src shell
+  #!/usr/bin/env/bash
+  [[ -x $(which offlineimap) ]] && offlineimap -s
+#+end_src
+This will ensure each time we call ~notmuch new~, it will run offlineimap.
+
+#+begin_src shell
+  #!/usr/bin/env bash
+
+  newcount=$(notmuch count tag:new)
+  summary="Notmuch: ${newcount} new message"
+
+  if [ $newcount -gt 1 ]; then summary="${summary}s"; fi
+  if [ $newcount -gt 0 ]; then detail="$(notmuch search --output=summary --format=json tag:new | sed -e 's/.*authors": "//;s/|[^"]*"/"/;s/", "subject": "/ : /;s/".*//')"; fi
+
+  notmuch tag -new        -- tag:new
+
+  # See the notmuch pre-hook for DISPLAY thoughts
+  # Desktop notifications
+  if [ $newcount -gt 0 ]; then logger -t notmuch "calling notify-send '$summary' '$detail'" && notify-send -i /usr/share/icons/Papirus/symbolic/actions/mail-message-new-symbolic.svg "$summary" "$detail"; fi
+  exit 0
+#+end_src
+* Footnotes
+
+[fn:1] https://wiki.archlinux.org/title/msmtp
