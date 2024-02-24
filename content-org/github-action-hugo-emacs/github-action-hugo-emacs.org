@@ -4,12 +4,12 @@
 #+hugo_section: posts
 #+hugo_base_dir: ../../
 #+date: <2024-02-22 Thu>
+#+title: Github Action for hugo static site using Emacs
 #+description: With a mixture of emacs-lisp and gnu makefile
-#+keywords: emacs hugo blog github git
 #+hugo_tags: emacs hugo blog github git
 #+hugo_categories: emacs
 #+startup: inlineimages
-* Github Action for hugo static site using Emacs
+* About
 :PROPERTIES:
 :EXPORT_FILE_NAME: github-action-for-hugo-static-site-using-emacs
 :END:
