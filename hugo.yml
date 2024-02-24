@@ -70,6 +70,8 @@ params:
       url: "mailto:alexforsale@yahoo.com"
     - name: "key"
       url: "https://keys.openpgp.org/vks/v1/by-fingerprint/27517709E592F14C5A51D90B972B3C2D613E4AE9"
+    - name: "matrix"
+      url: "matrix:@alexforsale:matrix.org"
 
 menu:
   main:
