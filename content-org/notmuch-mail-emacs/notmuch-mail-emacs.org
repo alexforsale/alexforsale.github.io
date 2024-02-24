@@ -208,7 +208,8 @@ crontab -l
 : MAILTO=alexforsale@yahoo.com
 : MAILFROM=alexforsale@yahoo.com
 : */45 * * * *    notmuch new
-
+* Other
+With all the processes above, we could use other mail clients like thunderbird or geary.
 * Footnotes
 
 [fn:1] https://wiki.archlinux.org/title/msmtp
