@@ -75,6 +75,64 @@ This will get you started with /Emacs/, open the tutorial buffer with:
 #+begin_example
 C-h t
 #+end_example
+* Configuration file
+The configuration file itself is written in /Emacs Lisp/. The default location is traditionally in ~~/.emacs~, although /Emacs/ will also look at ~~/.emacs.el~, ~/.emacs.d/init.el~, and ~~/.config/emacs/init.el~. Though if you put your configuration files in ~~/.config/emacs~ directory, be aware that it will not used if ~~/.emacs~ file or ~~/.emacs.d/~ directory already exists,
+* Some useful sane defaults
+** =use-short-answer=
+Use short answer for each confirmation ("y" or "n", instead of "yes" or "no").
+#+begin_src emacs-lisp
+(setq-default use-short-answers t)
+#+end_src
+** disable menu / tool / scroll bar
+Useful if you're already comfortable with the keyboard-centric workflow, and you want to expand the buffer as much as possible.
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+#+end_src
+** disable splash-screen
+#+begin_src emacs-lisp
+  (setq inhibit-startup-screen t)
+#+end_src
+** resize windows pixelwise
+This affect /split-window/, /maximize-window/, /minimize-window/, /fit-window-to-buffer/, and /fit-frame-to-buffer/.
+#+begin_src emacs-lisp
+(setq window-resize-pixelwise t)
+#+end_src
+** resize frame pixelwise
+Neccessary if you're using window-managers.
+#+begin_src emacs-lisp
+(setq frame-resize-pixelwise t)
+#+end_src
+** Ask for confirmatino when exiting /Emacs/
+The default is don't ask for confirmation (nil)
+#+begin_src emacs-lisp
+(setq confirm-kill-emacs #'yes-or-no-p)
+#+end_src
+** enable save-place-mode
+Save the point to the last place when the buffer is previously visited.
+#+begin_example
+(setq save-place-mode t)
+#+end_example
+** enable savehist-mode
+Save the minibuffer history.
+#+begin_src emacs-lisp
+(savehist-mode t)
+#+end_src
+** separate Customization file elsewhere
+By default this file is appended to the init file, which usually not desired.
+#+begin_src emacs-lisp
+  (setq custom-file (locate-user-emacs-file "custom.el")
+        (when (file-exists-p custom-file)
+          (load custom-file)))
+#+end_src
+this snippet will ensure the file is separated and loaded when starting /Emacs/.
+** Ignore case in completion
+#+begin_src emacs-lisp
+  (setq read-buffer-completion-ignore-case t
+        read-file-name-completion-ignore-case t
+        completion-ignore-case t)
+#+end_src
 * Useful links
 ** Configuration generator
 [[https://emacs.amodernist.com/][for those tldr users]].
