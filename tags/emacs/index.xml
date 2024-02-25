@@ -9,18 +9,18 @@
     <lastBuildDate>Thu, 22 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Emacs sane defaults</title>
+      <link>https://alexforsale.github.io/posts/emacs-sane-defaults/</link>
+      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/emacs-sane-defaults/</guid>
+      <description>Finding comfort in Emacs</description>
+    </item>
+    <item>
       <title>Github Action for hugo static site using Emacs</title>
       <link>https://alexforsale.github.io/posts/github-action-hugo-emacs/</link>
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/posts/github-action-hugo-emacs/</guid>
       <description>With a mixture of emacs-lisp and gnu makefile</description>
-    </item>
-    <item>
-      <title>Hyprland</title>
-      <link>https://alexforsale.github.io/posts/hyprland/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/posts/hyprland/</guid>
-      <description>Configure Hyprland</description>
     </item>
     <item>
       <title>Using Emacs as an email client</title>

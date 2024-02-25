@@ -15,12 +15,5 @@
       <guid>https://alexforsale.github.io/posts/github-action-hugo-emacs/</guid>
       <description>With a mixture of emacs-lisp and gnu makefile</description>
     </item>
-    <item>
-      <title>Hyprland</title>
-      <link>https://alexforsale.github.io/posts/hyprland/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/posts/hyprland/</guid>
-      <description>Configure Hyprland</description>
-    </item>
   </channel>
 </rss>
