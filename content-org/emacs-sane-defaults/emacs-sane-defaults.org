@@ -94,6 +94,11 @@ Useful if you're already comfortable with the keyboard-centric workflow, and you
 #+begin_src emacs-lisp
   (setq inhibit-startup-screen t)
 #+end_src
+** Disable =use-file-dialog=
+#+begin_src emacs-lisp
+(setq use-file-dialog nil)
+#+end_src
+Since we don't use the GUI (menu and toolbar).
 ** resize windows pixelwise
 This affect /split-window/, /maximize-window/, /minimize-window/, /fit-window-to-buffer/, and /fit-frame-to-buffer/.
 #+begin_src emacs-lisp
@@ -133,6 +138,77 @@ this snippet will ensure the file is separated and loaded when starting /Emacs/.
         read-file-name-completion-ignore-case t
         completion-ignore-case t)
 #+end_src
+** enable global auto-revert-mode
+This mode enable auto-revert buffer when the file on the disk changes.
+#+begin_src emacs-lisp
+  (global-auto-revert-mode 1)
+#+end_src
+*** also enable it for non-file buffers
+#+begin_src emacs-lisp
+  (setq global-auto-revert-non-file-buffers t)
+#+end_src
+This way, both file buffers and buffers with a custom =revert-buffer-function= will be auto-reverted.
+*** Don't generate message when auto-reverting
+#+begin_src emacs-lisp
+  (setq auto-revert-verbose nil)
+#+end_src
+** electric-pair-mode
+This mode is useful when editing /Emacs Lisp/ buffer, we'll enable this on every programming mode (prog-mode) via hook:
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook (lambda () (electric-pair-mode 1)))
+#+end_src
+** Use clipboard for cutting and pasting
+#+begin_src emacs-lisp
+(setq select-enable-clipboard t)
+#+end_src
+** Delete to trash
+Specifies whether to use the system's trash can.
+#+begin_src emacs-lisp
+(setq delete-by-moving-to-trash t)
+#+end_src
+** Automatic Compression
+#+begin_src emacs-lisp
+  (setq auto-compression-mode t)
+#+end_src
+Opening compressed file (zipped etc), will automatically uncompressed for reading, and compressed when writing.
+** enable font-lock-mode
+This will enable syntax-highlighting and coloring.
+#+begin_src emacs-lisp
+  (global-font-lock-mode t)
+#+end_src
+** recent file
+#+begin_src emacs-lisp
+(recentf-mode 1)
+#+end_src
+** prefer spaces than tabs
+#+begin_src emacs-lisp
+  (set-default 'indent-tabs-mode nil)
+#+end_src
+** visualize empty lines
+#+begin_src emacs-lisp
+  (set-default 'indicate-empty-lines t)
+#+end_src
+** Ease CamelCase word navigation
+#+begin_src emacs-lisp
+(global-subword-mode 1)
+#+end_src
+This way =editPost= is considered a two word.
+** disable electric-indent-mode
+#+begin_src emacs-lisp
+(setq electric-indent-mode nil)
+#+end_src
+* Early init
+This file is processed before ~init.el~, must be named ~early-init.el~ and located in the same directory as the ~init.el~. Example customization that should be placed here are:
+- Custom package management (this is loaded before the default /package/).
+I use this for early UI setup:
+#+begin_src emacs-lisp
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars) default-frame-alist)
+#+end_src
+* After Configuration
+#+caption: After configuring
+[[./emacs-after.png][file:emacs-after.png]]
 * Useful links
 ** Configuration generator
 [[https://emacs.amodernist.com/][for those tldr users]].
