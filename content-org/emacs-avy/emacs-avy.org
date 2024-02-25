@@ -1,0 +1,29 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-02-22 Thu>
+#+title: Emacs avy
+#+description: Jump to things in Emacs tree-style
+#+hugo_tags: emacs configuration avy
+#+hugo_categories: emacs
+#+startup: inlineimages
+This is a series of post about /external Emacs/ packages that I use.
+* Avy
+#+caption: avy-goto-char
+[[./avy.gif][file:avy.gif]]
+avy is a GNU Emacs package for jumping to visible text using a char-based decision tree.
+* installing
+** with =use-package=
+#+begin_src emacs-lisp
+  (use-package avy
+    :ensure ;; when `use-package-always-ensure' is nil
+    :bind (("C-:" . avy-goto-char)
+           ("C-'" . avy-goto-char2)
+           ("M-g f" . avy-goto-line)
+           ("M-g w" . avy-goto-word-1)
+           ("M-g e" . avy-goto-word-0)))
+#+end_src
+*** Notes:
+- for =evil= user, theres a command =evil-avy-goto*=.
