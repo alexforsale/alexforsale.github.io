@@ -18,13 +18,20 @@ Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, 
 #+end_src
 ** with use-package
 #+begin_src emacs-lisp
-(use-package evil
-  :ensure
-  :preface
-  (customize-set-variable 'evil-want-keybinding nil) ;; if using `evil-collection'
-  (customize-set-variable 'evil-want-integration t) ;; if using `evil-collection'
-  :config
-  (evil-mode 1))
+  (use-package evil
+    :ensure
+    :preface
+    (customize-set-variable 'evil-want-keybinding nil) ;; if using `evil-collection'
+    (customize-set-variable 'evil-want-integration t) ;; if using `evil-collection'
+    (customize-set-variable 'evil-undo-system 'undo-redo)
+    (customize-set-variable 'evil-want-C-u-scroll t) ;; move universal arg to <leader> u
+    (customize-set-variable 'evil-want-C-u-delete t) ;; delete back to indentation in insert state
+        (customize-set-variable 'evil-want-C-g-bindings t)
+    :config
+    (evil-mode 1)
+    ;; disable this when using `general.el'
+    (evil-set-leader '(normal visual) (kbd "SPC"))
+    (evil-set-leader '(normal visual) (kbd "C-c SPC") t))
 #+end_src
 ** without use-package
 #+begin_src emacs-lisp
@@ -44,6 +51,13 @@ Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, 
 (evil-mode 1)
 #+end_src
 * Configuration
+** Leader and Localleader key
+This is inherited from /vim/[fn:1], So this isn't really required, but as someone who use both /vim/ and /Emacs/ it certainly easier to memorize.
+#+begin_src emacs-lisp
+  (evil-set-leader '(normal visual) (kbd "SPC"))
+  (evil-set-leader '(normal visual) (kbd "C-c SPC") t)
+#+end_src
+The first line will set the ~<leader>~ key, while the latter will set the ~<localleader>~.
 * additional packages
 ** evil-collection
 Setup keybindings for evil-mode
@@ -59,3 +73,12 @@ Setup keybindings for evil-mode
 #+end_src
 *** Notes:
 - =evil-collection= assumes =evil-want-keybinding= is set to =nil= and =evil-want-integration= is set to =t= before loading =evil= and =evil-collection=. Note some other packages may load evil (e.g. evil-leader) so bear that in mind when determining when to set the variables.
+** =abbrev-mode=
+Not a mandatory package, but it's built-in into /Emacs/ so it nice to have,
+#+begin_src emacs-lisp
+  (use-package abbrev
+    :ensure nil)
+#+end_src
+* Footnotes
+
+[fn:1] https://learnvimscriptthehardway.stevelosh.com/chapters/06.html

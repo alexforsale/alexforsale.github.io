@@ -138,7 +138,7 @@ this snippet will ensure the file is separated and loaded when starting /Emacs/.
         read-file-name-completion-ignore-case t
         completion-ignore-case t)
 #+end_src
-** enable global auto-revert-mode
+** enable global =auto-revert-mode=
 This mode enable auto-revert buffer when the file on the disk changes.
 #+begin_src emacs-lisp
   (global-auto-revert-mode 1)
@@ -152,7 +152,7 @@ This way, both file buffers and buffers with a custom =revert-buffer-function= w
 #+begin_src emacs-lisp
   (setq auto-revert-verbose nil)
 #+end_src
-** electric-pair-mode
+** =electric-pair-mode=
 This mode is useful when editing /Emacs Lisp/ buffer, we'll enable this on every programming mode (prog-mode) via hook:
 #+begin_src emacs-lisp
   (add-hook 'prog-mode-hook (lambda () (electric-pair-mode 1)))
@@ -171,7 +171,7 @@ Specifies whether to use the system's trash can.
   (setq auto-compression-mode t)
 #+end_src
 Opening compressed file (zipped etc), will automatically uncompressed for reading, and compressed when writing.
-** enable font-lock-mode
+** enable =font-lock-mode=
 This will enable syntax-highlighting and coloring.
 #+begin_src emacs-lisp
   (global-font-lock-mode t)
@@ -193,10 +193,15 @@ This will enable syntax-highlighting and coloring.
 (global-subword-mode 1)
 #+end_src
 This way =editPost= is considered a two word.
-** disable electric-indent-mode
+** disable =electric-indent-mode=
 #+begin_src emacs-lisp
 (setq electric-indent-mode nil)
 #+end_src
+** enable =delete-selection-mode=
+#+begin_src emacs-lisp
+  (delete-selection-mode 1)
+#+end_src
+When enabled, typed text will replace the selection if the selection is active, which is what I prefer. If disabled (=nil=), typed text is just inserted at point regardless of any selection.
 * Early init
 This file is processed before ~init.el~, must be named ~early-init.el~ and located in the same directory as the ~init.el~. Example customization that should be placed here are:
 - Custom package management (this is loaded before the default /package/).
