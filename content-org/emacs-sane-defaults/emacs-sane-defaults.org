@@ -6,7 +6,7 @@
 #+date: <2024-02-22 Thu>
 #+title: Emacs sane defaults
 #+description: Finding comfort in Emacs
-#+hugo_tags: emacs
+#+hugo_tags: emacs configuration
 #+hugo_categories: emacs
 #+startup: inlineimages
 
@@ -127,9 +127,9 @@ Save the minibuffer history.
 ** separate Customization file elsewhere
 By default this file is appended to the init file, which usually not desired.
 #+begin_src emacs-lisp
-  (setq custom-file (locate-user-emacs-file "custom.el")
-        (when (file-exists-p custom-file)
-          (load custom-file)))
+  (setq custom-file (locate-user-emacs-file "custom.el"))
+  (when (file-exists-p custom-file)
+    (load custom-file))
 #+end_src
 this snippet will ensure the file is separated and loaded when starting /Emacs/.
 ** Ignore case in completion

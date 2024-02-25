@@ -1,0 +1,70 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-02-22 Thu>
+#+title: Emacs package management with use-package
+#+description: now built-in into emacs since emacs-29
+#+hugo_tags: emacs configuration
+#+hugo_categories: emacs
+#+startup: inlineimages
+* What is use-package anyway?
+[[https://github.com/jwiegley/use-package][Simply put, it's a macro for easier package management within /Emacs/]]. I've used this for a while, and for me this is much more manageable than the default package declaration.
+* How to use it?
+:PROPERTIES:
+:ID:       dbba8c9f-3de4-4eab-a28c-1734dc17588a
+:END:
+First we'll need to activate it, from your /Emacs/ ~init.el~ file:
+#+begin_src emacs-lisp
+  (require 'use-package)
+#+end_src
+And since we'll mostly use this for external package, also add:
+#+begin_src emacs-lisp
+  (setq use-package-always-ensure t)
+#+end_src
+After that, =use-package= is ready to use. For example, installing [[https://github.com/justbur/emacs-which-key][which-key]] is simply by:
+#+begin_src emacs-lisp
+  (use-package which-key)
+#+end_src
+If you don't enable the variable =use-package-always-ensure=, then we'll need to also use the keyword =:ensure=, to make sure the package is downloaded.
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure)
+#+end_src
+* Useful external packages
+** Which-key
+Just like our example [[id:dbba8c9f-3de4-4eab-a28c-1734dc17588a][earlier]], =which-key= is my most needed external packages. It display the keybinding following our incomplete command (or in /Emacs/ term: a prefix). For example, in default /Emacs/ when we want to open file we use the ~C-x C-f~ chord. When we input ~C-x~ and pause, nothing really shown.
+
+#+caption: default emacs prefix
+[[./prefix-key.png][file:prefix-key.png]]
+
+There's only =C-x= displayed in the echo area (in the bottom), but with =which-key-mode= activated:
+
+#+caption: which-key-mode
+[[./which-key-mode.png][file:which-key-mode.png]]
+** Further which-key customization
+#+begin_src emacs-lisp
+(use-package which-key
+  :ensure
+  :custom
+  (which-key-lighter "")
+  (which-key-sort-order #'which-key-key-order-alpha)
+  (which-key-sort-uppercase-first nil)
+  (which-key-add-column-padding 1)
+  (which-key-max-display-columns nil)
+  (which-key-min-display-lines 6)
+  (which-key-compute-remaps t)
+  (which-key-side-window-slot -10)
+  (which-key-separator " → ")
+  (which-key-allow-evil-operators t)
+  (which-key-use-C-h-commands t)
+  (which-key-show-remaining-keys t)
+  (which-key-show-prefix 'bottom)
+  :config
+  (which-key-mode)
+  (which-key-setup-side-window-bottom)
+  (which-key-setup-minibuffer)
+  (define-key which-key-mode-map (kbd "C-x <f5>") 'which-key-C-h-dispatch))
+#+end_src
+This is the setup I used for =which-key=.
