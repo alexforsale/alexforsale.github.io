@@ -6,8 +6,8 @@
 #+date: <2024-02-22 Thu>
 #+title: Hyprland
 #+description: Configure Hyprland
-#+hugo_tags: emacs hugo blog github git
-#+hugo_categories: emacs
+#+hugo_tags: hyprland linux
+#+hugo_categories: desktop
 #+startup: inlineimages
 [[./hyprland.png]]
 Hyprland is a wlroots-based tiling Wayland compositor written in C++. Noteworthy features of Hyprland include dynamic tiling, tabbed windows, a clean and readable C++ code-base, and a custom renderer that provides window animations, rounded corners, and Dual-Kawase Blur on transparent windows. General usage and configuration is thoroughly documented at Hyprland wiki[fn:1].

@@ -1,0 +1,77 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-02-22 Thu>
+#+title: Emacs sane defaults
+#+description: Finding comfort in Emacs
+#+hugo_tags: emacs
+#+hugo_categories: emacs
+#+startup: inlineimages
+
+#+caption: Default Emacs
+[[./default-emacs.png][file:default-emacs.png]]
+
+The default /Emacs/ is kinda boring and unintuitive, if you're looking for a simple text editor, I really suggest other editors like /nano/, /vim/, or other graphical editors like /gedit/. The main advantage of using /Emacs/ is that in can be more than just a text editor.
+
+#+caption: Tetris inside Emacs
+[[./emacs-tetris.png][file:emacs-tetris.png]]
+
+I don't think anybody ever want to play tetris inside /Emacs/, but it's there!
+
+#+caption: Emacs as a file manager
+[[./emacs-dired.png][file:emacs-dired.png]]
+
+The /dired-mode/ enable us to "edit directory" (DIRectory EDitor), delete, rename, print etc.
+
+#+caption: terminal in Emacs
+[[./emacs-eshell.png][file:emacs-eshell.png]]
+
+/Eshell/ is a shell-like interpreter implemented in /Emacs Lisp/.
+
+So, without any configuration, /Emacs/ is very usable. But first we need to know the basic.
+* The Basic
+** terminology
+| emacs  | rest of the world |
+| frame  | program window    |
+| window | pane              |
+| buffer | file              |
+| kill   | cut               |
+| yank   | paste             |
+| region | selection         |
+** Screen organization
+*** Point
+Basically, the cursor. By default, it is a solid block, the point appear /on/ a character, but actually situated /before/ the character under the cursor.
+*** The echo area
+The line at the very bottom of the frame, useful for displaying /error messages/ or other informative messages.
+*** The modeline
+Located at the bottom of each window describing what's going on in the current buffer. If there's only one window, the mode line appears above the echo area; it is next-to-last in the frame.
+*** Menu bar
+Located at the top of each frame.
+** Keys
+Keyboard shortcuts, for examples:
+#+begin_example
+M-x tetris
+#+end_example
+=M= stands for ~Alt~, so press and hold =Alt=, press =x=, release and type =tetris= and press ~Enter~.
+#+begin_example
+C-x C-f /path/to/some/file
+#+end_example
+=C= stands for ~Control~, so press and hold ~CTRL~, release, and press and hold ~CTRL~, press =f=, release, and type some path to a file.
+** Modes
+Each buffer is associated with something called =major mode=, and may have one or more active =minor modes=. Modes are sets of specific rules and/or keybindings for some buffers. There are read-only mode that forbid you from editing a buffer, there's also language-specific modes for programming languages.
+To get a detailed description for the current buffer:
+#+begin_example
+C-h m
+#+end_example
+
+To get all the available keybindings in the current buffer/mode:
+#+begin_example
+C-h b
+#+end_example
+** Tutorial
+This will get you started with /Emacs/, open the tutorial buffer with:
+#+begin_example
+C-h t
+#+end_example
