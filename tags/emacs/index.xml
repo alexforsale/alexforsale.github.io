@@ -16,6 +16,13 @@
       <description>Jump to things in Emacs tree-style</description>
     </item>
     <item>
+      <title>Emacs Evil</title>
+      <link>https://alexforsale.github.io/posts/emacs-evil/</link>
+      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/emacs-evil/</guid>
+      <description>The extensible vi layer for Emacs.</description>
+    </item>
+    <item>
       <title>Emacs package management with use-package</title>
       <link>https://alexforsale.github.io/posts/emacs-builtin-use-package/</link>
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
