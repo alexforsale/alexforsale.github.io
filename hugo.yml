@@ -40,10 +40,10 @@ params:
   hideSummary: false
   showtoc: false
   tocopen: false
-  editPost:
-    URL: "https://github.com/alexforsale/alexforsale.github.io/content"
-    Text: "Suggest changes"
-    appendFilePath: true
+  # editPost:
+  #   URL: "https://github.com/alexforsale/alexforsale.github.io/content"
+  #   Text: "Suggest changes"
+  #   appendFilePath: true
 
   profileMode:
     enabled: true
