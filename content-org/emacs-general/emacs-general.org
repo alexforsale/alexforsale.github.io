@@ -1,0 +1,117 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-02-22 Thu>
+#+title: Emacs general.el
+#+description: More convenient key definitions in emacs
+#+hugo_tags: emacs configuration general keybindings keyboard
+#+hugo_categories: emacs
+#+startup: inlineimages
+* About
+=general.el= provides a more convenient method for binding keys in emacs (for both evil and non-evil users). Like =use-package=, which provides a convenient, unified interface for managing packages, =general.el= is intended to provide a convenient, unified interface for key definitions. While this package does implement some completely new functionality (such as the ability to make vim-style keybindings under non-prefix keys with an optional timeout), its primary purpose is to build on existing functionality to make key definition more clear and concise. =general-define-key= is user-extensible and supports defining multiple keys in multiple keymaps at once, implicitly wrapping key strings with (=kbd ...=), using named prefix key sequences (like the leader key in vim), and much more[fn:1].
+* Installing
+** with =use-package=
+#+begin_src emacs-lisp
+(use-package general
+  :ensure t
+  :init
+  (with-eval-after-load 'evil
+    (general-evil-setup))
+  (general-auto-unbind-keys)
+  :config
+  (general-override-mode)
+  (general-create-definer +config/leader-key
+    :keymaps 'override
+    :states  '(insert emacs normal hybrid motion visual operator)
+    :prefix "SPC"
+    :non-normal-prefix "s-SPC")
+  (general-create-definer +config/local-leader
+    :keymaps 'override
+    :states '(emacs normal hybrid motion visual operator)
+    :prefix "m"
+    :non-normal-prefix "s-m"
+    "" '(:ignore t :which-key (lambda (arg) `(,(cadr (split-string (car arg) " ")) . ,(replace-regexp-in-string "-mode$" "" (symbol-name major-mode)))))))
+#+end_src
+*** Notes:
+- =general-create-definer= is a helper macro to create wrapper for =general-def=.
+- Here I create two wrapper, =+config/leader-key= and =+config/local-leader=. The first with ~SPC~ as a prefix, the latter with ~m~
+- To create a keybinding with =+config/leader-key=:
+  #+begin_src emacs-lisp
+    (+config/leader-key
+      ";" 'pp-eval-expression
+      ":" 'execute-extended-command
+      "." '(find-file :wk "find file")
+      "^" '(subword-capitalize :wk "Capitalize subword")
+      "u" 'universal-argument)
+  #+end_src
+Pressing ~SPC ;~ in normal mode, will execute =pp-eval-expression=, and so on.
+- As for =+config/local-leader=:
+  #+begin_src emacs-lisp
+    (with-eval-after-load  'ansible
+      (+config/local-leader
+        :keymaps 'yaml-mode-map
+        "a" '(:ignore t :wk ansible)
+        "ad" 'ansible-decrypt-buffer
+        "ae" 'ansible-encrypt-buffer))
+  #+end_src
+Pressing ~m a d~ while in normal mode while in a =yaml-mode= buffer (ex. editing a yaml file) will execute =ansible-decrypt-buffer=
+** Useful macro
+#+begin_src emacs-lisp
+(defmacro +config/leader-menu! (name infix-key &rest body)
+  "Create a definer NAME `+config/leader-NAME' wrapping `+config/leader-key'.
+Create prefix map: `+config/leader-NAME-map'. Prefix bindings in BODY with INFIX-KEY."
+  (declare (indent 2))
+  `(progn
+     (general-create-definer ,(intern (concat "+config/leader-" name))
+       :wrapping +config/leader-key
+       :prefix-map (quote ,(intern (concat "+config/leader-" name "-map")))
+       :infix ,infix-key
+       :wk-full-keys nil
+       "" '(:ignore t :which-key ,name))
+     (,(intern (concat "+config/leader-" name))
+      ,@body)))
+#+end_src
+This is a macro for creating a wrapper for each sub menu. For example:
+#+begin_src emacs-lisp
+(+config/leader-menu! "buffer" "b")
+#+end_src
+will create a keymap with the name =+config/leader-buffer-map=, to add keybinding into it:
+#+begin_src emacs-lisp
+  (+config/leader-buffer
+    "[" '(previous-buffer :wk "previous buffer")
+    "]" '(next-buffer :wk "next buffer")
+    "TAB" '((lambda () (interactive) (switch-to-buffer nil)) :wk "other-buffer")
+    "b" '(switch-to-buffer :wk "switch to buffer")
+    "s" '(basic-save-buffer :wk "save buffer")
+    "c" '(clone-indirect-buffer :wk "clone buffer")
+    "C" '(clone-indirect-buffer-other-window :wk "clone buffer other window")
+    "d" '(kill-current-buffer :wk "kill current buffer")
+    "i" 'ibuffer
+    "k" '(kill-buffer :wk "kill buffer")
+    "l" '(evil-switch-to-windows-last-buffer :wk "Switch to last open buffer")
+    "m" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :wk "switch to messages buffer")
+    "n" '(next-buffer :wk "next buffer")
+    "N" '(evil-buffer-new :wk "New unnamed buffer")
+    "p" '(previous-buffer :wk "previous buffer")
+    "o" '((lambda () (interactive) (switch-to-buffer nil)) :wk "other-buffer")
+    "r" '(revert-buffer-quick :wk "revert buffer")
+    "R" '(rename-buffer :wk "rename buffer")
+    "x" '((lambda () (interactive) (switch-to-buffer "*scratch*")) :wk "switch to scratch buffer")
+    "z" '(bury-buffer :wk "bury buffer"))
+#+end_src
+Pressing ~SPC b b~ will execute =switch-to-buffer=.
+** Simulating key
+#+begin_src emacs-lisp
+(+config/leader-key
+  "h" (general-simulate-key "C-h"
+        :state '(normal visual)
+        :name general-SPC-h-simulates-C-h
+        :docstring "Simulates C-h in normal and visual mode."
+        :which-key "Help"))
+#+end_src
+This is how we can simulate ~C-h~ keybindings into =general= keybindings. This way ~SPC- h~ is simulating ~C-h~.
+* Footnotes
+
+[fn:1] https://github.com/noctuid/general.el
