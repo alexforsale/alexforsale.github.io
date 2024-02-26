@@ -14,6 +14,10 @@
 :EXPORT_FILE_NAME: github-action-for-hugo-static-site-using-emacs
 :END:
 This site is build with [[https://gohugo.io][Hugo]] which is a static site generator using markdown. The usual way of doing /github action/ with /hugo/ is using the [[https://github.com/peaceiris/actions-hugo][actions-hugo]] workflow. Since I'm using /org-mode/ for literally everything, it's only natural that I also use it for blogging.
+
+#+caption: Deployment to github pages
+[[./deploy-github.png][file:deploy-github.png]]
+
 ** Setup
 *** Create a script for exporting org-files to markdown
 :PROPERTIES:
@@ -97,7 +101,11 @@ jobs:
           publish_dir: ./public
 #+end_src
 Things to note:
-- ~secrets.PERSONAL_TOKEN~ must be set within the repository settings in /Github/. [[./action-secrets-and-variables.png]]
+- ~secrets.PERSONAL_TOKEN~ must be set within the repository settings in /Github/.
+
+#+caption: secrets and variable
+[[./action-secrets-and-variables.png][file:action-secrets-and-variables.png]]
+
 * Footnotes
 
 [fn:1] https://ox-hugo.scripter.co/doc/blogging-flow/
