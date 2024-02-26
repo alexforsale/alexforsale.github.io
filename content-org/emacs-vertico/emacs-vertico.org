@@ -1,0 +1,143 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-02-22 Thu>
+#+title: Emacs vertico
+#+description: VERTical Interactive COmpletion
+#+hugo_tags: emacs configuration vertico
+#+hugo_categories: emacs
+#+startup: inlineimages
+Vertico provides a performant and minimalistic vertical completion UI based on the default completion system. The focus of Vertico is to provide a UI which behaves correctly under all circumstances. By reusing the built-in facilities system, Vertico achieves full compatibility with built-in Emacs completion commands and completion tables. Vertico only provides the completion UI but aims to be highly flexible, extendable and modular. Additional enhancements are available as extensions or complementary packages. The code base is small and maintainable. The main vertico.el package is only about 600 lines of code without white space and comments[fn:1].
+
+* Installation
+#+caption: emacs without vertico
+[[./emacs-without-vertico.png][file:emacs-without-vertico.png]]
+#+caption: emacs with vertico
+[[./emacs-vertico.png][file:emacs-vertico.png]]
+** With =use-package=
+#+begin_src emacs-lisp
+  ;; Enable vertico
+  (use-package vertico
+    :init
+    (vertico-mode)
+    ;; Different scroll margin
+    ;; (setq vertico-scroll-margin 0)
+    ;; Show more candidates
+    ;; (setq vertico-count 20)
+    ;; Grow and shrink the Vertico minibuffer
+    ;; (setq vertico-resize t)
+    ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+    ;; (setq vertico-cycle t)
+    )
+  ;; Persist history over Emacs restarts. Vertico sorts by history position.
+  (use-package savehist
+    :init
+    (savehist-mode))
+
+  ;; A few more useful configurations...
+  (use-package emacs
+    :init
+    ;; Add prompt indicator to `completing-read-multiple'.
+    ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
+    (defun crm-indicator (args)
+      (cons (format "[CRM%s] %s"
+                    (replace-regexp-in-string
+                     "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                     crm-separator)
+                    (car args))
+            (cdr args)))
+    (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+    ;; Do not allow the cursor in the minibuffer prompt
+    (setq minibuffer-prompt-properties
+          '(read-only t cursor-intangible t face minibuffer-prompt))
+    (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+    ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+    ;; Vertico commands are hidden in normal buffers.
+    (setq read-extended-command-predicate
+          #'command-completion-default-include-p)
+    ;; Enable recursive minibuffers
+    (setq enable-recursive-minibuffers t))
+#+end_src
+*** vertico configuration
+- ~vertico-scroll-margin~ :: Number of lines at the top and bottom when scrolling (default to 2).
+- ~vertico-count~ :: Maximal number of candidates to show (default to 10).
+- ~vertico-resize~ :: How to resize the =vertico= minibuffer window (default to the value of =resize-mini-windows=, which is ='grow-only=).
+- ~vertico-cycle~ ::  enable cycling for =vertico-next= and =vertico-previous=, default to =nil=.
+* Extensions
+The package also includes some extensions, they're installed automatically if using package from =ELPA=.
+** =vertico-flat=
+Flat, horizontal display for =vertico=, enable it with ~M-x vertico-flat-mode~.
+#+caption: vertico-flat-mode
+[[./vertico-flat-mode.png][file:vertico-flat-mode.png]]
+** =vertico-buffer=
+=vertico-buffer-mode= to display Vertico like a regular buffer.
+#+caption: vertico-buffer-mode
+[[./vertico-buffer-mode.png][file:vertico-buffer-mode.png]]
+** =vertico-directory=
+Commands for Ido-like directory navigation. The commands can be bound in the =vertico-map=. Furthermore a cleanup function for shadowed file paths is provided.
+#+begin_src emacs-lisp
+  (keymap-set vertico-map "RET" #'vertico-directory-enter)
+  (keymap-set vertico-map "DEL" #'vertico-directory-delete-char)
+  (keymap-set vertico-map "M-DEL" #'vertico-directory-delete-word)
+  (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
+#+end_src
+this way when opening file (via ~C-x C-f~ or with ~M-x find-file~), pressing ~Backspace~ (or ~DEL~), will automatically remove one directory up.
+** =vertico-grid=
+Enables grid-display.
+#+caption: vertico-grid-mode
+[[./vertico-grid-mode][file:vertico-grid-mode.png]]
+** =vertico-indexed-mode=
+Select indexed candidates with prefix arguments.
+#+caption: vertico-indexed-mode
+[[./vertico-indexed-mode][file:vertico-indexed-mode.png]]
+Select the candidate number with ~M-<candidate>~, for example: to select candidate =2= press ~M-2 RET~.
+** =vertico-mouse=
+Support for scrolling and candidate selection.
+** =vertico-unobstrusive-mode=
+Display only the topmost candidate. It is a simple derivative of =vertico-flat-mode=.
+** =vertico-suspend=
+Suspend the current Vertico completion session. If =vertico-suspend= is called from within the currently active Vertico minibuffer, the completion session is suspended.  Otherwise the last session is restored.  It is possible to suspend multiple nested Vertico sessions.  Note that =vertico-suspend= requires that recursive minibuffers are enabled by setting the customizable variable =enable-recursive-minibuffers= to =t=.
+** =vertico-reverse=
+Reverse the list of candidates.
+#+caption: vertico-reverse-mode
+[[./vertico-reverse-mode.png][file:vertico-reverse-mode.png]]
+** =vertico-repeat=
+Enables repetition of Vertico sessions via the =vertico-repeat=, =vertico-repeat-previous= and =vertico-repeat-select= commands.  If the repeat commands are called from an existing Vertico minibuffer session, only sessions corresponding to the current minibuffer command are offered via completion.
+
+It is necessary to register a minibuffer setup hook, which saves the Vertico state for repetition.  In order to save the history across Emacs sessions, enable =savehist-mode= and add =vertico-repeat-history= to =savehist-additional-variables=.
+#+begin_src emacs-lisp
+  (add-to-list 'savehist-additional-variables 'vertico-repeat-history)
+  (keymap-global-set "M-R" #'vertico-repeat)
+  (keymap-set vertico-map "M-P" #'vertico-repeat-previous)
+  (keymap-set vertico-map "M-N" #'vertico-repeat-next)
+  (keymap-set vertico-map "S-<prior>" #'vertico-repeat-previous)
+  (keymap-set vertico-map "S-<next>" #'vertico-repeat-next)
+  (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
+#+end_src
+** =vertico-quick=
+Similar to =vertico-indexed-mode=, which prefixes candidates with quick keys.  Typing these quick keys allows you to select the candidate in front of them.  This is designed to be a faster alternative to selecting a candidate with =vertico-next= and =vertico-previous=.
+#+begin_src emacs-lisp
+  (keymap-set vertico-map "M-q" #'vertico-quick-insert)
+  (keymap-set vertico-map "C-q" #'vertico-quick-exit)
+#+end_src
+#+caption: vertico-quick
+[[./vertico-quick.png][file:vertico-quick.png]]
+Pressing ~M-q~ while in =vertico-map= will show all the candidates, pressing ~C-q~ will exit the candidate selection.
+** =vertico-multiform=
+Perhaps the most complex extensions, used for fine tuning the Vertico display and other minibuffer modes per command or completion category.  For some commands you may want to use the =vertico-buffer= display and for completion categories like file you prefer the =vertico-grid-mode=.
+#+begin_src emacs-lisp
+  (setq vertico-multiform-commands
+        '((consult-line buffer)
+          (consult-imenu reverse buffer)
+          (execute-extended-command flat)))
+  (setq vertico-multiform-categories
+        '((file buffer grid)
+          (imenu (:not indexed mouse))
+          (symbol (vertico-sort-function . vertico-sort-alpha))))
+  (vertico-multiform-mode)
+#+end_src
+* Footnotes
+
+[fn:1] https://github.com/minad/vertico
