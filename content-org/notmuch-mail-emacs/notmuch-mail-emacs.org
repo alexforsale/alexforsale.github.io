@@ -9,7 +9,9 @@
 #+hugo_tags: emacs mail notmuch microsoft exchange
 #+hugo_categories: emacs
 #+startup: inlineimages
-[[./full.png]]
+
+#+caption: Notmuch Emacs
+[[./full.png][file:full.png]]
 * Davmail
 In my work routines, /Microsoft/ is somewhat unavoidable, and trying to have an email client that can sync /Exchange/ in linux has always been a pain to me. This is my documentation on how to use /notmuch/, /davmail/, and /msmtp/ to sync my work emails.
 ** Configuration
