@@ -44,6 +44,13 @@
       <description>Finding comfort in Emacs</description>
     </item>
     <item>
+      <title>Emacs vertico</title>
+      <link>https://alexforsale.github.io/posts/emacs-vertico/</link>
+      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/emacs-vertico/</guid>
+      <description>VERTical Interactive COmpletion</description>
+    </item>
+    <item>
       <title>Github Action for hugo static site using Emacs</title>
       <link>https://alexforsale.github.io/posts/github-action-hugo-emacs/</link>
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
