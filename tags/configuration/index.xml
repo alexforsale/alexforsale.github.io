@@ -50,5 +50,12 @@
       <guid>https://alexforsale.github.io/posts/emacs-vertico/</guid>
       <description>VERTical Interactive COmpletion</description>
     </item>
+    <item>
+      <title>Theming Emacs</title>
+      <link>https://alexforsale.github.io/posts/theming-emacs/</link>
+      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/theming-emacs/</guid>
+      <description>Changing the look and feel</description>
+    </item>
   </channel>
 </rss>
