@@ -27,3 +27,13 @@ avy is a GNU Emacs package for jumping to visible text using a char-based decisi
 #+end_src
 *** Notes:
 - for =evil= user, theres a command =evil-avy-goto*=.
+** for =evil= user
+#+begin_src emacs-lisp
+(use-package avy
+  :after evil
+  :ensure ;; when `use-package-always-ensure' is nil
+  :bind
+  (([remap goto-char] . evil-avy-goto-char)
+   ([remap goto-line] . evil-avy-goto-line)
+   ("M-g l" . evil-avy-goto-line)))
+#+end_src
