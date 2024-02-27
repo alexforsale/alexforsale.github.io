@@ -6,12 +6,12 @@
     <description>Recent content in Vi on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/tags/vi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emacs Evil</title>
       <link>https://alexforsale.github.io/posts/emacs-evil/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 25 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/posts/emacs-evil/</guid>
       <description>The extensible vi layer for Emacs.</description>
     </item>

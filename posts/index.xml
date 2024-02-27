@@ -6,8 +6,43 @@
     <description>Recent content in Posts on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 27 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Theming Emacs</title>
+      <link>https://alexforsale.github.io/posts/theming-emacs/</link>
+      <pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/theming-emacs/</guid>
+      <description>Changing the look and feel</description>
+    </item>
+    <item>
+      <title>Emacs Evil</title>
+      <link>https://alexforsale.github.io/posts/emacs-evil/</link>
+      <pubDate>Sun, 25 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/emacs-evil/</guid>
+      <description>The extensible vi layer for Emacs.</description>
+    </item>
+    <item>
+      <title>Emacs general.el</title>
+      <link>https://alexforsale.github.io/posts/emacs-general/</link>
+      <pubDate>Sat, 24 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/emacs-general/</guid>
+      <description>More convenient key definitions in emacs</description>
+    </item>
+    <item>
+      <title>Emacs sane defaults</title>
+      <link>https://alexforsale.github.io/posts/emacs-sane-defaults/</link>
+      <pubDate>Fri, 23 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/emacs-sane-defaults/</guid>
+      <description>Finding comfort in Emacs</description>
+    </item>
+    <item>
+      <title>Emacs vertico</title>
+      <link>https://alexforsale.github.io/posts/emacs-vertico/</link>
+      <pubDate>Fri, 23 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/emacs-vertico/</guid>
+      <description>VERTical Interactive COmpletion</description>
+    </item>
     <item>
       <title>Emacs avy</title>
       <link>https://alexforsale.github.io/posts/emacs-avy/</link>
@@ -16,39 +51,11 @@
       <description>Jump to things in Emacs tree-style</description>
     </item>
     <item>
-      <title>Emacs Evil</title>
-      <link>https://alexforsale.github.io/posts/emacs-evil/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/posts/emacs-evil/</guid>
-      <description>The extensible vi layer for Emacs.</description>
-    </item>
-    <item>
-      <title>Emacs general.el</title>
-      <link>https://alexforsale.github.io/posts/emacs-general/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/posts/emacs-general/</guid>
-      <description>More convenient key definitions in emacs</description>
-    </item>
-    <item>
       <title>Emacs package management with use-package</title>
       <link>https://alexforsale.github.io/posts/emacs-builtin-use-package/</link>
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/posts/emacs-builtin-use-package/</guid>
       <description>now built-in into emacs since emacs-29</description>
-    </item>
-    <item>
-      <title>Emacs sane defaults</title>
-      <link>https://alexforsale.github.io/posts/emacs-sane-defaults/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/posts/emacs-sane-defaults/</guid>
-      <description>Finding comfort in Emacs</description>
-    </item>
-    <item>
-      <title>Emacs vertico</title>
-      <link>https://alexforsale.github.io/posts/emacs-vertico/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/posts/emacs-vertico/</guid>
-      <description>VERTical Interactive COmpletion</description>
     </item>
     <item>
       <title>Github Action for hugo static site using Emacs</title>
@@ -63,13 +70,6 @@
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/posts/hyprland/</guid>
       <description>Configure Hyprland</description>
-    </item>
-    <item>
-      <title>Theming Emacs</title>
-      <link>https://alexforsale.github.io/posts/theming-emacs/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/posts/theming-emacs/</guid>
-      <description>Changing the look and feel</description>
     </item>
     <item>
       <title>Using Emacs as an email client</title>

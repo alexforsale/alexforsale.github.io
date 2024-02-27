@@ -6,12 +6,12 @@
     <description>Recent content in Keybindings on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/tags/keybindings/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emacs general.el</title>
       <link>https://alexforsale.github.io/posts/emacs-general/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 24 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/posts/emacs-general/</guid>
       <description>More convenient key definitions in emacs</description>
     </item>

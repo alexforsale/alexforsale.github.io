@@ -6,12 +6,12 @@
     <description>Recent content in Vertico on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/tags/vertico/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emacs vertico</title>
       <link>https://alexforsale.github.io/posts/emacs-vertico/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 23 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/posts/emacs-vertico/</guid>
       <description>VERTical Interactive COmpletion</description>
     </item>
