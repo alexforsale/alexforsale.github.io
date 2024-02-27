@@ -3,7 +3,7 @@
 #+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
 #+hugo_section: posts
 #+hugo_base_dir: ../../
-#+date: <2024-02-22 Thu>
+#+date: <2024-02-25 Thu>
 #+title: Emacs Evil
 #+description: The extensible vi layer for Emacs.
 #+hugo_tags: emacs configuration evil vim vi

@@ -3,7 +3,7 @@
 #+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
 #+hugo_section: posts
 #+hugo_base_dir: ../../
-#+date: <2024-02-22 Thu>
+#+date: <2024-02-23 Thu>
 #+title: Emacs sane defaults
 #+description: Finding comfort in Emacs
 #+hugo_tags: emacs configuration
