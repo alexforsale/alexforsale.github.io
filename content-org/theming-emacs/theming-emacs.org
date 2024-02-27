@@ -1,0 +1,70 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-02-22 Thu>
+#+title: Theming Emacs
+#+description: Changing the look and feel
+#+hugo_tags: emacs configuration theme
+#+hugo_categories: emacs
+#+startup: inlineimages
+* Why?
+#+caption: Default Emacs UI
+[[./default-emacs.png][file:default-emacs.png]]
+
+For those who prefer a universal theme in their destop, the default Emacs interface is kind of ugly. Though there are built-in themes included, to be fair the options are limited.
+
+#+caption: emacs wombat theme, one of the better ones
+[[./emacs-wombat.png][file:emacs-wombat.png]]
+* Doom
+When I first tried Emacs, [[https://github.com/doomemacs/doomemacs][Doomemacs]] was my first choice. It's kind of a "curated default configurations".
+
+#+caption: doom emacs, image from their github page
+[[https://raw.githubusercontent.com/doomemacs/doomemacs/screenshots/main.png]]
+
+But since I've started to write my own configuration files for Emacs, I still use their [[https://github.com/seagle0128/doom-modeline][mode-line]] and [[https://github.com/doomemacs/themes][themes]].
+* Installing
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :ensure
+  :if (display-graphic-p))
+
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-nord t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  ;; (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
+(use-package doom-modeline
+  :ensure
+  :hook (after-init . doom-modeline-mode))
+#+end_src
+** Notes:
+- =all-the-icons= is one of the dependency. Run ~M-x all-the-icons-install-fonts~ command to install the font.
+- I use the =doom-nord= theme to match my desktop theme.
+* Dashboard
+Just to make it more "doomy".
+#+begin_src emacs-lisp
+  ;; use-package with package.el:
+  (use-package dashboard
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook)
+    (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*"))))
+#+end_src
+
+#+caption: emacs with doom themes, mode-line, and dashboard
+[[./emacs-doom-theme-modeline-and-dashboard.png][file:emacs-doom-theme-modeline-and-dashboard.png]]
