@@ -75,7 +75,7 @@ params:
     - name: "reddit"
       url: "https://www.reddit.com/user/alexforsale"
     - name: "telegram"
-      url: "https:/t.me/alexforsale"
+      url: "https://t.me/alexforsale"
 
 menu:
   main:
