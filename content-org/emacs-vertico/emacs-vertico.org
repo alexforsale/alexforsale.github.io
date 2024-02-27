@@ -408,7 +408,50 @@ Nerd-icons-corfu.el is a library for adding icons to completions in [[https://gi
 #+end_src
 #+caption: nerd-icons-corfu
 [[./nerd-icons-corfu.png][file:nerd-icons-corfu.png]]
-
+* Cape
+Cape provides Completion At Point Extensions which can be used in combination with [[https://github.com/minad/corfu][Corfu]], [[https://github.com/company-mode/company-mode][Company]] or the default completion UI. The completion backends used by =completion-at-point= are so called =completion-at-point-functions= (Capfs)[fn:7].
+** Configuration
+#+begin_src emacs-lisp
+;; Add extensions
+(use-package cape
+  ;; Bind dedicated completion commands
+  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+  :bind (("C-c p p" . completion-at-point) ;; capf
+         ("C-c p t" . complete-tag)        ;; etags
+         ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
+         ("C-c p h" . cape-history)
+         ("C-c p f" . cape-file)
+         ("C-c p k" . cape-keyword)
+         ("C-c p s" . cape-elisp-symbol)
+         ("C-c p e" . cape-elisp-block)
+         ("C-c p a" . cape-abbrev)
+         ("C-c p l" . cape-line)
+         ("C-c p w" . cape-dict)
+         ("C-c p :" . cape-emoji)
+         ("C-c p \\" . cape-tex)
+         ("C-c p _" . cape-tex)
+         ("C-c p ^" . cape-tex)
+         ("C-c p &" . cape-sgml)
+         ("C-c p r" . cape-rfc1345))
+  :init
+  ;; Add to the global default value of `completion-at-point-functions' which is
+  ;; used by `completion-at-point'.  The order of the functions matters, the
+  ;; first function returning a result wins.  Note that the list of buffer-local
+  ;; completion functions takes precedence over the global list.
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+  ;;(add-to-list 'completion-at-point-functions #'cape-history)
+  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+  ;;(add-to-list 'completion-at-point-functions #'cape-tex)
+  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+  ;;(add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
+  ;;(add-to-list 'completion-at-point-functions #'cape-line)
+)
+#+end_src
 * Footnotes
 
 [fn:1] https://github.com/minad/vertico
@@ -417,3 +460,4 @@ Nerd-icons-corfu.el is a library for adding icons to completions in [[https://gi
 [fn:4] https://github.com/minad/consult
 [fn:5] https://github.com/minad/corfu
 [fn:6] https://github.com/LuigiPiucco/nerd-icons-corfu
+[fn:7] https://github.com/minad/cape
