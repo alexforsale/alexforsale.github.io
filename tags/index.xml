@@ -6,20 +6,48 @@
     <description>Recent content in Tags on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 27 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Configuration</title>
       <link>https://alexforsale.github.io/tags/configuration/</link>
-      <pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/configuration/</guid>
       <description></description>
     </item>
     <item>
       <title>Emacs</title>
       <link>https://alexforsale.github.io/tags/emacs/</link>
-      <pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/emacs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Eshell</title>
+      <link>https://alexforsale.github.io/tags/eshell/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/eshell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Shell</title>
+      <link>https://alexforsale.github.io/tags/shell/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/shell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Terminal</title>
+      <link>https://alexforsale.github.io/tags/terminal/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/terminal/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vterm</title>
+      <link>https://alexforsale.github.io/tags/vterm/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/vterm/</guid>
       <description></description>
     </item>
     <item>

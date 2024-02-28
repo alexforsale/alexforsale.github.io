@@ -3,25 +3,40 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alexforsale.github.io/</loc>
-    <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alexforsale.github.io/categories/</loc>
-    <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alexforsale.github.io/tags/configuration/</loc>
-    <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alexforsale.github.io/tags/emacs/</loc>
-    <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alexforsale.github.io/categories/emacs/</loc>
-    <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alexforsale.github.io/posts/emacs-shell/</loc>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alexforsale.github.io/tags/eshell/</loc>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alexforsale.github.io/posts/</loc>
-    <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alexforsale.github.io/tags/shell/</loc>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alexforsale.github.io/tags/</loc>
-    <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alexforsale.github.io/tags/terminal/</loc>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alexforsale.github.io/tags/vterm/</loc>
+    <lastmod>2024-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alexforsale.github.io/tags/theme/</loc>
     <lastmod>2024-02-27T00:00:00+00:00</lastmod>
