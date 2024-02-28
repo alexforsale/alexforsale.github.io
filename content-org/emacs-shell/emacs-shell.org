@@ -1,0 +1,59 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-02-28 Thu>
+#+title: Emacs shell
+#+description: Exploring Emacs Shell capabilities
+#+hugo_tags: emacs configuration shell eshell vterm terminal
+#+hugo_categories: emacs
+#+startup: inlineimages
+* Eshell
+It is a shell written in /Emacs Lisp/. Eshell is both a command shell and an /Emacs Lisp/ REPL (Read Eval Print Loop), as a result, you can invoke commands in two different ways: /command form/ or in /Lisp form/.
+
+As always, the [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][official documentation]] provides you with more than enough information on /Eshell/.
+#+caption: Eshell
+[[./eshell.png][file:eshell.png]]
+
+** Command form
+Command form looks much the same as in other shells. A command consists of arguments separated by spaces; the first argument is the command to run, with any subsequent arguments being passed to that command.
+
+#+caption: eshell command form
+[[./eshell-command-form.png][file:eshell-command-form.png]]
+
+** Lisp form
+Lisp form looks like ordinary Emacs Lisp code, because that’s what it is. As a result, you can use any syntax normally available to an Emacs Lisp program.
+
+#+caption: eshell elisp form
+[[./eshell-elisp-form.png][file:eshell-elisp-form.png]]
+
+** Customization
+Standard I/O works well in eshell, but ncurses interfaces like =htop= and =nano= won’t run in it; we can tell eshell to run such commands in [[https://www.emacswiki.org/emacs/AnsiTerm][AnsiTerm]] instead, which is a full emulated VT100 terminal.
+
+#+begin_src emacs-lisp
+(append '("htop" "vim" "ssh") eshell-visual-commands)
+#+end_src
+Note that usually this is already appended, see the output of variable =eshell-visual-commands= to find out what already included.
+#+begin_src emacs-lisp
+eshell-visual-commands
+#+end_src
+
+#+RESULTS:
+: ("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm")
+
+** Completion
+*** esh-autosuggest
+Fish-like history autosuggestions in eshell[fn:1].
+#+begin_src emacs-lisp
+(use-package esh-autosuggest
+  :hook (eshell-mode . esh-autosuggest-mode)
+  ;; If you have use-package-hook-name-suffix set to nil, uncomment and use the
+  ;; line below instead:
+  ;; :hook (eshell-mode-hook . esh-autosuggest-mode)
+  :ensure t)
+#+end_src
+
+* Footnotes
+
+[fn:1] https://github.com/dieggsy/esh-autosuggest
