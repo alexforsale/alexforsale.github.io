@@ -1,0 +1,13 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-02-28 Thu>
+#+title: Emacs Version Control
+#+description: Managing version controlled projects within Emacs
+#+hugo_tags: emacs configuration git magit projectile
+#+hugo_categories: emacs
+#+startup: inlineimages
+* Magit
+Actually, Emacs already has a built-in version control package (aptly named =vc=). But
