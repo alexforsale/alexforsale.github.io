@@ -6,7 +6,7 @@
     <description>Recent content in Tags on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Feb 2024 03:41:52 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Configuration</title>
@@ -27,6 +27,27 @@
       <link>https://alexforsale.github.io/tags/eshell/</link>
       <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/eshell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>https://alexforsale.github.io/tags/git/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Magit</title>
+      <link>https://alexforsale.github.io/tags/magit/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/magit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Projectile</title>
+      <link>https://alexforsale.github.io/tags/projectile/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/projectile/</guid>
       <description></description>
     </item>
     <item>
@@ -125,13 +146,6 @@
       <link>https://alexforsale.github.io/tags/exchange/</link>
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/exchange/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Git</title>
-      <link>https://alexforsale.github.io/tags/git/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/tags/git/</guid>
       <description></description>
     </item>
     <item>
