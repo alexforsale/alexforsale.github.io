@@ -4,5 +4,6 @@
 #+hugo_section: /
 #+hugo_base_dir: ../
 #+date: <2024-02-28>
-#+title: archives
+#+title: archive
 #+hugo_custom_front_matter: :layout archives
+* archive
