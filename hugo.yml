@@ -91,7 +91,11 @@ menu:
       name: posts
       url: /posts/
       weight: 30
+    - identifier: archives
+      name: archives
+      url: /archives/
+      weight: 40
     - identifier: about
       name: about
       url: about
-      weight: 40
+      weight: 50
