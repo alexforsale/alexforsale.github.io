@@ -8,6 +8,7 @@
 (defun export-org-files ()
   "Export files to hugo markdown."
   (interactive)
-  (dolist (f (append (file-expand-wildcards "content-org/**/*.org")))
+  (dolist (f (append (file-expand-wildcards "content-org/**/*.org")
+                     (file-expand-wildcards "content-org/*.org")))
     (with-current-buffer (find-file f)
       (org-hugo-export-to-md))))
