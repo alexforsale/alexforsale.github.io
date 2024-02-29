@@ -3,11 +3,31 @@
 #+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
 #+hugo_section: posts
 #+hugo_base_dir: ../../
-#+date: <2024-02-28 Thu>
+#+date: <2024-02-28>
 #+title: Emacs Version Control
 #+description: Managing version controlled projects within Emacs
 #+hugo_tags: emacs configuration git magit projectile
 #+hugo_categories: emacs
+#+hugo_publishdate: <2024-02-28>
+#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 * Magit
-Actually, Emacs already has a built-in version control package (aptly named =vc=). But
+Actually, Emacs already has a built-in version control package (aptly named =vc=). But to me the UI is rather cryptic. I've used =magit= since forever, and old habit die hard.
+
+#+caption: Emacs magit status
+[[./emacs-magit-status.png][file:emacs-magit-status.png]]
+** Installation
+*** =use-package=
+#+begin_src emacs-lisp
+(use-package magit
+  :ensure
+  :demand t
+  :config
+  (evil-set-initial-state #'git-commit-mode 'insert)
+  :custom
+  (magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+  (magit-diff-refine-hunk 'all)
+  (magit-log-arguments '("-n100" "--graph" "--decorate")))
+#+end_src
+Notes:
+- =magit-revision-show-gravatars= will enable /gravatars/ when viewing commits. The service used by default is [[https://www.libravatar.org/][Libgravatar]].

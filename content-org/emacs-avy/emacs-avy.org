@@ -8,6 +8,8 @@
 #+description: Jump to things in Emacs tree-style
 #+hugo_tags: emacs configuration avy
 #+hugo_categories: emacs
+#+hugo_publishdate: <2024-02-22 Thu>
+#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 This is a series of post about /external Emacs/ packages that I use.
 * Avy

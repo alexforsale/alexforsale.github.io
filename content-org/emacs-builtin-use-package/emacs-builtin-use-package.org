@@ -8,6 +8,8 @@
 #+description: now built-in into emacs since emacs-29
 #+hugo_tags: emacs configuration
 #+hugo_categories: emacs
+#+hugo_publishdate: <2024-02-22 Thu>
+#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 * What is use-package anyway?
 [[https://github.com/jwiegley/use-package][Simply put, it's a macro for easier package management within /Emacs/]]. I've used this for a while, and for me this is much more manageable than the default package declaration.

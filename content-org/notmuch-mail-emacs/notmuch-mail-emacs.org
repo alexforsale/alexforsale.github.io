@@ -8,6 +8,8 @@
 #+description: Exchange mail sync with davmail, msmtp, notmuch and emacs.
 #+hugo_tags: emacs mail notmuch microsoft exchange
 #+hugo_categories: emacs
+#+hugo_publishdate: <2024-02-22 Thu>
+#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 
 #+caption: Notmuch Emacs

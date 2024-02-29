@@ -8,6 +8,8 @@
 #+description: With a mixture of emacs-lisp and gnu makefile
 #+hugo_tags: emacs hugo blog github git
 #+hugo_categories: emacs
+#+hugo_publishdate: <2024-02-22 Thu>
+#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 * About
 :PROPERTIES:

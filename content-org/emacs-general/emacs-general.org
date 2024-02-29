@@ -8,6 +8,8 @@
 #+description: More convenient key definitions in emacs
 #+hugo_tags: emacs configuration general keybindings keyboard
 #+hugo_categories: emacs
+#+hugo_publishdate: <2024-02-24 Thu>
+#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 * About
 =general.el= provides a more convenient method for binding keys in emacs (for both evil and non-evil users). Like =use-package=, which provides a convenient, unified interface for managing packages, =general.el= is intended to provide a convenient, unified interface for key definitions. While this package does implement some completely new functionality (such as the ability to make vim-style keybindings under non-prefix keys with an optional timeout), its primary purpose is to build on existing functionality to make key definition more clear and concise. =general-define-key= is user-extensible and supports defining multiple keys in multiple keymaps at once, implicitly wrapping key strings with (=kbd ...=), using named prefix key sequences (like the leader key in vim), and much more[fn:1].

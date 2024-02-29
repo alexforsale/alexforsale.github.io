@@ -7,7 +7,9 @@
 #+title: Emacs Evil
 #+description: The extensible vi layer for Emacs.
 #+hugo_tags: emacs configuration evil vim vi
+#+hugo_publishdate: <2024-02-25 Thu>
 #+hugo_categories: emacs
+#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, and provides facilities for writing custom extensions.
 * Installing
