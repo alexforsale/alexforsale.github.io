@@ -97,5 +97,15 @@ menu:
       weight: 40
     - identifier: about
       name: about
-      url: about
+      url: /about/
       weight: 50
+    - identifier: search
+      name: search
+      url: /search/
+      weight: 60
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
