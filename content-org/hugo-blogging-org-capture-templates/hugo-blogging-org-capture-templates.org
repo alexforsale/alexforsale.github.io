@@ -1,0 +1,188 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-03-03 Sun>
+#+title: Hugo blog org-capture-templates
+#+description: My blogging workflow
+#+hugo_tags: hugo emacs org
+#+hugo_categories: emacs
+#+hugo_auto_set_lastmod: t
+#+startup: inlineimages
+
+* Blogging with =org-mode=
+I do almost all my note-taking in /Emacs org-mode/, so naturally I also prefer to write my blog posts in it. As for my /ox-hugo/ [[https://ox-hugo.scripter.co/doc/blogging-flow/][blogging flow]], I use the less preferred method: one org file per post, the consequence is I cannot just copy-paste the [[https://ox-hugo.scripter.co/doc/org-capture-setup/][org capture setup]] provided by the doc site. I also setup my posts in a subdirectory beneath the =HUGO_BASE_DIR=:
+#+caption: my content directory
+#+begin_src sh :results output :exports both
+tree -n  ..
+#+end_src
+
+#+RESULTS:
+#+begin_example
+..
+├── about
+│   └── about.org
+├── archives.org
+├── emacs-avy
+│   ├── avy.gif
+│   └── emacs-avy.org
+├── emacs-builtin-use-package
+│   ├── emacs-builtin-use-package.org
+│   ├── prefix-key.png
+│   └── which-key-mode.png
+├── emacs-evil
+│   └── emacs-evil.org
+├── emacs-general
+│   └── emacs-general.org
+├── emacs-sane-defaults
+│   ├── default-emacs.png
+│   ├── emacs-after.png
+│   ├── emacs-dired.png
+│   ├── emacs-eshell.png
+│   ├── emacs-sane-defaults.org
+│   └── emacs-tetris.png
+├── emacs-shell
+│   ├── emacs-shell.org
+│   ├── eshell-command-form.png
+│   ├── eshell-elisp-form.png
+│   └── eshell.png
+├── emacs-version-control
+│   ├── emacs-magit-status.png
+│   └── emacs-version-control.org
+├── emacs-vertico
+│   ├── consult-buffer.png
+│   ├── consult-flymake.png
+│   ├── consult-outline.png
+│   ├── consult-yank-pop.png
+│   ├── corfu-completion.png
+│   ├── emacs-vertico.org
+│   ├── emacs-vertico.png
+│   ├── emacs-without-vertico.png
+│   ├── marginalia-describe-variable.png
+│   ├── marginalia-files.png
+│   ├── marginalia-find-file-with-icons.png
+│   ├── nerd-icons-corfu.png
+│   ├── orderless-default.png
+│   ├── vertico-buffer-mode.png
+│   ├── vertico-flat-mode.png
+│   ├── vertico-grid-mode.png
+│   ├── vertico-indexed-mode.png
+│   ├── vertico-quick.png
+│   └── vertico-reverse-mode.png
+├── github-action-hugo-emacs
+│   ├── action-secrets-and-variables.png
+│   ├── deploy-github.png
+│   └── github-action-hugo-emacs.org
+├── hugo-blogging-org-capture-templates
+│   └── hugo-blogging-org-capture-templates.org
+├── hyprland
+│   ├── hyprland.org
+│   └── hyprland.png
+├── notmuch-mail-emacs
+│   ├── full.png
+│   └── notmuch-mail-emacs.org
+├── search.org
+└── theming-emacs
+    ├── default-emacs.png
+    ├── emacs-doom-theme-modeline-and-dashboard.png
+    ├── emacs-wombat.png
+    └── theming-emacs.org
+
+15 directories, 53 files
+#+end_example
+
+** Custom =org-capture-templates=
+First off, =org-capture-templates= is just like its name; it is a template for creation of new entries. It is used by =org-mode=, which is a killer feature of /Emacs/. Initially it was design to capture notes with little interruption[fn:1]. But since it was all /Emacs Lisp/, we can modify it with ease.
+
+*** basic template
+#+caption: from the manual
+#+begin_src emacs-lisp
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/org/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
+#+end_src
+=org-capture-templates= is a list of:
+- keys :: in the example, =t= is for todo entry and =j= is for journal.
+- description :: usually a one-liner describing what kind of capture the key is.
+- type :: the type of the entry, here =entry= is an org node with a headline.
+- target :: where the capture should be placed.
+- template :: the template itself[fn:2].
+
+So I need to tweak it a bit in order to automatically create a file within a subdirectory in my blog content (using the same name to make it easier). Not only that, =ox-hugo= use an org meta-data for hugo front-matter[fn:3]. Each new files created must be started with these metadata (at minimal):
+
+#+caption: ox-hugo metadata
+#+begin_src org
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-03-03 Sun>
+#+title: Hugo blog org-capture-templates
+#+description: My blogging workflow
+#+hugo_tags: hugo emacs org
+#+hugo_categories: emacs
+#+hugo_auto_set_lastmod: t
+#+startup: inlineimages
+#+end_src
+Some metadata will be different for each capture; =title=, =description=, =hugo_tags=, and =hugo_categories=. =dates= should be set as the capture date, the other will be needing a user input, including the filename, for the =org-capture= process.
+
+Those will be set as the =template= part. As for the =target=, I'm using a simple /Emacs Lisp/ function:
+
+#+caption: my targeting function
+#+begin_src emacs-lisp
+(defun +config/create-new-blog-post ()
+  "Create new blog post path."
+  (interactive)
+  (let ((name (read-string "Filename: ")))
+    (concat +config/blog-directory "/content-org/" (format "%s" name) "/" (format "%s.org" name))))
+#+end_src
+This function is just a basic input/output; it will ask for a file name, and then it will concatenate it as a valid file path, here subtituted as a variable =+config/blog-directory=
+
+#+caption: the variable definition
+#+begin_src emacs-lisp
+  (when (file-directory-p (expand-file-name "alexforsale.github.io" org-directory))
+    (customize-set-variable '+config/blog-directory
+                            (expand-file-name "alexforsale.github.io" org-directory)))
+#+end_src
+Basically it will look for a directory named "alexforsale.github.io" (it's my github-page repository) inside the variable =org-directory=, which is also should be set.
+
+*** The actual template
+
+#+caption: my capture template
+#+begin_src emacs-lisp
+  (add-to-list 'org-capture-templates
+               '("b" "(b)log post" plain
+                 (file +config/create-new-blog-post)
+                 "\
+  ,#+options: ':nil -:nil ^:{} num:nil toc:nil
+  ,#+author: %n
+  ,#+creator: Emacs %(eval emacs-version) (Org mode %(eval org-version) + ox-hugo)
+  ,#+hugo_section: posts
+  ,#+hugo_base_dir: ../../
+  ,#+date: %t
+  ,#+title: %^{title}
+  ,#+description: %^{description}
+  ,#+hugo_tags: %^{tags}
+  ,#+hugo_categories: %^{categories}
+  ,#+hugo_auto_set_lastmod: t
+  ,#+startup: inlineimages\n%?" :unnarrowed t :jump-to-captured t))
+#+end_src
+Usually, =org-capture= is not bound to any keys, the recommended way is to bind it to ~C-c c~[fn:4].
+
+#+caption: the recommended keybindings
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
+#+end_src
+* Footnotes
+[fn:4] https://orgmode.org/org.html#Activation-1
+
+[fn:3] https://ox-hugo.scripter.co/doc/org-meta-data-to-hugo-front-matter/
+[fn:2] https://orgmode.org/manual/Template-expansion.html
+
+[fn:1] https://orgmode.org/manual/Capture-templates.html
