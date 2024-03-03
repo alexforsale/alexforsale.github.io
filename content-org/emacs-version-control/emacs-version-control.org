@@ -3,27 +3,33 @@
 #+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
 #+hugo_section: posts
 #+hugo_base_dir: ../../
-#+date: <2024-02-28>
+#+date: <2024-02-29>
 #+title: Emacs Version Control
 #+description: Managing version controlled projects within Emacs
 #+hugo_tags: emacs configuration git magit projectile
 #+hugo_categories: emacs
-#+hugo_publishdate: <2024-02-28>
+#+hugo_publishdate: <2024-02-29>
 #+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 * Magit
+Magit is a complete text-based user interface to [[https://git-scm.com/][Git]]. It fills the glaring gap between the Git command-line interface and various GUIs, letting you perform trivial as well as elaborate version control tasks with just a couple of mnemonic key presses. Magit looks like a prettified version of what you get after running a few Git commands but in Magit every bit of visible information is also actionable to an extent that goes far beyond what any Git GUI provides and it takes care of automatically refreshing this output when it becomes outdated. In the background Magit just runs Git commands and if you wish you can see what exactly is being run, making it possible for you to learn the git command-line by using Magit[fn:1].
+
 Actually, Emacs already has a built-in version control package (aptly named =vc=). But to me the UI is rather cryptic. I've used =magit= since forever, and old habit die hard.
 
 #+caption: Emacs magit status
 [[./emacs-magit-status.png][file:emacs-magit-status.png]]
 ** Installation
 *** =use-package=
+#+caption: magit suggested installation
 #+begin_src emacs-lisp
 (use-package magit
   :ensure
   :demand t
   :config
   (evil-set-initial-state #'git-commit-mode 'insert)
+  (with-eval-after-load 'general
+    (+config/leader-go
+      "g" 'magit-status))
   :custom
   (magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
   (magit-diff-refine-hunk 'all)
@@ -31,3 +37,244 @@ Actually, Emacs already has a built-in version control package (aptly named =vc=
 #+end_src
 Notes:
 - =magit-revision-show-gravatars= will enable /gravatars/ when viewing commits. The service used by default is [[https://www.libravatar.org/][Libgravatar]].
+** extensions
+There are lots of extensions for /magit/ which adds more features or functionalities. These are the ones I use:
+*** git-link
+Interactive Emacs functions that create URLs for files and commits in GitHub/Bitbucket/GitLab/... repositories[fn:4].
+#+caption: my git-link setup
+#+begin_src emacs-lisp
+(use-package git-link
+  :ensure
+  :commands (git-link git-link-commit git-link-homepage)
+  :config
+  (with-eval-after-load 'general
+    (+config/leader-go
+      "G" '(:ignore t :wk "git")
+      "Gl" 'git-link
+      "Gh" 'git-link-homepage
+      "Gc" 'git-link-commit)))
+#+end_src
+
+Notes:
+- git-link returns the URL for the current buffer's file location at the current line number or active region.
+- git-link-commit returns the URL for the commit at point.
+- git-link-homepage returns the URL for the repository's homepage.
+
+  All the URLs are added to the kill ring automatically.
+*** git-messenger
+=git-messenger.el= is Emacs port of [[https://github.com/rhysd/git-messenger.vim][git-messenger.vim]][fn:5].
+
+=git-messenger.el= provides function that popup commit message at current line. This is useful when you want to know why this line was changed.
+
+#+caption: my git-messenger setup
+#+begin_src emacs-lisp
+(use-package git-messenger
+  :ensure
+  :config
+  (with-eval-after-load 'general
+    (+config/leader-go
+      "Gm" 'git-messenger:popup-message))
+  :custom
+  ;; Enable magit-show-commit instead of pop-to-buffer
+  (git-messenger:use-magit-popup t)
+  (git-messenger:show-detail t))
+#+end_src
+
+#+caption: image from the github README
+[[https://github.com/emacsorphanage/git-messenger/raw/master/image/git-messenger.png]]
+****  git-timemachine
+Walk through git revisions of a file[fn:6].
+
+#+caption: git timemachine
+
+#+caption: My git-timemachine configuration
+#+begin_src emacs-lisp
+(use-package git-timemachine
+  :ensure
+  :after magit
+  :config
+  (with-eval-after-load 'general
+    (+config/leader-go
+      "Gt" 'git-timemachine-toggle)))
+#+end_src
+[[https://github.com/emacsmirror/git-timemachine/blob/master/timemachine.gif]]
+**** magit-todos
+This package displays keyword entries from source code comments and Org files in the Magit status buffer. Activating an item jumps to it in its file. By default, it uses keywords from [[https://github.com/tarsius/hl-todo][hl-todo]], minus a few (like NOTE).
+
+* Projectile
+Projectile is a project interaction library for Emacs. Its goal is to provide a nice set of features operating on a project level without introducing external dependencies (when feasible). For instance - finding project files has a portable implementation written in pure Emacs Lisp without the use of GNU =find= (but for performance sake an indexing mechanism backed by external commands exists as well).
+
+** Installation
+#+caption: projectile suggested installation
+#+begin_src emacs-lisp
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
+#+end_src
+
+This is the basic configuration, however, /projectile/ is [[https://docs.projectile.mx/projectile/configuration.html][highly configurable]]. This is how I setup my configuration for /projectile/:
+
+#+caption: my projectile configuration
+#+begin_src emacs-lisp
+(use-package projectile
+  :ensure t
+  :demand t
+  :bind (([remap evil-jump-to-tag] . projectile-find-tag)
+         ([remap find-tag] . projectile-find-tag))
+  :hook (dired-before-readin . projectile-track-known-projects-find-file-hook)
+  :custom
+  (projectile-cache-file (expand-file-name ".projects" user-emacs-directory))
+  (projectile-auto-discover nil)
+  (projectile-enable-caching (not noninteractive))
+  (projectile-globally-ignored-files '("DS_Store" "TAGS"))
+  (projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o"))
+  (projectile-kill-buffers-filter 'kill-only-files)
+  (projectile-known-projects-file (expand-file-name ".projectile_projects.eld" user-emacs-directory))
+  (projectile-ignored-projects '("~/"))
+  (projectile-project-root-files-bottom-up
+   (append '(".projectile" ".project" ".git")
+           (when (executable-find "hg")
+             '(".hg"))
+           (when (executable-find "bzr")
+             '(".bzr"))))
+  (projectile-project-root-files-top-down-recurring '("Makefile"))
+  (compilation-buffer-name-function #'projectile-compilation-buffer-name)
+  (compilation-save-buffers-predicate #'projectile-current-project-buffer-p)
+  (projectile-git-submodule-command nil)
+  (projectile-indexing-method 'hybrid)
+  :config
+  (projectile-mode +1)
+  (put 'projectile-git-submodule-command 'initial-value projectile-git-submodule-command)
+  (with-eval-after-load 'general
+  (+config/leader-key
+    "SPC" 'projectile-find-file
+    "p" '(:keymap projectile-command-map :package projectile :wk "projectile"))))
+#+end_src
+Notes:
+- if you use [[https://github.com/emacs-dashboard/emacs-dashboard]]dashboard, /projectile/ will automatically set =dashboard-projects-backend= to ='projectile=.
+** External tools
+Projectile will work without any external dependencies out of the box. However, if you have various tools installed, they will be automatically used when appropriate to improve performance. If you use /git/, install the system package as well.
+*** [[https://github.com/sharkdp/fd][fd]]
+File searching tool, if available, will be use as an alternative to =git ls-files=.
+*** [[https://github.com/ggreer/the_silver_searcher][ag]] / [[https://github.com/BurntSushi/ripgrep][ripgrep]]
+To benefit from the projectile-ag and projectile-ripgrep commands to perform file search, it’s recommended to install ag (the_silver_searcher) and/or rg (ripgrep). You should also install the Emacs packages =ag=, =ripgrep= or =rg= if you want to make sure of Projectile’s commands projectile-ag and projectile-ripgrep.
+#+caption: ripgrep package
+#+begin_src emacs-lisp
+(use-package ripgrep
+  :ensure
+  :init
+  (with-eval-after-load 'evil-collection
+    (evil-collection-ripgrep-setup)))
+#+end_src
+** Useful commands
+- =projectile-find-file=, bound to ~SPC p f~ in my configuration. Find file in current project.
+- =projectile-switch-project=, bound to ~SPC p p~, you can also switch to between open projects with ~SPC p q~.
+- =projectile-grep=, bound to ~SPC p s g~, search for text/regexp in project.
+- =projectile-replace=, bound to ~SPC p r~, replace in project.
+- =projectile-commander=, execute any projectile command with a single letter. See the variable =projectile-commander-methods= to see the list of methods used.
+- =projectile-find-other-file=, switch between files with the same name but different extensions (e.g. =foo.h= to =foo.c=).
+- =projectile-run-shell-command-in-root= and =projectile-run-async-shell-comand-in-root=, bound to ~SPC p !~ and ~SPC p &~, Run a shell command in the root of the project.
+- other commands described in the [[https://docs.projectile.mx/projectile/usage.html][documentation]].
+** Packages that interacts with /projectile/
+- [[https://elpa.gnu.org/packages/counsel.html][counsel]]
+- [[https://github.com/emacs-helm/helm][helm]]
+- [[https://github.com/nex3/perspective-el][perspective]]
+- [[https://orgmode.org/][org-mode]]
+- [[https://github.com/Alexander-Miller/treemacs][treemacs]]
+- [[https://www.emacswiki.org/emacs/SpeedBar][speedbar]]
+- [[https://github.com/jaypei/emacs-neotree][neotree]]
+- [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]]
+
+* diff-hl
+=diff-hl-mode= highlights uncommitted changes on the left side of the window (area also known as the "gutter"), allows you to jump between and revert them selectively[fn:2].
+#+caption: my diff-hl setup
+#+begin_src emacs-lisp
+  (use-package diff-hl
+    :ensure
+    :hook (find-file . diff-hl-mode)
+    :hook (vc-dir-mode . diff-hl-dir-mode)
+    :hook (dired-mode . diff-hl-dired-mode)
+    :hook (diff-hl-mode . diff-hl-show-hunk-mouse-mode)
+    :hook (diff-hl-mode . diff-hl-flydiff-mode)
+    :hook (magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
+    :hook (magit-post-refresh-hook . diff-hl-magit-post-refresh)
+    :init
+    (global-diff-hl-mode)
+    :custom
+    (vc-git-diff-switches '("--histogram")
+                          diff-hl-flydiff-delay 0.5
+                          diff-hl-show-staged-changes nil)
+    :config
+    (when (featurep 'flycheck)
+      (setq flycheck-indication-mode 'right-fringe)))
+#+end_src
+
+* Perspective
+The Perspective package provides multiple named workspaces (or "perspectives") in Emacs, similar to multiple desktops in window managers like Awesome and XMonad, and Spaces on the Mac. Each perspective has its own buffer list and its own window layout, along with some other isolated niceties, like the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Xref.html][xref]] ring. This makes it easy to work on many separate projects without getting lost in all the buffers. Switching to a perspective activates its window configuration, and when in a perspective, only its buffers are available (by default). Each Emacs frame has a distinct list of perspectives[fn:3].
+
+#+caption: my perspective configuration
+#+begin_src emacs-lisp
+  (use-package perspective
+    :ensure
+    :config
+    (setq persp-initial-frame-name "Main"
+          persp-suppress-no-prefix-key-warning t)
+    (if (featurep 'no-littering)
+        (setq persp-state-default-file (expand-file-name ".perspective-state" no-littering-var-directory))
+      (setq persp-state-default-file (expand-file-name ".perspective-state" user-emacs-directory)))
+    (global-set-key [remap switch-to-buffer] #'persp-switch-to-buffer*)
+    (when (featurep 'consult)
+      (require 'consult)
+      (unless (boundp 'persp-consult-source)
+        (defvar persp-consult-source
+          (list :name     "Perspective"
+                :narrow   ?s
+                :category 'buffer
+                :state    #'consult--buffer-state
+                :history  'buffer-name-history
+                :default  t
+                :items
+                #'(lambda () (consult--buffer-query :sort 'visibility
+                                                    :predicate '(lambda (buf) (persp-is-current-buffer buf t))
+                                                    :as #'buffer-name)))))
+      (consult-customize consult--source-buffer :hidden t :default nil)
+      (add-to-list 'consult-buffer-sources persp-consult-source))
+    (with-eval-after-load 'general
+      (general-def
+        :keymaps 'perspective-map
+        "P" 'projectile-persp-switch-project)
+      (+config/leader-key
+        "TAB" '(:keymap perspective-map
+                        :package perspective
+                        :which-key "perspective")
+        "TAB TAB" '(persp-switch-last :wk "switch to last perspective")
+        "C-x" '(persp-switch-to-scratch-buffer :wk "switch to scratch buffer")))
+    :init
+    (customize-set-variable 'persp-mode-prefix-key (kbd "C-c TAB"))
+    (unless (equal persp-mode t)
+      (persp-mode 1))
+    :bind (([remap switch-to-buffer] . persp-switch-to-buffer*)
+           ([remap kill-buffer] . persp-kill-buffer*))
+    :hook (kill-emacs . persp-state-save))
+
+  (use-package persp-projectile
+    :ensure t
+    :after perspective
+    :commands projectile-persp-switch-project)
+#+end_src
+
+Notes:
+The =persp-consult-source= is added to the =consult-buffer-sources= for the =consult-buffer= command. The prefix keybinding I use is ~SPC TAB~.
+
+* Footnotes
+[fn:6] https://github.com/emacsmirror/git-timemachine
+
+[fn:5]https://github.com/emacsorphanage/git-messenger
+[fn:4]https://github.com/sshaw/git-link
+[fn:3] https://github.com/nex3/perspective-el
+[fn:2] https://github.com/dgutov/diff-hl
+[fn:1] https://magit.vc/
