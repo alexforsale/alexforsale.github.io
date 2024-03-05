@@ -26,6 +26,7 @@ This site is build with [[https://gohugo.io][Hugo]] which is a static site gener
 :ID:       4c19c52d-19e4-4514-a6b1-d688387f3986
 :END:
 We need to be able to export the /org-mode/ files into /markdown/ format. Depending on how the files are organized, we need to have a function that could export them. Here I'm using per file layout[fn:1].
+#+caption: build.el
 #+begin_src emacs-lisp
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -48,6 +49,7 @@ Things to note:
 - so the function required for exporting is ~org-hugo-export-to-md~, it should be different when using another type of layout.
 *** Create a makefile
 This will be called by the github action workflow.
+#+caption: Makefile
 #+begin_src makefile
 .PHONY: all
 
@@ -58,6 +60,7 @@ all:
 Things to note:
 - This script is calling the /emacs-lisp/ file we've created [[id:4c19c52d-19e4-4514-a6b1-d688387f3986][earlier]].
 *** Create GIthub action workflow
+#+caption: deploy.yml
 #+begin_src yaml
 name: hugo CI
 on:
