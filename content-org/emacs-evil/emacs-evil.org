@@ -14,11 +14,13 @@
 Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, and provides facilities for writing custom extensions.
 * Installing
 ** Add Melpa
+#+caption: melpa
 #+begin_src emacs-lisp
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 #+end_src
 ** with use-package
+#+caption: use-package
 #+begin_src emacs-lisp
   (use-package evil
     :ensure
@@ -36,6 +38,7 @@ Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, 
     (evil-set-leader '(normal visual) (kbd "C-c SPC") t))
 #+end_src
 ** without use-package
+#+caption: without use-package
 #+begin_src emacs-lisp
 ;; Set up package.el to work with MELPA
 (require 'package)
@@ -55,6 +58,7 @@ Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, 
 * Configuration
 ** Leader and Localleader key
 This is inherited from /vim/[fn:1], So this isn't really required, but as someone who use both /vim/ and /Emacs/ it certainly easier to memorize.
+#+caption: leader and local leader key
 #+begin_src emacs-lisp
   (evil-set-leader '(normal visual) (kbd "SPC"))
   (evil-set-leader '(normal visual) (kbd "C-c SPC") t)
@@ -63,6 +67,7 @@ The first line will set the ~<leader>~ key, while the latter will set the ~<loca
 * additional packages
 ** evil-collection
 Setup keybindings for evil-mode
+#+caption: evil-collection
 #+begin_src emacs-lisp
   (use-package evil-collection
     :ensure t
@@ -77,6 +82,7 @@ Setup keybindings for evil-mode
 - =evil-collection= assumes =evil-want-keybinding= is set to =nil= and =evil-want-integration= is set to =t= before loading =evil= and =evil-collection=. Note some other packages may load evil (e.g. evil-leader) so bear that in mind when determining when to set the variables.
 ** =abbrev-mode=
 Not a mandatory package, but it's built-in into /Emacs/ so it nice to have,
+#+caption: abbrev-mode
 #+begin_src emacs-lisp
   (use-package abbrev
     :ensure nil)
