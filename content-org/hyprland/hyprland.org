@@ -20,6 +20,7 @@ Hyprland is a wlroots-based tiling Wayland compositor written in C++. Noteworthy
 The default configuration file is =~/.config/hypr/hyprland.conf=, though it support splitting the configuration into multiple files and including them in the main file (=hyprland.conf=). If you're familiar with /i3wm/, this configuration is similar to that. Either way, the [[https://wiki.hyprland.org/Configuring/Configuring-Hyprland/][wiki]] provides enough information to start configuring.
 
 ** Default configuration file
+#+caption: default configuration file
 #+begin_src
 # This is an example Hyprland config file.
 #
@@ -216,6 +217,7 @@ If you're planning to start from the default configuration file, here are the pa
 Hyprland can be started via a display manager (GDM, Lightdm etc), or via the command line (in =archlinux= it's ~/usr/bin/Hyprland~, notice the capital =H=).
 * Environment variables
 Unlike other window manager where usually environment variables are set from the /shell/, in =Hyprland= we can set the variables from within the configuration files[fn:2]. Common variables:
+#+caption: example of setting environment variable in Hyprland
 #+begin_src
 env = QT_QPA_PLATFORM,wayland
 env = XDG_CURRENT_DESKTOP, Hyprland
@@ -224,16 +226,19 @@ env = XDG_SESSION_DESKTOP, Hyprland
 but try to start /Hyprland/ without any variables set and see which is missing. Some variables such as =GTK_THEME=, =XCURSOR_THEME=, and =XCURSOR_SIZE= can be set via other methods (gsettings, GTK configuration file, etc).
 
 In case you're not using any /display managers/, it's important to also import the environment variables into /systemd/ (assuming your distribution uses /systemd/, which is the norm nowadays). Add this into the configuration file:
+#+caption: systemd: environment import
 #+begin_src
 exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME
 #+end_src
 =exec-once=, just like the name, will only execute the command once, only when /Hyprland/ is started. And while we're at it, also update environment used for =D-bus= session service:
+#+caption: activating dbus environment
 #+begin_src
 exec-once = dbus-update-activation-environment --systemd --all
 #+end_src
 In case you're wondering what kind of variables are used, run ~dbus-update-activation-environment --systemd --all --verbose~ from the terminal to see the output.
 * Autostarting applications
 =exec-once= can also be use to auto start applications that should be run at the start of the sessions. My recommendation is:
+#+caption: autostarting apps in Hyprland
 #+begin_src
 exec-once=blueman-applet # bluetooth
 exec-once=nm-applet --indicator # only if you use networkmanager
@@ -251,6 +256,7 @@ exec-once=thunar --daemon # file manager, set in daemon mode
 exec-once=swayidle -w timeout 200 'hyprctl dispatch dpms off' timeout 300 'swaylock' before-sleep 'swaylock' # screen locker
 #+end_src
 * Input settings
+#+caption: input settings
 #+begin_src
 input {
     kb_layout = us
@@ -274,6 +280,7 @@ input {
 }
 #+end_src
 
+#+caption: gestures
 #+begin_src
 gestures {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -282,6 +289,7 @@ gestures {
 }
 #+end_src
 * Keybindings
+#+caption: keybindings
 #+begin_src
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 $mainMod = SUPER
@@ -473,6 +481,7 @@ binde = Super, Apostrophe, splitratio, 0.1
 #+end_src
 * Hyprland-specific configuration
 #+begin_src
+#+caption: general section
 general {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
@@ -493,6 +502,7 @@ general {
 }
 #+end_src
 
+#+caption: misc section
 #+begin_src
 misc {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -506,6 +516,7 @@ misc {
 }
 #+end_src
 
+#+caption: decoration section
 #+begin_src
 decoration {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -527,6 +538,7 @@ decoration {
 }
 #+end_src
 
+#+caption: dwindle layout
 #+begin_src
 dwindle {
     # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
@@ -536,6 +548,7 @@ dwindle {
 }
 #+end_src
 
+#+caption: master layout
 #+begin_src
 master {
     # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
@@ -543,6 +556,7 @@ master {
 }
 #+end_src
 * monitor configuration
+#+caption: monitors
 #+begin_src
 # See https://wiki.hyprland.org/Configuring/Monitors/
 monitor=,highrr,auto,1
@@ -550,6 +564,7 @@ monitor=eDP-1,1920x1080@60,auto,1
 monitor=DP-5,preferred,auto,1
 #+end_src
 * Window rules
+#+caption: window rules
 #+begin_src
 windowrulev2 = nomaximizerequest, class:.* # You'll probably like this.
 windowrulev2 = opacity 0.8, class:.*
@@ -607,6 +622,7 @@ windowrulev2 = maximize, class:(vim)
 windowrulev2 = maximize, class:(nw-emacs)
 #+end_src
 * workspaces
+#+caption: bind configuration
 #+begin_src
 binds {
     workspace_back_and_forth = false
@@ -614,6 +630,7 @@ binds {
 }
 #+end_src
 
+#+caption: workspaces
 #+begin_src
 workspace = 1, name:terminal, on-created-empty:alacritty
 workspace = 2, name:code, on-created-empty:emacsclient -c -a emacs
