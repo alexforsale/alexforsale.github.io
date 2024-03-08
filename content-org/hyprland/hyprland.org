@@ -419,6 +419,33 @@ general {
 }
 #+end_src
 Aside from the colors, I just copy everything from the default configuration file.
+*** group section
+#+caption: group
+#+begin_src +n
+group {
+    insert_after_current = true
+    focus_removed_window = true
+    col.border_active = 0x66ffff00
+    col.border_inactive = 0x66777700
+    col.border_locked_active = 0x66ff5500
+    col.border_locked_inactive = 0x66775500
+    groupbar {
+        enabled = true
+        font_family = "JetBrainsMonoNL Nerd Font Mono 10"
+        font_size = 10
+        gradients = true
+        height = 14
+        priority = 3
+        render_titles = true
+        scrolling = true
+        text_color = 0xffeceff4
+        col.active = 0x554c566a
+        col.inactive = 0x55434c5e
+        col.locked_active = 0x66ff5500
+        col.locked_inactive = 0x66775500
+    }
+}
+#+end_src
 *** decoration
 #+caption: decoration section
 #+begin_src
@@ -615,7 +642,7 @@ workspace = special:scratchpad
 This section still needs tweaking. Basically, it's fine when I'm on a single monitor. But I haven't got the time to test it in multi monitors setup, it would be better if I can assign multiple monitors into a workspace.
 *** Keybindings
 :LOGBOOK:
-CLOCK: [2024-03-08 Fri 13:45]
+CLOCK: [2024-03-08 Fri 13:45]--[2024-03-08 Fri 14:49] =>  1:04
 :END:
 #+caption: main keybindings
 #+begin_src -n
@@ -710,6 +737,9 @@ Packages used:
 - [[https://github.com/carnager/rofi-pass][rofi-pass]] :: rofi frontend for [[https://www.passwordstore.org/][pass]].
 - [[https://github.com/fdw/rofi-rbw/][rofi-rbw]] :: Rofi frontend for [[https://bitwarden.com/][Bitwarden]].
 - [[https://github.com/AlynxZhou/showmethekey][showmethekey]] :: Show keys you typed on screen.
+- [[https://github.com/tesseract-ocr/tesseract/][tesseract]] :: Tesseract Open Source OCR Engine.
+#+caption: Applications
+[[./applications.gif][file:applications.gif]]
 **** media keys
 #+caption: media keys
 #+begin_src +n
@@ -758,7 +788,8 @@ bind = $mainMod, grave, exec, dunstctl close
 bind = $mainMod, G, submap, group
 submap = group
 bind = , T, togglegroup
-bind = Alt, TAB, changegroupactive
+bind = $mainMod Control, F, changegroupactive, f
+bind = $mainMod Control, B, changegroupactive, b
 
 # bind = $mainMod Alt, L, lockactivegroup
 bind = $mainMod, G, lockgroups, toggle
