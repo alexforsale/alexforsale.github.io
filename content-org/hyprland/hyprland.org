@@ -10,12 +10,14 @@
 #+hugo_categories: desktop
 #+hugo_publishdate: <2024-02-22 Thu>
 #+hugo_auto_set_lastmod: t
-#+startup: overview
+#+startup: showall
 
 #+caption: hyprland
 [[./hyprland.png][file:hyprland.png]]
 Hyprland is a wlroots-based tiling Wayland compositor written in C++. Noteworthy features of Hyprland include dynamic tiling, tabbed windows, a clean and readable C++ code-base, and a custom renderer that provides window animations, rounded corners, and Dual-Kawase Blur on transparent windows. General usage and configuration is thoroughly documented at Hyprland wiki[fn:1].
 
+* Starting Hyprland
+Hyprland can be started via a display manager (GDM, Lightdm etc), or via the command line (in =archlinux= it's ~/usr/bin/Hyprland~, notice the capital =H=).
 * Configuration
 The default configuration file is =~/.config/hypr/hyprland.conf=, though it support splitting the configuration into multiple files and including them in the main file (=hyprland.conf=). If you're familiar with /i3wm/, this configuration is similar to that. Either way, the [[https://wiki.hyprland.org/Configuring/Configuring-Hyprland/][wiki]] provides enough information to start configuring.
 
@@ -213,17 +215,142 @@ If you're planning to start from the default configuration file, here are the pa
 - [[https://wiki.archlinux.org/title/Dolphin][dolphin]] :: File manager used in /KDE/.
 - [[https://hg.sr.ht/~scoopta/wofi][wofi]] :: Launcher/menu program for wlroots based wayland compositors such as sway.
 - Other packages needed: a text editor and web browser.
-* Starting Hyprland
-Hyprland can be started via a display manager (GDM, Lightdm etc), or via the command line (in =archlinux= it's ~/usr/bin/Hyprland~, notice the capital =H=).
-* Environment variables
+** Split configuration file
+#+caption: my split configuration for Hyprland (~~/.config/hypr/hyprland.conf~)
+#+begin_src -n
+source = ./hypr.d/monitors.conf
+source = ./hypr.d/autostart.conf
+source = ./hypr.d/variables.conf
+source = ./hypr.d/input.conf
+source = ./hypr.d/general.conf
+source = ./hypr.d/decoration.conf
+source = ./hypr.d/animations.conf
+source = ./hypr.d/dwindle.conf
+source = ./hypr.d/master.conf
+source = ./hypr.d/gestures.conf
+source = ./hypr.d/binds.conf
+source = ./hypr.d/misc.conf
+source = ./hypr.d/devices.conf
+source = ./hypr.d/windowrule.conf
+source = ./hypr.d/workspaces.conf
+source = ./hypr.d/keybindings.conf
+#+end_src
+*** monitors
+#+caption: monitor configuration
+#+begin_src +n
+# See https://wiki.hyprland.org/Configuring/Monitors/
+monitor=,highrr,auto,1
+monitor=eDP-1,1920x1080@60,auto,1
+monitor=DP-1,preferred,auto,1
+monitor=DP-2,preferred,auto,1
+monitor=DP-3,preferred,auto,1
+monitor=DP-4,preferred,auto,1
+monitor=DP-5,preferred,auto,1
+
+# laptop
+monitor = HDMI-A-1, highres, auto, 1
+#+end_src
+This is my monitors from all the machines that uses Hyprland.
+*** Autostarting applications
+=exec-once= can also be use to auto start applications that should be run at the start of the sessions.
+#+caption: autostarting apps in Hyprland
+#+begin_src -n
+# Execute your favorite apps at launch
+exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME
+exec-once=dbus-update-activation-environment --systemd --all &
+exec-once=blueman-applet &
+exec-once=nm-applet --indicator &
+exec-once=/usr/lib/polkit-kde-authentication-agent-1 &
+exec-once=gnome-keyring-daemon --components=pkcs11,secrets,ssh -r -d &
+exec-once=dbus-launch --sh-syntax --exit-with-session udiskie -t &
+exec-once=dbus-launch --sh-syntax --exit-with-session dunst -conf ~/.config/dunst/dunstrc &
+exec-once=/usr/lib/kdeconnectd &
+exec-once=kdeconnect-indicator &
+exec-once=waybar &
+exec-once=hyprpaper &
+exec-once = wl-paste --type text --watch cliphist store &
+exec-once = wl-paste --type image --watch cliphist store &
+exec-once=hyprctl setcursor Bibata-Modern-Classic 24
+exec-once=hyprshade auto &
+exec-once=thunar --daemon &
+exec-once = hypridle
+
+# gtk settings
+exec-once = gsettings set org.gnome.desktop.interface font-name "JetBrainsMonoNL Nerd Font Mono 10"
+exec-once = gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic
+exec-once = gsettings set org.gnome.desktop.interface cursor-size 24
+exec-once = gsettings set org.gnome.desktop.interface gtk-theme Breeze
+exec-once = gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
+exec-once = gsettings set org.gnome.desktop.interface icon-theme Papirus
+exec-once = gsettings set org.gnome.desktop.sound theme-name freedesktop
+exec-once = gsettings set org.gnome.desktop.sound input-feedback-sounds true
+exec-once = gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
+#+end_src
+Not so sure if the =&= is needed, it is for script (/shells/, or /xprofile/, etc.).
+**** Packages used:
+- [[https://wiki.archlinux.org/title/Blueman][Blueman]] :: a full featured Bluetooth manager written in Python and using GTK.
+- [[https://archlinux.org/packages/extra/x86_64/network-manager-applet/][network-manager-applet]] :: Useful for laptop.
+- [[https://archlinux.org/packages/extra/x86_64/polkit-kde-agent/][polkit-kde-agent]] :: The recommended polkit by the wiki, there's also [[https://wiki.archlinux.org/title/Polkit][other alternatives]].
+- [[https://archlinux.org/packages/extra/x86_64/kdeconnect/][kdeconnect]] :: for quick file sharing between pc and android. Also work for other kind of sharing.
+- [[https://wiki.archlinux.org/title/GNOME/Keyring][gnome-keyring]] :: a collection of components in GNOME that store secrets, passwords, keys, certificates and make them available to applications.
+- [[https://github.com/Alexays/Waybar][Waybar]] :: Highly customizable Wayland bar for Sway and Wlroots based compositors.
+- [[https://github.com/sentriz/cliphist][cliphist]] :: wayland clipboard manager with support for multimedia.
+- [[https://github.com/loqusion/hyprshade][hyprshade]] :: Hyprland shader configuration tool.
+- [[https://github.com/hyprwm/hypridle][hypridle]] and [[https://github.com/hyprwm/hyprlock/][hyprlock]] :: Hyprland's idle daemon and  Hyprland's GPU-accelerated screen locking utility.
+- [[https://archlinux.org/packages/extra/any/ttf-jetbrains-mono-nerd/][ttf-jetbrains-mono-nerd]] :: Jetbrains mono, or get it from [[https://github.com/ryanoasis/nerd-fonts][the github repo]].
+- [[https://archlinux.org/packages/extra/any/papirus-icon-theme/][papirus-icon-theme]] :: Papirus icon theme.
+- [[https://archlinux.org/packages/extra/any/sound-theme-freedesktop/][sound theme freedesktop]] :: The usual /Linux/ sound theme.
+
+*** Environment variables
 Unlike other window manager where usually environment variables are set from the /shell/, in =Hyprland= we can set the variables from within the configuration files[fn:2]. Common variables:
-#+caption: example of setting environment variable in Hyprland
-#+begin_src
-env = QT_QPA_PLATFORM,wayland
-env = XDG_CURRENT_DESKTOP, Hyprland
-env = XDG_SESSION_DESKTOP, Hyprland
+#+caption: example of setting environment variable in Hyprland (~~/.config/hypr/hypr.d/variables.conf~)
+#+begin_src +n
+# Set programs that you use
+$terminal = alacritty
+$fileManager = thunar
+$menu = rofi -show drun -theme apps
+$editor = emacsclient -c -a emacs
+$mail = thunderbird
+$browser = firefox
+
+# Some default env vars.
+env = QT_QPA_PLATFORM,xcb
+env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that
+env = QT_AUTO_SCREEN_SCALE_FACTOR,1
+env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+env = SDL_VIDEODRIVER,wayland
+env = CLUTTER_BACKEND,wayland
+env = GTK_THEME,Breeze-Dark
+env = GTK2_RC_FILES,/usr/share/themes/Breeze-Dark/gtk-2.0
+env = XCURSOR_THEME,Bibata-Modern-Classic
+env = XCURSOR_SIZE,24
+
+# wallpapers
+$w1 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/nord/ign_duaAnime.png"
+$w2 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/nord/ign_chainsaw-man.png"
+$w3 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/nord/ign_animeGirlSleeping.png"
+$w4 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/nord/ign_girlWithHeadphones.png"
+$w5 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/manga/Sora-no-Otoshimono/kazane_hiyori_angel_by_sakurakiel_d4cnyy6.png"
+$w6 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/nord/nord_scenary.png"
+$w7 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/nord/wild.png"
+$w8 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/nord/waves.jpg"
+$w9 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/nord/subtle_ferns.jpg"
+$w10 = hyprctl hyprpaper wallpaper ",~/.local/share/wallpapers/nord/street_blues.png"
+
 #+end_src
 but try to start /Hyprland/ without any variables set and see which is missing. Some variables such as =GTK_THEME=, =XCURSOR_THEME=, and =XCURSOR_SIZE= can be set via other methods (gsettings, GTK configuration file, etc).
+
+Packages used:
+- [[https://github.com/hyprwm/hyprpaper][hyprpaper]] :: wallpaper utility for hyprland.
+- Breeze theme :: [[https://archlinux.org/packages/extra/any/breeze-gtk/][Breeze]] and [[https://archlinux.org/packages/extra/any/breeze-icons/][breeze-icons]].
+- [[https://aur.archlinux.org/packages/bibata-cursor-theme][bibata-cursor-theme]] :: Material Based Cursor Theme.
+- [[https://wiki.archlinux.org/title/Alacritty][Alacritty]] :: GPU-accelerated terminal emulator written in Rust.
+- [[https://wiki.archlinux.org/title/rofi][rofi]] :: use [[https://aur.archlinux.org/packages/rofi-lbonn-wayland][this version]] of rofi for wayland.
+- [[https://wiki.archlinux.org/title/Thunar][Thunar]] :: modern file manager for the Xfce Desktop Environment.
+- [[https://wiki.archlinux.org/title/Emacs][Emacs]] :: obviously.
+- [[https://wiki.archlinux.org/title/Thunderbird][Thunderbird]] :: open source email, news, and chat client previously developed by the Mozilla Foundation.
+- [[https://wiki.archlinux.org/title/Firefox][Firefox]] :: popular open source graphical web browser from Mozilla.
+- [[https://gitlab.com/alexforsale/wallpapers/][My wallpaper collection]] :: mostly from [[https://deviantart.com/][deviantart]].
 
 In case you're not using any /display managers/, it's important to also import the environment variables into /systemd/ (assuming your distribution uses /systemd/, which is the norm nowadays). Add this into the configuration file:
 #+caption: systemd: environment import
@@ -236,26 +363,7 @@ exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESK
 exec-once = dbus-update-activation-environment --systemd --all
 #+end_src
 In case you're wondering what kind of variables are used, run ~dbus-update-activation-environment --systemd --all --verbose~ from the terminal to see the output.
-* Autostarting applications
-=exec-once= can also be use to auto start applications that should be run at the start of the sessions. My recommendation is:
-#+caption: autostarting apps in Hyprland
-#+begin_src
-exec-once=blueman-applet # bluetooth
-exec-once=nm-applet --indicator # only if you use networkmanager
-exec-once=/usr/lib/polkit-kde-authentication-agent-1 # the hyprland wiki suggest polkit-kde rather than polkit-gnome
-exec-once=gnome-keyring-daemon --components=pkcs11,secrets,ssh -r -d  # gnome-keyring
-exec-once=dbus-launch --sh-syntax --exit-with-session udiskie -t # removable storage
-exec-once=dbus-launch --sh-syntax --exit-with-session dunst -conf ~/.config/dunst/dunstrc # notification
-exec-once=waybar # status bar for wayland
-exec-once=hyprpaper # wallpaper management for hyprland
-exec-once = wl-paste --type text --watch cliphist store # wayland clipboard manager, watching text
-exec-once = wl-paste --type image --watch cliphist store # watching image
-exec-once=hyprctl setcursor Bibata-Modern-Classic 24 # set the cursor theme and size, not neccessary (can be set via GTK configuration file)
-exec-once=hyprshade auto # auto shader
-exec-once=thunar --daemon # file manager, set in daemon mode
-exec-once=swayidle -w timeout 200 'hyprctl dispatch dpms off' timeout 300 'swaylock' before-sleep 'swaylock' # screen locker
-#+end_src
-* Input settings
+*** Input settings
 #+caption: input settings
 #+begin_src
 input {
@@ -280,17 +388,237 @@ input {
 }
 #+end_src
 
+The touchpad section is useful, but this only sets for hyprland, if you use any display managers, it needs to be configured inside the display manager configuration.
+
 #+caption: gestures
 #+begin_src
+    workspace_swipe = true
+    workspace_swipe_fingers = 3
+}
+#+end_src
+*** general section
+#+begin_src
+#+caption: general section
+general {
+    # See https://wiki.hyprland.org/Configuring/Variables/ for more
+
+    gaps_in = 5
+    gaps_out = 5
+    border_size = 2
+    #col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+    col.active_border = rgba(88c0d0ff) rgba(b48eadff) rgba(ebcb8bff) rgba(a3be8cff) 45deg
+    #col.inactive_border = rgba(595959aa)
+    col.inactive_border=0xff434c5e
+    col.nogroup_border=0xff89dceb
+    col.nogroup_border_active=0xfff9e2af
+
+    layout = master
+
+    # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
+    allow_tearing = false
+}
+#+end_src
+Aside from the colors, I just copy everything from the default configuration file.
+*** decoration
+#+caption: decoration section
+#+begin_src
+decoration {
+    # See https://wiki.hyprland.org/Configuring/Variables/ for more
+
+    rounding = 10
+
+    blur {
+        enabled = true
+        size = 3
+        passes = 1
+    }
+
+    drop_shadow = yes
+    shadow_range = 4
+    shadow_render_power = 3
+    #col.shadow = rgba(1a1a1aee)
+    col.shadow=0xee1a1a1a
+    col.shadow_inactive=0xee1a1a1a
+}
+#+end_src
+I suppose the decoration section is also from the default.
+*** animation section
+#+caption: animation
+#+begin_src +n
+animations {
+    enabled = true
+
+    # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+
+    bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+
+    animation = windows, 1, 7, myBezier
+    animation = windowsOut, 1, 7, default, popin 80%
+    animation = border, 1, 10, default
+    animation = borderangle, 1, 8, default
+    animation = fade, 1, 7, default
+    animation = workspaces, 1, 6, default
+}
+#+end_src
+*** Dwindle layout
+#+caption: dwindle layout
+#+begin_src
+dwindle {
+    # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+    pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+    preserve_split = yes # you probably want this
+    smart_split = yes
+}
+#+end_src
+Dwindle layout is also using the default.
+*** Master layout
+#+caption: master layout
+#+begin_src
+master {
+    # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+    new_is_master = true
+}
+#+end_src
+The same for the master layout
+*** gestures section
+#+caption: gestures
+#+begin_src +n
 gestures {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
     workspace_swipe = true
     workspace_swipe_fingers = 3
 }
 #+end_src
-* Keybindings
-#+caption: keybindings
+*** binds section
+#+caption: binds
+#+begin_src +n
+binds {
+    workspace_back_and_forth = false
+    allow_workspace_cycles = true
+}
+#+end_src
+*** misc section
+#+caption: misc section
 #+begin_src
+misc {
+    # See https://wiki.hyprland.org/Configuring/Variables/ for more
+    force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
+    disable_hyprland_logo = false
+    disable_splash_rendering = false
+    mouse_move_enables_dpms = true
+    key_press_enables_dpms = true
+    animate_manual_resizes = true
+    mouse_move_focuses_monitor = true
+}
+#+end_src
+I set =force_default_wallpaper= to =-1= to disable the anime mascot.
+*** devices section
+#+caption: devices
+#+begin_src +n
+# See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
+device:epic-mouse-v1 {
+    sensitivity = -0.5
+}
+#+end_src
+*** Window rules
+#+caption: window rules
+#+begin_src
+windowrulev2 = nomaximizerequest, class:.* # You'll probably like this.
+windowrulev2 = opacity 0.8, class:.*
+windowrulev2 = float,class:^(pavucontrol)$
+windowrulev2 = size 50%,class:^(pavucontrol)$
+windowrulev2 = center,class:^(pavucontrol)$
+windowrulev2 = float,class:(org.kde.polkit-kde-authentication-agent-1)
+windowrulev2 = center,class:(org.kde.polkit-kde-authentication-agent-1)
+windowrulev2 = float,class:(blueman)
+windowrulev2 = center,class:(blueman)
+windowrulev2 = size 50%,class:(blueman)
+windowrulev2 = float,class:(thunderbird),title:(status)
+windowrulev2 = float,class:(thunderbird),title:(.*)(Reminders)
+windowrulev2 = float,class:(thunderbird),title:(Write:.*)
+windowrulev2 = float,class:(thunderbird),title:(Send.*)
+windowrulev2 = float,class:(thunderbird),title:(Inbox.*)
+windowrulev2 = tile,class:(thunderbird),initialTitle(Mozilla Thunderbird)
+windowrulev2 = float,class:(thunderbird)
+windowrulev2 = float,class:(Msgcompose.*)
+windowrulev2 = idleinhibit always, class:firefox title:(.*)(- YouTube)
+windowrulev2 = opacity 1, class:firefox title:(.*)(- YouTube)
+windowrulev2 = float, class:(thunderbird),title(.*)(Reminders)$
+windowrulev2 = float,class:(QtPass)
+windowrulev2 = float,class:(zoom)
+windowrulev2 = float, class:(file-roller)
+windowrulev2 = float,class:(ncmpcpp)
+windowrulev2 = center,class:(ncmpcpp)
+windowrulev2 = size 50%,class:(ncmpcpp)
+windowrulev2 = float, class:(khal)
+windowrulev2 = size 40%, class:(khal)
+windowrulev2 = move onscreen cursor 50% 10%, class:(khal)
+windowrulev2 = workspace 4, class:(astroid)
+windowrulev2 = maximize, class:(astroid)
+windowrulev2 = workspace 4, class:(thunderbird)
+windowrulev2 = maximize, class:(thunderbird)
+windowrulev2 = workspace 5, class:(thunar)
+windowrulev2 = workspace 7,class:(vlc)
+windowrulev2 = opacity 1,class:(vlc)
+windowrulev2 = idleinhibit always,class:(vlc)
+windowrulev2 = float, workspace 8, class:(org.remmina.Remmina)
+windowrulev2 = workspace 9,class:^(com.transmissionbt.transmission).*
+windowrulev2 = float,title:(Torrent.*)
+windowrulev2 = opacity 1, class:(zoom)
+windowrulev2 = workspace 10, class:(zoom)
+windowrulev2 = opacity 1, class:(zoom), title:(Settings)
+windowrulev2 = opacity 1, class:(zoom), title:(Zoom Meeting)
+windowrulev2 = float, class:(org.kde.kdeconnect.app)
+windowrulev2 = float, title:(File Operation Progress)
+windowrulev2 = float, class:(htop)
+windowrulev2 = size 100% 40%, class:(htop)
+windowrulev2 = move 0 40, class:(htop)
+windowrulev2 = float, class:(nmtui)
+#windowrulev2 = size 100% 40%, class:(htop)
+#windowrulev2 = move 0 40, class:(htop)
+windowrulev2 = float, class:(vim)
+windowrulev2 = maximize, class:(vim)
+windowrulev2 = maximize, class:(nw-emacs)
+windowrulev2 = float, class:(one.alynx.showmethekey), title:(Show Me The Key)
+windowrulev2 = nofocus, class:(showmethekey-gtk), title:(Floating Window - Show Me The Key)
+windowrulev2 = opacity 0.4, class:(showmethekey-gtk), title:(Floating Window - Show Me The Key)
+windowrulev2 = center, class:(showmethekey-gtk), title:(Floating Window - Show Me The Key)
+windowrulev2 = float, class:(showmethekey-gtk), title:(Floating Window - Show Me The Key)
+windowrulev2 = pin, class:(showmethekey-gtk), title:(Floating Window - Show Me The Key)
+windowrulev2 = size 100% 10%, class:(showmethekey-gtk), title:(Floating Window - Show Me The Key)
+windowrulev2 = move 0 90%, class:(showmethekey-gtk), title:(Floating Window - Show Me The Key)
+#+end_src
+I think this section of the configuration file that I change the most. Always refer to [[https://wiki.hyprland.org/Configuring/Window-Rules/][the wiki]] in case there's an update. I use =idleinhibit= for window that should not activate the screensaver. Use [[https://aur.archlinux.org/packages/hyprprop-git][hyprprop]] which function just like =xprop= in /Xorg/ to determine the window class or title.
+*** workspaces
+#+caption: bind configuration
+#+begin_src
+binds {
+    workspace_back_and_forth = false
+    allow_workspace_cycles = true
+}
+#+end_src
+
+#+caption: workspaces
+#+begin_src
+workspace = 1, name:terminal, monitor:eDP-1 #, on-created-empty:alacritty
+workspace = 2, name:code, monitor:eDP-1 #, on-created-empty:emacsclient -c -a emacs
+workspace = 3, name:web, monitor:eDP-1 #, on-created-empty:firefox
+workspace = 4, name:message, monitor:eDP-1
+workspace = 5, name:file, monitor:HDMI-A-1, monitor:DP-1, default:true
+workspace = 6, name:office, monitor:HDMI-A-1
+workspace = 7, name:fun, monitor:HDMI-A-1
+workspace = 8, name:remote, monitor:HDMI-A-1
+workspace = 9, name:torrent, monitor:HDMI-A-1
+workspace = 10, name:zoom, monitor:HDMI-A-1
+workspace = special:scratchpad
+#+end_src
+This section still needs tweaking. Basically, it's fine when I'm on a single monitor. But I haven't got the time to test it in multi monitors setup, it would be better if I can assign multiple monitors into a workspace.
+*** Keybindings
+:LOGBOOK:
+CLOCK: [2024-03-08 Fri 13:45]
+:END:
+#+caption: main keybindings
+#+begin_src -n
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 $mainMod = SUPER
 
@@ -300,62 +628,19 @@ bind = $mainMod, E, exec, $fileManager
 bind = $mainMod, F4, killactive,
 bind = ALT, F4, killactive,
 bind = $mainMod, Q, exec, ~/.local/bin/rofi-logout
-#bind = $mainMod SHIFT, E, exit
-#bind = $mainMod Shift, Q, exec, systemctl poweroff
-#bind = $mainMod Shift, R, exec, systemctl reboot
+bind = $mainMod Alt, Q, exec, hyprlock
 bind = $mainMod, D, exec, $menu
 bind = $mainMod, C, exec, cliphist list | rofi -dmenu -p "Clipboard:" -theme "clipboard" | cliphist decode | wl-copy
 bind = $mainMod, Comma, exec, rofi -show emoji
 bind = $mainMod Shift, V, exec, pavucontrol
 bind = $mainMod, F, fullscreen, 0
+#+end_src
+**** Window motions
+#+caption: window keybindings
+#+begin_src +n
 bind = $mainMod Shift, F, fullscreen, 1
 bind = $mainMod Control, F, fakefullscreen, 0
-bind = $mainMod Alt, M, exec, alacritty --class ncmpcpp -e ncmpcpp
-bind = $mainMod Alt, H, exec, alacritty --class htop -e htop
-bind = $mainMod Alt, W, exec, alacritty --class nmtui -e nmtui
-bind = $mainMod Alt, K, exec, alacritty --class khal -e khal interactive
-bind = $mainMod Alt, V, exec, alacritty --class vim -e vim
-bind = $mainMod Shift Alt, N, exec, alacritty --class nw-emacs -e emacsclient -t -a emacs
-bind = $mainMod Alt, E, exec, emacsclient -c -a emacs -e '(dired (getenv "HOME"))'
-bind = $mainMod Alt, N, exec, $editor
-bind = $mainMod Alt, T, exec, $mail
-bind = $mainMod Alt, P, exec, rofi-pass
-bind = $mainMod Alt, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -theme calculator
-bind = $mainMod Alt, B, exec, rofi-rbw
-
-# submaps
-## Groups
-bind = $mainMod, G, submap, group
-submap = group
-bind = , T, togglegroup
-bind = , escape, submap, reset
-bind = Control, G, submap, reset
-submap = reset
-
-## Resize
-bind = $mainMod, R, submap, resize
-submap = resize
-### using arrow key
-binde = , right, resizeactive, 10 0
-binde = , left, resizeactive, -10 0
-binde = , up, resizeactive, 0 -10
-binde = , down, resizeactive, 0 10
-### using vim key
-binde = , l, resizeactive, 10 0
-binde = , h, resizeactive, -10 0
-binde = , k, resizeactive, 0 -10
-binde = , j, resizeactive, 0 10
-bind = Control, G, submap, reset
-bind = , escape, submap, reset
-submap = reset
-
-# bind = $mainMod, V, togglefloating,
 bind = $mainMod, Space, togglefloating,
-bind = $mainMod, P, pseudo, # dwindle
-bind = $mainMod, S, togglesplit, # dwindle
-
-# master
-bind = $mainMod Alt, TAB, layoutmsg, swapwithmaster auto
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, left, movefocus, l
@@ -385,6 +670,177 @@ bind = $mainMod Shift, J, movewindow, d
 bind = $mainMod Shift, K, movewindow, u
 bind = $mainMod Shift, L, movewindow, r
 
+# Window split ratio
+binde = Super, Minus, splitratio, -0.1
+binde = Super, Equal, splitratio, 0.1
+binde = Super, Semicolon, splitratio, -0.1
+binde = Super, Apostrophe, splitratio, 0.1
+
+# Move/resize windows with mainMod + LMB/RMB and dragging
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow
+#+end_src
+**** Applications
+#+begin_src -n
+bind = $mainMod Alt, M, exec, alacritty --class ncmpcpp -e ncmpcpp
+bind = $mainMod Alt, H, exec, alacritty --class htop -e htop
+bind = $mainMod Alt, W, exec, alacritty --class nmtui -e nmtui
+bind = $mainMod Alt, K, exec, alacritty --class khal -e khal interactive
+bind = $mainMod Alt, V, exec, alacritty --class vim -e vim
+bind = $mainMod Shift Alt, N, exec, alacritty --class nw-emacs -e emacsclient -t -a emacs
+bind = $mainMod Alt, E, exec, emacsclient -c -a emacs -e '(dired (getenv "HOME"))'
+bind = $mainMod Alt, N, exec, $editor
+bind = $mainMod Alt, T, exec, $mail
+bind = $mainMod Alt, P, exec, rofi-pass
+bind = $mainMod Alt, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -theme calculator
+bind = $mainMod Alt, B, exec, rofi-rbw
+bind = $mainMod Alt, f, exec, firefox
+bind = $mainMod Alt, S, exec, [workspace 10; silent; float] showmethekey-gtk
+# tesseract
+bind = SuperShift,T,exec,grim -g "$(slurp -d -c D1E5F4BB -b 1B232866 -s 00000000)" "tmp.png" && tesseract -l eng "tmp.png" - | wl-copy && rm "tmp.png"
+#+end_src
+Packages used:
+- ~rofi-logout~ ::  a [[https://gitlab.com/alexforsale/dotfiles-apps][script I made]].
+- [[https://archlinux.org/packages/extra/x86_64/pavucontrol/][pavucontrol]] :: pulseaudio control
+- [[https://wiki.archlinux.org/title/ncmpcpp][ncmpcpp]] :: an [[https://wiki.archlinux.org/title/Mpd][mpd]] client.
+- [[https://htop.dev/][htop]] :: a cross-platform interactive process viewer.
+- nmtui :: [[https://wiki.archlinux.org/title/NetworkManager][Network Manager]] terminal interface.
+- [[https://github.com/pimutils/khal][khal]] :: 📆 CLI calendar application.
+- [[https://wiki.archlinux.org/title/vim][vim]] :: a terminal text editor.
+- [[https://github.com/carnager/rofi-pass][rofi-pass]] :: rofi frontend for [[https://www.passwordstore.org/][pass]].
+- [[https://github.com/fdw/rofi-rbw/][rofi-rbw]] :: Rofi frontend for [[https://bitwarden.com/][Bitwarden]].
+- [[https://github.com/AlynxZhou/showmethekey][showmethekey]] :: Show keys you typed on screen.
+**** media keys
+#+caption: media keys
+#+begin_src +n
+binde = , XF86AudioRaiseVolume, exec, ~/.local/bin/dunst-volume -i 1
+binde = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -1%
+binde = , XF86AudioLowerVolume, exec, ~/.local/bin/dunst-volume -d 1
+bindl = , XF86AudioMute, exec, ~/.local/bin/dunst-volume -t
+# bindl = , XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+bind = , XF86AudioPlay, exec, playerctl play-pause
+bind = , XF86AudioNext, exec, playerctl next
+bind = , XF86AudioPrev, exec, playerctl previous
+
+# binde = , XF86MonBrightnessUp, exec, brightnessctl set +1%
+binde = , XF86MonBrightnessUp, exec, ~/.local/bin/dunst-backlight +1%
+binde = , XF86MonBrightnessDown, exec, ~/.local/bin/dunst-backlight 1%-
+# binde = , XF86MonBrightnessDown, exec, brightnessctl set 1%-
+#+end_src
+- [[https://github.com/dunst-project/dunst][dunst]] ::  Lightweight and customizable notification daemon.
+- [[https://github.com/altdesktop/playerctl][playerctl]] ::  🎧 mpris media player command-line controller for vlc, mpv, RhythmBox, web browsers, cmus, mpd, spotify and others.
+- ~~/.local/bin/dunst-volume~ :: [[https://gitlab.com/alexforsale/dotfiles-apps/-/blob/main/.local/bin/dunst-backlight?ref_type=heads][A script to set volume and also show notification]].
+- ~~/.local/bin/dunst-backlight/~ :: [[https://gitlab.com/alexforsale/dotfiles-apps/-/blob/main/.local/bin/dunst-backlight?ref_type=heads][Similar script for backlight]].
+**** Print Key
+#+caption: print key
+#+begin_src +n
+bind= , Print, exec, grim "$(echo ~/Pictures/Screenshots/Screenshot1-$(date +'%Y%m%d_%H%M%S').png)"
+bind = Control, Print, exec, grim -g "$(slurp)" - | swappy -f -
+bind = Alt, Print, exec, kooha
+#+end_src
+- [[https://sr.ht/~emersion/grim/][grim]] :: Grab images from a Wayland compositor.
+- [[https://github.com/emersion/slurp][slurp]] ::  Select a region in a Wayland compositor.
+- [[https://github.com/jtheoof/swappy][swappy]] ::  A Wayland native snapshot editing tool, inspired by Snappy on macOS.
+- [[https://github.com/SeaDve/Kooha][kooha]] ::  Elegantly record your screen.
+**** notification
+#+caption: notification
+#+begin_src +n
+bind = $mainMod Alt, grave, exec, dunstctl history-pop
+bind = $mainMod SHIFT, grave, exec, dunstctl context
+bind = $mainMod, grave, exec, dunstctl action
+bind = $mainMod, grave, exec, dunstctl close
+#+end_src
+**** Submaps
+***** Group
+#+caption: group submap
+#+begin_src +n
+bind = $mainMod, G, submap, group
+submap = group
+bind = , T, togglegroup
+bind = Alt, TAB, changegroupactive
+
+# bind = $mainMod Alt, L, lockactivegroup
+bind = $mainMod, G, lockgroups, toggle
+bind = $mainMod Alt, G, lockactivegroup, toggle
+
+bind = $mainMod Shift, left, moveintogroup, l
+bind = $mainMod Shift, right, moveintogroup, r
+bind = $mainMod Shift, up, moveintogroup, u
+bind = $mainMod Shift, down, moveintogroup, d
+
+bind = $mainMod Shift, H, moveintogroup, l
+bind = $mainMod Shift, L, moveintogroup, r
+bind = $mainMod Shift, K, moveintogroup, u
+bind = $mainMod Shift, J, moveintogroup, d
+
+bind = $mainMod Control, left, moveoutofgroup, l
+bind = $mainMod Control, right, moveoutofgroup, r
+bind = $mainMod Control, up, moveoutofgroup, u
+bind = $mainMod Control, down, moveoutofgroup, d
+
+bind = $mainMod Control, H, moveoutofgroup, l
+bind = $mainMod Control, L, moveoutofgroup, r
+bind = $mainMod Control, K, moveoutofgroup, u
+bind = $mainMod Control, J, moveoutofgroup, d
+
+bind = , left, movefocus, l
+bind = , right, movefocus, r
+bind = , up, movefocus, u
+bind = , down, movefocus, d
+
+bind = , H, movefocus, l
+bind = , L, movefocus, r
+bind = , K, movefocus, u
+bind = , J, movefocus, d
+
+bind = , escape, submap, reset
+bind = Control, G, submap, reset
+submap = reset
+
+bind = $mainMod Control, F, changegroupactive, f
+bind = $mainMod Control, B, changegroupactive, b
+#+end_src
+This make window grouped.
+***** Resize
+#+begin_src +n
+## Resize
+bind = $mainMod, R, submap, resize
+submap = resize
+### using arrow key
+binde = , right, resizeactive, 10 0
+binde = , left, resizeactive, -10 0
+binde = , up, resizeactive, 0 -10
+binde = , down, resizeactive, 0 10
+### using vim key
+binde = , l, resizeactive, 10 0
+binde = , h, resizeactive, -10 0
+binde = , k, resizeactive, 0 -10
+binde = , j, resizeactive, 0 10
+bind = Control, G, submap, reset
+bind = , escape, submap, reset
+submap = reset
+#+end_src
+**** dwindle layout keybindings
+#+begin_src +n
+bind = $mainMod, P, pseudo, # dwindle
+bind = $mainMod, S, togglesplit, # dwindle
+bind = Alt Control Shift, Tab, layoutmsg, swapprev
+#+end_src
+**** master layout keybindings
+#+begin_src +n
+# master
+bind = $mainMod Alt, TAB, layoutmsg, swapwithmaster auto
+bind = $mainMod Alt, H, layoutmsg, orientationleft
+bind = $mainMod Alt, J, layoutmsg, orientationbottom
+bind = $mainMod Alt, K, layoutmsg, orientationtop
+bind = $mainMod Alt, L, layoutmsg, orientationright
+# bind = Alt Shift, Tab, layoutmsg, swapnext
+bind = Alt, Tab, cyclenext
+bind = Alt Control, TAB, layoutmsg, cycleprev
+#+end_src
+**** workspaces keybindings
+#+begin_src +n
 # Switch workspaces with mainMod + [0-9]
 bind = $mainMod, 1, workspace, 1
 bind = $mainMod, 1, exec, $w1
@@ -408,18 +864,12 @@ bind = $mainMod, 0, workspace, 10
 bind = $mainMod, 0, exec, $w10
 bind = $mainMod, TAB, workspace, previous
 
-bind = Alt, Tab, cyclenext
-bind = Alt, Tab, bringactivetotop,
-bind = Alt Shift, Tab, layoutmsg, swapnext
-bind = Alt Shift, Tab, bringactivetotop,
-bind = Alt Control, TAB, layoutmsg, cycleprev
-bind = Alt Control, TAB, bringactivetotop,
-bind = Alt Control Shift, Tab, layoutmsg, swapprev
-bind = Alt Control Shift, Tab, bringactivetotop,
-bind = $mainMod Alt, H, layoutmsg, orientationleft
-bind = $mainMod Alt, J, layoutmsg, orientationbottom
-bind = $mainMod Alt, K, layoutmsg, orientationtop
-bind = $mainMod Alt, L, layoutmsg, orientationright
+bind = $mainMod, BackSpace, workspace, special
+bind = $mainMod Shift, Backspace, movetoworkspace, special
+bind = $mainMod Alt, Backspace, togglespecialworkspace
+# Scroll through existing workspaces with mainMod + scroll
+bind = $mainMod, mouse_down, workspace, e+1
+bind = $mainMod, mouse_up, workspace, e-1
 
 # Move active window to a workspace with mainMod + SHIFT + [0-9]
 bind = $mainMod SHIFT, 1, movetoworkspace, 1
@@ -433,215 +883,37 @@ bind = $mainMod SHIFT, 8, movetoworkspace, 8
 bind = $mainMod SHIFT, 9, movetoworkspace, 9
 bind = $mainMod SHIFT, 0, movetoworkspace, 10
 bind = $mainMod SHIFT, TAB, movetoworkspace, previous
-
-bind = $mainMod Alt, grave, exec, dunstctl history-pop
-bind = $mainMod SHIFT, grave, exec, dunstctl context
-bind = $mainMod, grave, exec, dunstctl action
-bind = $mainMod, grave, exec, dunstctl close
-
-bind= , Print, exec, grim "$(echo ~/Pictures/Screenshots/Screenshot1-$(date +'%Y%m%d_%H%M%S').png)"
-bind = Control, Print, exec, grim -g "$(slurp)" - | swappy -f -
-bind = Alt, Print, exec, kooha
-
-# tesseract
-bind = SuperShift,T,exec,grim -g "$(slurp -d -c D1E5F4BB -b 1B232866 -s 00000000)" "tmp.png" && tesseract -l eng "tmp.png" - | wl-copy && rm "tmp.png"
-
-# Example special workspace (scratchpad)
-bind = $mainMod, S, togglespecialworkspace, magic
-bind = $mainMod SHIFT, S, movetoworkspace, special:magic
-
-binde = , XF86AudioRaiseVolume, exec, ~/.local/bin/dunst-volume -i 1
-binde = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -1%
-binde = , XF86AudioLowerVolume, exec, ~/.local/bin/dunst-volume -d 1
-bindl = , XF86AudioMute, exec, ~/.local/bin/dunst-volume -t
-# bindl = , XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle
-
-bind = , XF86AudioPlay, exec, playerctl play-pause
-bind = , XF86AudioNext, exec, playerctl next
-bind = , XF86AudioPrev, exec, playerctl previous
-
-# binde = , XF86MonBrightnessUp, exec, brightnessctl set +1%
-binde = , XF86MonBrightnessUp, exec, ~/.local/bin/dunst-backlight +1%
-binde = , XF86MonBrightnessDown, exec, ~/.local/bin/dunst-backlight 1%-
-# binde = , XF86MonBrightnessDown, exec, brightnessctl set 1%-
-
-# Scroll through existing workspaces with mainMod + scroll
-bind = $mainMod, mouse_down, workspace, e+1
-bind = $mainMod, mouse_up, workspace, e-1
-
-# Move/resize windows with mainMod + LMB/RMB and dragging
-bindm = $mainMod, mouse:272, movewindow
-bindm = $mainMod, mouse:273, resizewindow
-
-# Window split ratio
-binde = Super, Minus, splitratio, -0.1
-binde = Super, Equal, splitratio, 0.1
-binde = Super, Semicolon, splitratio, -0.1
-binde = Super, Apostrophe, splitratio, 0.1
 #+end_src
-* Hyprland-specific configuration
-#+begin_src
-#+caption: general section
-general {
-    # See https://wiki.hyprland.org/Configuring/Variables/ for more
+**** monitors movement
+#+begin_src +n
+bind = $mainMod Alt, H, focusmonitor, l
+bind = $mainMod Alt, J, focusmonitor, d
+bind = $mainMod Alt, K, focusmonitor, u
+bind = $mainMod Alt, L, focusmonitor, r
 
-    gaps_in = 5
-    gaps_out = 5
-    border_size = 2
-    #col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-    col.active_border = rgba(88c0d0ff) rgba(b48eadff) rgba(ebcb8bff) rgba(a3be8cff) 45deg
-    #col.inactive_border = rgba(595959aa)
-    col.inactive_border=0xff434c5e
-    col.nogroup_border=0xff89dceb
-    col.nogroup_border_active=0xfff9e2af
-
-    layout = master
-
-    # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
-    allow_tearing = false
-}
+bind = $mainMod Control, H, movecurrentworkspacetomonitor, l
+bind = $mainMod Control, J, movecurrentworkspacetomonitor, d
+bind = $mainMod Control, K, movecurrentworkspacetomonitor, u
+bind = $mainMod Control, L, movecurrentworkspacetomonitor, r
+#+end_src
+**** misc
+#+begin_src +n
+bind = $mainMod, O, toggleopaque
 #+end_src
 
-#+caption: misc section
-#+begin_src
-misc {
-    # See https://wiki.hyprland.org/Configuring/Variables/ for more
-    force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
-    disable_hyprland_logo = false
-    disable_splash_rendering = false
-    mouse_move_enables_dpms = true
-    key_press_enables_dpms = true
-    animate_manual_resizes = true
-    mouse_move_focuses_monitor = true
-}
-#+end_src
+#+begin_src +n
+bind = Alt, Tab, alterzorder, top
+bind = Alt Shift, Tab, bringactivetotop,
+bind = Alt Control, TAB, bringactivetotop,
+bind = Alt Control Shift, Tab, bringactivetotop,
 
-#+caption: decoration section
-#+begin_src
-decoration {
-    # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
-    rounding = 10
-
-    blur {
-        enabled = true
-        size = 3
-        passes = 1
-    }
-
-    drop_shadow = yes
-    shadow_range = 4
-    shadow_render_power = 3
-    #col.shadow = rgba(1a1a1aee)
-    col.shadow=0xee1a1a1a
-    col.shadow_inactive=0xee1a1a1a
-}
-#+end_src
-
-#+caption: dwindle layout
-#+begin_src
-dwindle {
-    # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-    pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-    preserve_split = yes # you probably want this
-    smart_split = yes
-}
-#+end_src
-
-#+caption: master layout
-#+begin_src
-master {
-    # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-    new_is_master = true
-}
-#+end_src
-* monitor configuration
-#+caption: monitors
-#+begin_src
-# See https://wiki.hyprland.org/Configuring/Monitors/
-monitor=,highrr,auto,1
-monitor=eDP-1,1920x1080@60,auto,1
-monitor=DP-5,preferred,auto,1
-#+end_src
-* Window rules
-#+caption: window rules
-#+begin_src
-windowrulev2 = nomaximizerequest, class:.* # You'll probably like this.
-windowrulev2 = opacity 0.8, class:.*
-windowrulev2 = float,class:^(pavucontrol)$
-windowrulev2 = size 50%,class:^(pavucontrol)$
-windowrulev2 = center,class:^(pavucontrol)$
-windowrulev2 = float,class:(org.kde.polkit-kde-authentication-agent-1)
-windowrulev2 = center,class:(org.kde.polkit-kde-authentication-agent-1)
-windowrulev2 = float,class:(blueman)
-windowrulev2 = center,class:(blueman)
-windowrulev2 = size 50%,class:(blueman)
-windowrulev2 = float,class:(thunderbird),title:(status)
-windowrulev2 = float,class:(thunderbird),title:(.*)(Reminders)
-windowrulev2 = float,class:(thunderbird),title:(Write:.*)
-windowrulev2 = float,class:(thunderbird),title:(Send.*)
-windowrulev2 = float,class:(thunderbird),title:(Inbox.*)
-windowrulev2 = tile,class:(thunderbird),initialTitle(Mozilla Thunderbird)
-windowrulev2 = float,class:(thunderbird)
-windowrulev2 = float,class:(Msgcompose.*)
-windowrulev2 = opacity 1, class:firefox title:(.*)(- YouTube)
-windowrulev2 = float, class:(thunderbird),title(.*)(Reminders)$
-windowrulev2 = float,class:(QtPass)
-windowrulev2 = float,class:(zoom)
-windowrulev2 = float, class:(file-roller)
-windowrulev2 = float,class:(ncmpcpp)
-windowrulev2 = center,class:(ncmpcpp)
-windowrulev2 = size 50%,class:(ncmpcpp)
-windowrulev2 = float, class:(khal)
-windowrulev2 = size 40%, class:(khal)
-windowrulev2 = move onscreen cursor 50% 10%, class:(khal)
-windowrulev2 = workspace 4, class:(astroid)
-windowrulev2 = maximize, class:(astroid)
-windowrulev2 = workspace 4, class:(thunderbird)
-windowrulev2 = maximize, class:(thunderbird)
-windowrulev2 = workspace 5, class:(thunar)
-windowrulev2 = workspace 7,class:(vlc)
-windowrulev2 = opacity 1,class:(vlc)
-windowrulev2 = float, workspace 8, class:(org.remmina.Remmina)
-windowrulev2 = workspace 9,class:^(com.transmissionbt.transmission).*
-windowrulev2 = float,title:(Torrent.*)
-windowrulev2 = opacity 1, class:(zoom)
-windowrulev2 = workspace 10, class:(zoom)
-windowrulev2 = opacity 1, class:(zoom), title:(Settings)
-windowrulev2 = opacity 1, class:(zoom), title:(Zoom Meeting)
-windowrulev2 = float, class:(org.kde.kdeconnect.app)
-windowrulev2 = float, title:(File Operation Progress)
-windowrulev2 = float, class:(htop)
-windowrulev2 = size 100% 40%, class:(htop)
-windowrulev2 = move 0 40, class:(htop)
-windowrulev2 = float, class:(nmtui)
-#windowrulev2 = size 100% 40%, class:(htop)
-#windowrulev2 = move 0 40, class:(htop)
-windowrulev2 = float, class:(vim)
-windowrulev2 = maximize, class:(vim)
-windowrulev2 = maximize, class:(nw-emacs)
-#+end_src
-* workspaces
-#+caption: bind configuration
-#+begin_src
-binds {
-    workspace_back_and_forth = false
-    allow_workspace_cycles = true
-}
-#+end_src
-
-#+caption: workspaces
-#+begin_src
-workspace = 1, name:terminal, on-created-empty:alacritty
-workspace = 2, name:code, on-created-empty:emacsclient -c -a emacs
-workspace = 3, name:web, on-created-empty:firefox
-workspace = 4, name:message
-workspace = 5, name:file
-workspace = 6, name:office
-workspace = 7, name:fun
-workspace = 8, name:remote
-workspace = 9, name:torrent
-workspace = 10, name:zoom
+# lid switch
+# trigger when the switch is toggled
+bindl=,switch:Lid Switch,exec,hyprlock
+# trigger when the switch is turning on
+#bindl=,switch:on:[switch name],exec,hyprctl keyword monitor "eDP-1, 2560x1600, 0x0, 1"
+# trigger when the switch is turning off
+#bindl=,switch:off:[switch name],exec,hyprctl keyword monitor "eDP-1, disable"
 #+end_src
 * Footnotes
 [fn:1] https://wiki.hyprland.org/
