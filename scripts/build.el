@@ -4,6 +4,7 @@
 (package-initialize)
 (package-install 'ox-hugo)
 (require 'ox-hugo)
+(setq org-confirm-babel-evaluate nil)
 
 (defun export-org-files ()
   "Export files to hugo markdown."
