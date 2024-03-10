@@ -60,6 +60,8 @@ params:
     buttons:
       - name: "Braindump"
         url: "/braindump/"
+      - name: "Literate Emacs"
+        url: "/literate-emacs/"
       - name: "Posts"
         url: "/posts/"
 
