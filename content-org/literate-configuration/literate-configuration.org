@@ -33,6 +33,9 @@ Right now, I'm doing my dotfiles[fn:1] one by one, and I've come to realize how 
 
 * Using =github-action= to create each page on /github/
 My goal is to have a /self-documenting/ page for each repositories. Not too detailed to be a /wiki/, just a reminder for me, or anyone who happens to see it. Another nice thing is that the /about/ section in the github repository page can automatically link the page.
+#+caption: Github Pages
+[[./github-pages-deployed.png][file:github-pages-deployed.png]]
+
 * What I've done
 
 ** /Emacs/
