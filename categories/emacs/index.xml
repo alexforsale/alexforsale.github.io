@@ -6,8 +6,15 @@
     <description>Recent content in Emacs on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Mar 2024 13:10:03 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Mar 2024 11:46:22 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/categories/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Literate Configuration with Emacs</title>
+      <link>https://alexforsale.github.io/posts/literate-configuration/</link>
+      <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/literate-configuration/</guid>
+      <description>for easier documenting and maintaining codes</description>
+    </item>
     <item>
       <title>Hugo blog org-capture-templates</title>
       <link>https://alexforsale.github.io/posts/hugo-blogging-org-capture-templates/</link>
