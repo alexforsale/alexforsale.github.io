@@ -1,3 +1,27 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: README
+#+date: <2024-03-12 Tue>
+#+author: Kristian Alexander P
+#+email: alexforsale@yahoo.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.2 (Org mode 9.6.15)
+#+cite_export:
+
+#+begin_html:
+<a href="https://raw.githubusercontent.com/alexforsale/alexforsale.github.io/main/LICENSE.md">
+<img alt="GPLv3" src="https://img.shields.io/github/license/alexforsale/alexforsale.github.io" />
+</a>
+
+<a href="https://github.com/alexforsale/alexforsale.github.io/actions/workflows/publish.yml">
+<img alt="Build status" src="https://github.com/alexforsale/alexforsale.github.io/actions/workflows/deploy.yml/badge.svg" />
+</a>
+#+end_html
+
 * Publishing
 #+begin_src sh
   emacs -q -Q --batch --load scripts/build.el --funcall export-org-files
