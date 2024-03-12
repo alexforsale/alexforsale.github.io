@@ -17,7 +17,7 @@
 I'm spending most of my long vacation reorganizing my /github/ repositories, archiving some old repos (mostly /android/ stuffs that I don't use anymore). And when I'm looking into my /dotfiles/ repos I remember once I've tried to use [[https://en.wikipedia.org/wiki/Literate_programming/][literate programming]] to manage them. I think one of the difficulties I had was editing the source code block inline.
 
 #+begin_src org
-  This is how code block looks like in /Emacs/
+  This is how shell code block looks like in /Emacs/
   ,#+begin_src sh
     echo true
   ,#+end_src
