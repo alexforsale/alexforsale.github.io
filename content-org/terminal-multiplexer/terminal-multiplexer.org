@@ -1,0 +1,39 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-03-13 Wed>
+#+title: Using Terminal Multiplexer
+#+description: or how I achieve terminal efficiency
+#+hugo_draft: true
+#+hugo_tags: tmux screen linux unix ssh remote
+#+hugo_categories: terminals
+#+hugo_auto_set_lastmod: t
+#+startup: inlineimages
+
+* What is a terminal multiplexer?
+
+let /[[https://en.wikipedia.org/wiki/Terminal_multiplexer/][wikipedia]]/ do the talking:
+#+begin_quote
+A terminal multiplexer is a software application that can be used to multiplex several separate pseudoterminal-based login sessions inside a single terminal display, terminal emulator window, PC/workstation system console, or remote login session, or to detach and reattach sessions from a terminal. It is useful for dealing with multiple programs from a command line interface, and for separating programs from the session of the Unix shell that started the program, particularly so a remote process continues running even when the user is disconnected.
+#+end_quote
+
+In a way, it's just like a window manager, only it's in text. And as far as I know, only two of them really stands out: [[https://en.wikipedia.org/wiki/GNU_Screen][GNU Screen]] and [[https://en.wikipedia.org/wiki/Tmux/][Tmux]].
+
+* My interaction with /GNU Screen/.
+#+caption: GNU screen
+[[./gnu-screen.png][file:gnu-screen.png]]
+In my early /linux/ years, I was the /Gnome/ guy, back when /Gnome/ is just /Gnome/, no /2/ or /3/. For me back then, /screen/ or /tmux/ is kind of useless. Why use another program when I can just ~CTRL-SHIFT-T~ and create a new tab in my /Gnome Terminal/? Only later when I started tinkering /[[https://www.linuxfromscratch.org/lfs/][LinuxFromScratch]]/ and /[[https://www.gentoo.org/][Gentoo]]/ I realized:
+
+#+begin_quote
+*It's sucks having just 6 TTY*. Especially when you forgot which one is chrooted and which is not (yes, there's a command to change the prompt, but who does that?).
+#+end_quote
+
+From the memory usage point of view, it's trivial. After all it just a pseudo-terminal. But consider this:
+- You can have multiple terminals shown at once, in a split.
+- Or, multiple terminals like a buffer in /Emacs/ or /Vim/.
+- You can copy and paste text from one terminal into another, when I'm installing /archlinux/, I have a screen with one terminal doing the installation, and another one opening /links/ or /lynx/ (terminal web browser, they have those as well) viewing the /[[https://wiki.archlinux.org/title/installation_guide/][Archlinux installation page]]/.
+- When connecting to a remote machine, via /SSH/, by using /screen/ or /tmux/ in the remote machine, you can easily detach or reattach to a running session. No more disconnection worry. It also means you can connect to a remote machine from one client, opening application in it, detach, and reattach from a different client.
+
+This is not a tutorial on how to use /screen/ or /tmux/ (in /screen/ type ~C-a ?~ to get you started). I suppose the question is "should I use /screen/ or /tmux/?" And I'm not going to answer that either.
