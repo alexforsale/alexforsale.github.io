@@ -113,7 +113,7 @@ There are also different syntax for the date:
 - ~DEADLINE: <2024-03-14 Thu -3d>~
   means a warning with the period of 3 days,
 *** Schedule
-Meaning that I'm planning to start doing the tasks at that date. The default keybinding is ~C-c C-s~, use ~C-u C-c C-s_~ to remove a schedule from a heading.
+Meaning that I'm planning to start doing the tasks at that date. The default keybinding is ~C-c C-s~, use ~C-u C-c C-s~ to remove a schedule from a heading.
 #+caption: TODO task with a schedule
 #+begin_src org
   ,* TODO test
