@@ -1,4 +1,4 @@
-#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+options: ':nil -:nil ^:{} num:nil toc:t
 #+author: Kristian Alexander P
 #+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
 #+hugo_section: posts
