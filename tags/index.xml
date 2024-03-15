@@ -6,27 +6,76 @@
     <description>Recent content in Tags on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Mar 2024 15:07:48 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Mar 2024 15:10:38 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emacs</title>
       <link>https://alexforsale.github.io/tags/emacs/</link>
-      <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 14 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/emacs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GTD</title>
+      <link>https://alexforsale.github.io/tags/gtd/</link>
+      <pubDate>Thu, 14 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/gtd/</guid>
       <description></description>
     </item>
     <item>
       <title>Org</title>
       <link>https://alexforsale.github.io/tags/org/</link>
-      <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 14 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/org/</guid>
       <description></description>
     </item>
     <item>
       <title>Org-Mode</title>
       <link>https://alexforsale.github.io/tags/org-mode/</link>
-      <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 14 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/org-mode/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://alexforsale.github.io/tags/linux/</link>
+      <pubDate>Wed, 13 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Remote</title>
+      <link>https://alexforsale.github.io/tags/remote/</link>
+      <pubDate>Wed, 13 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/remote/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Screen</title>
+      <link>https://alexforsale.github.io/tags/screen/</link>
+      <pubDate>Wed, 13 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/screen/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ssh</title>
+      <link>https://alexforsale.github.io/tags/ssh/</link>
+      <pubDate>Wed, 13 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/ssh/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tmux</title>
+      <link>https://alexforsale.github.io/tags/tmux/</link>
+      <pubDate>Wed, 13 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/tmux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Unix</title>
+      <link>https://alexforsale.github.io/tags/unix/</link>
+      <pubDate>Wed, 13 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/unix/</guid>
       <description></description>
     </item>
     <item>
@@ -181,13 +230,6 @@
       <link>https://alexforsale.github.io/tags/hyprland/</link>
       <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/hyprland/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Linux</title>
-      <link>https://alexforsale.github.io/tags/linux/</link>
-      <pubDate>Thu, 22 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/tags/linux/</guid>
       <description></description>
     </item>
     <item>
