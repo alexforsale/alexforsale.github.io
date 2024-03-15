@@ -1,0 +1,237 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.2 (Org mode 9.6.15 + ox-hugo)
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+date: <2024-03-14 Thu>
+#+title: Org Mode Workflow
+#+description: Getting Things Done with /Emacs/
+#+hugo_draft: true
+#+hugo_tags: emacs org-mode org GTD
+#+hugo_categories: emacs
+#+hugo_auto_set_lastmod: t
+#+startup: inlineimages
+
+* Task Management System
+Lately I found that I am in dire need of an effective task management system as an /IT/ support. There are some days where everything is hectic and I'm lost prioritizing my assignments. There's moment where I was in the middle of doing one task, and suddenly another request / assignment came out of nowhere (not exactly nowhere, but you get the idea). Task management system is also useful for creating some kind of reporting, although this is not the main goal.
+
+Basically what I want is:
+- [ ] daily planner.
+- [ ] Simple UI for task highlighting or focusing.
+- [ ] also some kind of visual task movements (task delegation / escalation).
+- [ ] perhaps, automation or templating.
+- [ ] reviewing
+
+* Using /org-mode/
+An /Emacs/ nerd as I am, of course the first stop is =org-mode=. And I really want to try from the ground up, using a /vanilla/ /Emacs/ with no interference from my actual configuration file[fn:1]. First of all, we need to set the minimal keybinding suggested by the [[https://orgmode.org/manual/Activation.html][manual]]:
+
+** Keybindings
+#+caption: suggested keybindings
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c l") #'org-store-link)
+  (global-set-key (kbd "C-c a") #'org-agenda)
+  (global-set-key (kbd "C-c c") #'org-capture)
+#+end_src
+
+** Specific =org-mode= variables
+:PROPERTIES:
+:ID:       705c247a-a878-46fc-aff6-3fc1d3b548a6
+:END:
+
+*** =org-directory= and =org-agenda-files=
+Next is set the =org-directory=, this directory is going to be the location of =org-mode= files, well, you are free to place an =org-mode= files anywhere, but think of this as the /root/ location, so every customizations we'll be making will refers to this location, for example, if we want to define our =org-agenda-files= as =agenda.org= inside the =org-directory=, we'll use:
+#+caption: set the location of =org-directory= inside =user-emacs-directory=
+#+begin_src emacs-lisp
+  (setq org-directory (expand-file-name "org" user-emacs-directory))
+#+end_src
+Usually you'll want your =org-directory= to be separated from your =user-emacs-directory=, which mostly be under some kind of version control system (such as /git/). The simplest location is just on the root of your =home-directory=
+
+#+caption: set the location of =org-directory= on the root of your home directory
+#+begin_src emacs-lisp
+  (setq org-directory (expand-file-name "org" (getenv "HOME"))) ;; ~/org/
+#+end_src
+
+Assuming your =user-emacs-directory= is in =~/.emacs.d~=, then your =org-directory= is =~/.emacs.d/org=
+
+#+caption: set the location of =org-agenda-files=
+#+begin_src emacs-lisp
+  (setq org-agenda-files (list org-directory))
+#+end_src
+
+*** =org-archive-location=
+=org-archive-location= is another variable that I should consider, will I want an archiving method? If I do, where should I put it? Is storing archived task (the done, cancelled etc) in a designated file necessary?
+
+*** =org-todo-keywords=
+:PROPERTIES:
+:ID:       6edcb547-3712-45a8-a665-8f1e7f05cd37
+:END:
+The =org-todo-keywords= also need to be customized, the default keywords are just =TODO=, and =DONE=. I've thought of this for a while, and perhaps this will suffice:
+
+#+caption: my todo keywords
+| TODO Keyword | What it is                                                                                                                                                                                                     |
+|--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| =TODO=       | Tasks that are not started, also not planned. There can be many of them.                                                                                                                                       |
+| =NEXT=       | Tasks that are planned to do immediately.                                                                                                                                                                      |
+| =WAIT=       | Tasks that needs other form of interaction in order for it to be set as =PROG= or =DONE= or =KILL=.                                                                                                            |
+| =PROG=       | Tasks that are actively in working progress, these are usually the kind of tasks that can be done by myself, or have gone through the =WAIT= phase. Which also means that this can also revert back to =WAIT=. |
+| =HOLD=       | The kind of tasks that suspended without an escalation (these things happens im my workplace).                                                                                                              |
+These =TODO= keywords are the ones that (supposed) to have further actions. I only have three keywords with no further actions:
+
+#+caption: keywords with no further actions
+| TODO keyword | What it is                                              |
+|--------------+---------------------------------------------------------|
+| =DONE=       | GG, well played!                                        |
+| =DELEGATED=  | I got someone else doing my job, GG, well played!       |
+| =KILL=       | Cancelled, or my boss gave me a task beyond my paygrade |
+
+Translate these into /Emacs Lisp/:
+
+#+caption: defining my own =org-todo-keywords=
+#+begin_src emacs-lisp
+  (setq org-todo-keywords
+        '((sequence "TODO(t!)" "NEXT(n!)" "PROG(p!)" "WAIT(w!)" "HOLD(h!)" "IDEA(i!)" "|" "DONE(d!)" "DELEGATED(l!)" "KILL(k!)")))
+#+end_src
+- each character inside the parentheses are the fast state selection, when you use ~C-c C-t~ in a heading, you only have to type the character to select the keyword.
+- =~~= means to record the time of state changes.
+  #+caption: example of state changes log
+  #+begin_src org
+    ,* TODO test
+    - State "TODO"       from              [2024-03-14 Thu 22:10]
+  #+end_src
+** Deadlines and Schedules
+In =org-mode= it's a timestamp with a special keywords. Adding timestamp can be done with ~C-c .~ inside a heading.
+*** Deadline
+The default keybinding is ~C-c C-d~. Meaning the heading, with a keyword (can be =TODO= or any other), is supposed to be finished at that date.
+#+caption: TODO task with a deadline
+#+begin_src org
+  ,* TODO test
+  DEADLINE: <2024-03-14 Thu>
+  - State "TODO"       from              [2024-03-14 Thu 22:10]
+#+end_src
+There are also different syntax for the date:
+- ~DEADLINE: <2024-03-14 Thu -3d>~
+  means a warning with the period of 3 days,
+*** Schedule
+Meaning that I'm planning to start doing the tasks at that date. The default keybinding is ~C-c C-s~.
+#+caption: TODO task with a schedule
+#+begin_src org
+  ,* TODO test
+  SCHEDULED: <2024-03-16 Sat 09:00>
+  - State "TODO"       from              [2024-03-14 Thu 22:10]
+#+end_src
+Just as deadline, a different syntax also available:
+- ~SCHEDULED: <2024-03-16 Sat 10:00 -2d>~
+  means to delay the display of this task in the agenda for 2 day. The task is still scheduled on the 16th.
+** The Agenda view.
+=org-mode= has a builtin /agenda/. The default /Agenda views/ will show informations of:
+- Agenda for the current week or day, with the default key ~a~.
+- List of all =TODO= entries, key ~t~.
+- Matching queries of /tags/, /properties/, or =TODO= keywords. With the key ~m~.
+- ~s~, search for keywords.
+- ~/~ for multi-occur (never tried this).
+- ~?~ for finding flagged entries.
+- ~*~ for toggling sticky agenda views.
+- ~n~ for all agendas and =TODOs=.
+
+The magic of /Emacs/ is that it's all configureable (with a little /Emacs Lisp/ magic).
+
+#+caption: Vanilla Emacs =org-agenda=
+[[./vanilla-emacs-org-agenda.png][file:vanilla-emacs-org-agenda.png]]
+*** Configuring =org-agenda-custom-commands=
+This is the meat of my workflow, so I should have the information I want with just pressing each keyword.
+**** Viewing the custom agenda
+***** today's section
+This will show on the top of my custom agenda view, showing today's tasks.
+#+begin_src emacs-lisp
+  (setq org-agenda-custom-commands
+        `(("w" "work"
+           ((agenda ""
+                    ((org-agenda-span 1)
+                     (org-deadline-warning-days 0)
+                     (org-agenda-block-separator nil)
+                     (org-agenda-use-time-grid t)
+                     (org-agenda-overriding-header "\nToday\n")))))))
+#+end_src
+- =org-agenda-span= :: number of days to include in overview display, default to ='week=.
+- =org-deadline-warning-days= :: Number of days before expiration during which a deadline becomes active, default to =14=.
+- =org-agenda-use-time-grid= :: Non-nil means show a time grid in agenda schedule.
+This will show every tasks created today. For example, if I have a todo list like this:
+#+begin_src org
+  ,* Inbox
+  ,** TODO Test Heading 2
+  DEADLINE: <2024-03-15 Fri>
+  :LOGBOOK:
+  - State "TODO"       from              [2024-03-14 Thu 22:53]
+  :END:
+  <2024-03-14 Thu 11:00>
+  ,** PROG Test Heading
+  DEADLINE: <2024-03-14 Thu>
+  :LOGBOOK:
+  - State "PROG"       from              [2024-03-14 Thu 22:53]
+  :END:
+  <2024-03-14 Thu 09:34>
+  ,** DONE Test HEADING 3
+  <2024-03-14 Thu 14:00>
+  CLOSED: [2024-03-14 Thu 22:54] SCHEDULED: <2024-03-18 Mon>
+  :LOGBOOK:
+  - State "DONE"       from              [2024-03-14 Thu 22:54]
+  :END:
+
+  ,** Test Heading 4
+  DEADLINE: <2024-03-14 Thu 17:00>
+#+end_src
+
+Will create a custom view ~w~, with the first section marked "Today", the =\n= is for inserting new line:
+#+caption: today's view
+[[./org-agenda-custom-today.png][file:org-agenda-custom-today.png]]
+***** Not =DONE= section
+Useful to remind me for tasks that has not completed.
+#+caption: not =DONE= section addition
+#+begin_src emacs-lisp
+  (setq org-agenda-custom-commands
+        `(("w" "work"
+           ((agenda ""
+                    ((org-agenda-span 1)
+                     (org-deadline-warning-days 0)
+                     (org-agenda-block-separator nil)
+                     (org-agenda-use-time-grid t)
+                     (org-agenda-overriding-header "\nToday\n")))
+            (tags "-TODO=\"DONE\"|\"KILL\""
+                  ((org-agenda-block-separator nil)
+                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo 'done))
+                   (org-agenda-overriding-header "\nNot Done\n")))))))
+#+end_src
+This second section is filtered by /tags/ (though it matches everything from /tags/, /properties/, and /TODO keywords/). The expression ~"-TODO=\"DONE\"|\"KILL\""~ means all /TODO keywords/ that matches =DONE= or =KILL=, notice that we need to espace the quote with =\= between each keywords.
+
+The other notable filter is the =org-agenda-skip-function=, this will only show tasks that matches from the function ='(org-agenda-skip-entry-if'nottodo 'done)=, which as its name suggest, skip entry if =TODO= keyword is not the type ='done= (the keywords on the right side of the =|= as defined [[id:6edcb547-3712-45a8-a665-8f1e7f05cd37][here]]).
+***** Section for everything else
+This will show all the tasks for the current week. I intentionally set this weekly to limit the number of tasks that I should be aware of. No filter is set for this section just in case I created a task without schedule, deadline, or even a keyword.
+#+caption: weekly view addition
+#+begin_src emacs-lisp
+  (setq org-agenda-custom-commands
+        `(("w" "work"
+           ((agenda ""
+                    ((org-agenda-span 1)
+                     (org-deadline-warning-days 0)
+                     (org-agenda-block-separator nil)
+                     (org-agenda-use-time-grid t)
+                     (org-agenda-overriding-header "\nToday\n")))
+            (tags "-TODO=\"DONE\"|\"KILL\""
+                  ((org-agenda-block-separator nil)
+                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo 'done))
+                   (org-agenda-overriding-header "\nNot Done\n")))
+            (agenda ""
+                    ((org-agenda-span 7)
+                     (org-agenda-start-on-weekday 1)
+                     (org-agenda-block-separator nil)
+                     (org-agenda-overriding-header "\nWeekly\n")))))))
+#+end_src
+
+#+caption: the modified =org-agenda-custom-commands=
+[[./org-agenda-custom-commands-work.png][file:org-agenda-custom-commands-work.png]]
+* Footnotes
+[fn:1] By using another instance of /Emacs/, but with a specific command arguments:
+#+begin_src sh
+  emacs --init-directory=/dev/null
+#+end_src
+This will ensure /Emacs/ is started with no user configuration.
