@@ -6,7 +6,7 @@
 #+date: <2024-03-13 Wed>
 #+title: Using Terminal Multiplexer
 #+description: or how I achieve terminal efficiency
-#+hugo_draft: true
+#+hugo_draft: false
 #+hugo_tags: tmux screen linux unix ssh remote
 #+hugo_categories: terminals
 #+hugo_auto_set_lastmod: t
