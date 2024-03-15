@@ -16,10 +16,9 @@
 Lately I found that I am in dire need of an effective task management system as an /IT/ support. There are some days where everything is hectic and I'm lost prioritizing my assignments. There's moment where I was in the middle of doing one task, and suddenly another request / assignment came out of nowhere (not exactly nowhere, but you get the idea). Task management system is also useful for creating some kind of reporting, although this is not the main goal.
 
 Basically what I want is:
-- [ ] daily planner.
-- [ ] Simple UI for task highlighting or focusing.
-- [ ] also some kind of visual task movements (task delegation / escalation).
-- [ ] perhaps, automation or templating.
+- [X] daily planner.
+- [X] Simple UI for task highlighting or focusing.
+- [X] automation or templating for capturing tasks.
 - [ ] reviewing
 
 * Using /org-mode/
@@ -186,7 +185,7 @@ Will create a custom view ~w~, with the first section marked "Today", the =\n= i
 #+caption: today's view
 [[./org-agenda-custom-today.png][file:org-agenda-custom-today.png]]
 ***** Not =DONE= section
-Useful to remind me for tasks that has not completed.
+Useful to remind me for tasks that has not yet completed.
 #+caption: not =DONE= section addition
 #+begin_src emacs-lisp
   (setq org-agenda-custom-commands
@@ -230,6 +229,8 @@ This will show all the tasks for the current week. I intentionally set this week
 
 #+caption: the modified =org-agenda-custom-commands=
 [[./org-agenda-custom-commands-work.png][file:org-agenda-custom-commands-work.png]]
+
+Now I have a view of my daily, weekly agenda, and list of incomplete tasks. I can easily move into each tasks with pressing ~RET~ (~ENTER~) at each task.
 ** Refiling and archiving
 Eventually, the =org-files= used in my workflow will grow larger. So I will also need to move the previous tasks, refiling them into separate categories or even separate file. And also archiving them so they won't clutter my agenda views, and also keep my =org-agenda= faster without having to check all those completed tasks.
 *** Refiling
