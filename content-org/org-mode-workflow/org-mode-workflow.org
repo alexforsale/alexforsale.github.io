@@ -88,7 +88,7 @@ Translate these into /Emacs Lisp/:
 #+caption: defining my own =org-todo-keywords=
 #+begin_src emacs-lisp
   (setq org-todo-keywords
-        '((sequence "TODO(t!)" "NEXT(n!)" "PROG(p!)" "WAIT(w!)" "HOLD(h!)" "IDEA(i!)" "|" "DONE(d!)" "DELEGATED(l!)" "KILL(k!)")))
+        '((sequence "TODO(t!)" "NEXT(n!)" "PROG(p!)" "WAIT(w!)" "HOLD(h!)" "|" "DONE(d!)" "DELEGATED(l!)" "KILL(k!)")))
 #+end_src
 - each character inside the parentheses are the fast state selection, when you use ~C-c C-t~ in a heading, you only have to type the character to select the keyword.
 - =~~= means to record the time of state changes.
@@ -147,9 +147,11 @@ This will show on the top of my custom agenda view, showing today's tasks.
         `(("w" "work"
            ((agenda ""
                     ((org-agenda-span 1)
-                     (org-deadline-warning-days 0)
+                     (org-agenda-start-on-weekday t)
                      (org-agenda-block-separator nil)
                      (org-agenda-use-time-grid t)
+                     (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                     (org-agenda-format-date "%A %-e %B %Y")
                      (org-agenda-overriding-header "\nToday\n")))))))
 #+end_src
 - =org-agenda-span= :: number of days to include in overview display, default to ='week=.
@@ -184,22 +186,27 @@ This will show every tasks created today. For example, if I have a todo list lik
 Will create a custom view ~w~, with the first section marked "Today", the =\n= is for inserting new line:
 #+caption: today's view
 [[./org-agenda-custom-today.png][file:org-agenda-custom-today.png]]
-***** Not =DONE= section
+***** Incomplete tasks section
 Useful to remind me for tasks that has not yet completed.
-#+caption: not =DONE= section addition
+#+caption: Incomplete tasks section addition
 #+begin_src emacs-lisp
   (setq org-agenda-custom-commands
         `(("w" "work"
            ((agenda ""
                     ((org-agenda-span 1)
-                     (org-deadline-warning-days 0)
+                     (org-agenda-start-on-weekday t)
                      (org-agenda-block-separator nil)
+                     (org-deadline-warning-days 0)
+                     (org-scheduled-past-days 0)
                      (org-agenda-use-time-grid t)
+                     (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                     (org-agenda-format-date "%A %-e %B %Y")
                      (org-agenda-overriding-header "\nToday\n")))
-            (tags "-TODO=\"DONE\"|\"KILL\""
-                  ((org-agenda-block-separator nil)
-                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo 'done))
-                   (org-agenda-overriding-header "\nNot Done\n")))))))
+            (tags-todo "TODO=\"TODO\"|\"NEXT\""
+                       ((org-agenda-block-separator nil)
+                        (org-agenda-skip-function '(org-agenda-skip-if-todo 'nottodo 'done))
+                        (org-agenda-use-time-grid nil)
+                        (org-agenda-overriding-header "\nIncomplete\n")))))))
 #+end_src
 This second section is filtered by /tags/ (though it matches everything from /tags/, /properties/, and /TODO keywords/). The expression ~"-TODO=\"DONE\"|\"KILL\""~ means all /TODO keywords/ that matches =DONE= or =KILL=, notice that we need to espace the quote with =\= between each keywords.
 
@@ -209,21 +216,25 @@ This will show all the tasks for the current week. I intentionally set this week
 #+caption: weekly view addition
 #+begin_src emacs-lisp
   (setq org-agenda-custom-commands
-        `(("w" "work"
+        `(("n" "Agenda"
            ((agenda ""
                     ((org-agenda-span 1)
-                     (org-deadline-warning-days 0)
+                     (org-agenda-start-on-weekday t)
                      (org-agenda-block-separator nil)
                      (org-agenda-use-time-grid t)
+                     (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                     (org-agenda-format-date "%A %-e %B %Y")
                      (org-agenda-overriding-header "\nToday\n")))
-            (tags "-TODO=\"DONE\"|\"KILL\""
-                  ((org-agenda-block-separator nil)
-                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo 'done))
-                   (org-agenda-overriding-header "\nNot Done\n")))
+            (tags-todo "TODO=\"TODO\"|\"NEXT\""
+                    ((org-agenda-block-separator nil)
+                     (org-agenda-skip-function '(org-agenda-skip-if-todo 'nottodo 'done))
+                     (org-agenda-use-time-grid nil)
+                     (org-agenda-overriding-header "\nIncomplete\n")))
             (agenda ""
                     ((org-agenda-span 7)
                      (org-agenda-start-on-weekday 1)
                      (org-agenda-block-separator nil)
+                     (org-agenda-use-time-grid nil)
                      (org-agenda-overriding-header "\nWeekly\n")))))))
 #+end_src
 
@@ -231,6 +242,66 @@ This will show all the tasks for the current week. I intentionally set this week
 [[./org-agenda-custom-commands-work.png][file:org-agenda-custom-commands-work.png]]
 
 Now I have a view of my daily, weekly agenda, and list of incomplete tasks. I can easily move into each tasks with pressing ~RET~ (~ENTER~) at each task.
+***** Separation of work and personal tasks
+I personally don't use /org-agenda/ for anything else beside my work stuffs. But occasionally there's things that I put in my org files that are not work-related. For me, the easiest solution is just to use =org-tags= for all my personal tasks and use =org-agenda-tag-filter= in my agenda.
+
+#+caption: filter by tag
+#+begin_src emacs-lisp
+  (setq org-agenda-custom-commands
+        `(("n" "Agenda and all TODOs"
+           ((agenda ""
+                    ((org-agenda-span 1)
+                     (org-agenda-start-on-weekday t)
+                     (org-agenda-block-separator nil)
+                     (org-agenda-use-time-grid t)
+                     (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                     (org-agenda-format-date "%A %-e %B %Y")
+                     (org-agenda-overriding-header "\nToday\n")))
+            (tags-todo "TODO=\"TODO\"|\"NEXT\""
+                       ((org-agenda-block-separator nil)
+                        (org-agenda-skip-function '(org-agenda-skip-if-todo 'nottodo 'done))
+                        (org-agenda-use-time-grid nil)
+                        (org-agenda-overriding-header "\nIncomplete\n")))
+            (agenda ""
+                    ((org-agenda-span 7)
+                     (org-agenda-start-on-weekday 1)
+                     (org-agenda-block-separator nil)
+                     (org-agenda-use-time-grid nil)
+                     (org-agenda-overriding-header "\nWeekly\n"))))
+           ((org-agenda-tag-filter-preset '("-personal" "-home")))
+           )))
+#+end_src
+the ="-personal"= and ="-home"= means to filter out every headlines with the tag =personal=, and =home=, if you have many of them, just create another /agenda view/ with that filter in reverse, using =+personal= or =+home=
+***** Stuck Projects
+In =org-mode= term, a /stuck project/ is a project (identified as a header) that has no defined next action, so it never shows up in the TODO list. The default value is:
+
+#+caption: default =org-stuck-projects=
+#+begin_src emacs-lisp
+  (setq org-stuck-projects
+        '("+LEVEL=2/-DONE"
+          ("TODO" "NEXT" "NEXTACTION")
+          nil ""))
+#+end_src
+
+It is a list with four items:
+- a tag/todo/property matching a project.
+- a list of todo keywords identifying non-stuck projects.
+- a list of tags identifying non-stuck projects.
+- a regular expression matching non stuck projects.
+
+The default means that a project is a level 2 headlines with the tag =PROJECT= but not if it has a todo keyword =MAYBE= and =DONE=, and will not be considered a stuck project if it has a todo keyword =TODO=, =NEXT=, or =NEXTACTION=, the third and fourth item is =nil= so it has no tag filter and no regular expression matcher for non-stuck projects. 
+
+So I simply just use the tag =project= for tasks that I considered as a project. Using the =org-todo-keywords= that I already setup earlier, my =org-stuck-projects= is:
+
+#+caption: my =org-stuck-projects=
+#+begin_src emacs-lisp
+  (setq org-stuck-projects
+        '("+LEVEL=2/-DONE/-DELEGATED/-KILL"
+          ("TODO" "NEXT" "PROG")
+          nil ""))
+#+end_src
+
+Then you can use org agenda to list all the stuck project with the key =#=, or with the command ~M-x org-agenda #~.
 ** Refiling and archiving
 Eventually, the =org-files= used in my workflow will grow larger. So I will also need to move the previous tasks, refiling them into separate categories or even separate file. And also archiving them so they won't clutter my agenda views, and also keep my =org-agenda= faster without having to check all those completed tasks.
 *** Refiling
@@ -299,7 +370,6 @@ This will create a template for a 2nd level heading, with org [[https://orgmode.
 
 #+caption: content of the capture target
 [[./org-capture-with-template-4.png][file:org-capture-with-template-4.png]]
-
 
 *** Things of interest
 - [[https://bzg.fr/en/some-emacs-org-mode-features-you-may-not-know/][Using context-aware capture-templates]] :: the link is not just about =org-capture=.
