@@ -97,6 +97,22 @@ Translate these into /Emacs Lisp/:
     ,* TODO test
     - State "TODO"       from              [2024-03-14 Thu 22:10]
   #+end_src
+*** Priority
+Prioritizing tasks is important in my daily routines. And I would like to quickly identify the priority of all the tasks I have in my hand.
+
+#+caption: org-priority setup
+#+begin_src emacs-lisp
+  (setq org-priority-highest ?A
+        org-priority-lowest ?D
+        org-priority-default ?B)
+
+  (setq org-priority-faces
+        '((?A . (:foreground "#bf616a" :weight bold :underline t))
+          (?B . (:foreground "#d08770" :weight bold :underline t))
+          (?C . (:foreground "#4c566a" :weight bold :underline t))
+          (?D . (:foreground "#3b4252" :weight bold :underline t))))
+#+end_src
+This will set a list of priority from =A= to =D=, the default keybinding is ~C-c ,~.
 ** Deadlines and Schedules
 *** Time-stamp
 In =org-mode= it's a timestamp with a special keywords. Adding timestamp can be done with ~C-c .~ inside a heading, to insert an inactive timestamp (that doesn't show in org-agenda) use ~C-c !~. This will only insert date, to also insert time, use a ~C-u~ prefix (e.g. ~C-u C-c .~ or ~C-u C-c !~).
@@ -304,9 +320,37 @@ So I simply just use the tag =project= for tasks that I considered as a project.
 Then you can use org agenda to list all the stuck project with the key =#=, or with the command ~M-x org-agenda #~.
 ** Refiling and archiving
 Eventually, the =org-files= used in my workflow will grow larger. So I will also need to move the previous tasks, refiling them into separate categories or even separate file. And also archiving them so they won't clutter my agenda views, and also keep my =org-agenda= faster without having to check all those completed tasks.
+*** Archiving
+The main goal is to keep my main inbox file (the first entry of tasks) empty as soon as possible. This is where /org-archive/ comes handy. The flow that I have in mind is to create a monthly file, perhaps in a headline consisting of =YYYY/MM= structure. The refiled entries are still monitored by /org-agenda/. I'd like to have some kind of /agenda view/ for these files for reviewing purpose, perhaps maybe exporting them to different formats.
+
+#+caption: my =org-archive= setup
+#+begin_src emacs-lisp
+  (setq org-archive-location  (concat org-directory  "/archive.org::datetree/* Archived Tasks"))
+#+end_src
+This will set the archive location to a file named =archives.org= inside my =org-directory=, and within a first level headline named "Archived Tasks"
 *** Refiling
-The main goal is to keep my main inbox file (the first entry of tasks) empty as soon as possible. This is where /org-refile/ comes handy. The flow that I have in mind is to create a monthly file, perhaps in a subdirectories consisting of =YYYY/MM= structure. The refiled entries are still monitored by /org-agenda/. I'd like to have some kind of /agenda view/ for these files for reviewing purpose, perhaps maybe exporting them to different formats.
-**** Things of interest
+Still with the goal of having an unclutter inbox file, I'm using =org-refile= feature to move tasks from my inbox into another file, mainly for tasks that need (or waiting for) several steps to complete. Mostly though, I use =org-refile= in order to categorize my tasks, for examples I prefer to put tasks that are related to projects (in term of my work project), into a file named =projects.org= inside my =org-directory=, and routine tasks into =routines.org=, and my personal stuffs in =personal.org=
+
+#+caption: my =org-refile= setup
+#+begin_src emacs-lisp
+  (setq org-refile-targets
+        `((,(expand-file-name "projects.org" org-directory) :maxlevel . 1)
+          (,(expand-file-name "routines.org" org-directory) :maxlevel . 1)
+          (,(expand-file-name "personal.org" org-directory) :maxlevel . 1))
+        org-refile-use-outline-path 'file
+        org-outline-path-complete-in-steps nil)
+#+end_src
+- =org-refile-use-outline-path= :: this is set to ='file= to provide the file name as the refile target. Necessary since I'm using multiple files.
+- =org-outline-path-complete-in-steps= :: set to =nil= so the completions won't be set per step (filename -> headlines). Just to speed up the process.
+- =:maxlevel= :: limits the level of headlines considered to be a target. A max level of 1 means only the top-level headlines. This also means that all the targets above can be set into one file (e.g. =refile.org=), and create a top-level headlines as the categories.
+
+We'll also need to add a [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][hook]] to make sure that the target buffer is saved after the refiling process.
+
+#+caption: refile hook
+#+begin_src emacs-lisp
+  (add-hook 'org-after-refile-insert-hook #'save-buffer)
+#+end_src
+*** Things of interest
 - [[https://200ok.ch/posts/2022-02-13_integrating_org_mode_agenda_into_other_calendar_apps.html][Exporting /org-agenda/ to /thunderdbird/]] :: I use /thunderbird/, and also have setup my /thunderbird/ calendar to sync my /Outlook/ calendars using /[[https://davmail.sourceforge.net/][davmail]]/.
 ** Capturing new tasks
 Of course all of the above would be useless if I have to manually create a task. At least I would like to have an /org-capture/ template to make this easier.
