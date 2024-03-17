@@ -20,6 +20,7 @@ Basically what I want is:
 - [X] Simple UI for task highlighting or focusing.
 - [X] automation or templating for capturing tasks.
 - [ ] reviewing
+- [ ] Sync between Laptop, PC, and android
 
 * Using /org-mode/
 An /Emacs/ nerd as I am, of course the first stop is =org-mode=. And I really want to try from the ground up, using a /vanilla/ /Emacs/ with no interference from my actual configuration file[fn:1]. First of all, we need to set the minimal keybinding suggested by the [[https://orgmode.org/manual/Activation.html][manual]]:
@@ -417,6 +418,148 @@ This will create a template for a 2nd level heading, with org [[https://orgmode.
 
 *** Things of interest
 - [[https://bzg.fr/en/some-emacs-org-mode-features-you-may-not-know/][Using context-aware capture-templates]] :: the link is not just about =org-capture=.
+* /org-mode/ extensions
+Although all the configuration listed above is enough for my /task management/ workflow, there are many packages for /Emacs/ (builtin or external) to enhance your /org-mode/ experience. Here are some of them:
+** =Evil-mode=
+I made a separate post for this package. If you're coming from /Vim/, this is mandatory. If you're not, try the default /Emacs/ keybindings first, if your pinky fingers are not long enough, try this package.
+
+#+caption: recommended /evil/ configuration
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
+
+  (use-package evil-collection
+    :after evil
+    :ensure t
+    :config
+    (evil-collection-init)
+    (with-eval-after-load 'org-agenda
+      (evil-set-initial-state #'org-agenda-mode 'normal)
+      (evil-define-key '(normal visual) org-agenda-mode-map
+        "q" 'org-agenda-quit
+        "Q" 'org-agenda-quit
+        (kbd "<return>") 'org-agenda-switch-to
+        "t" 'org-agenda-todo
+        "gr" 'org-agenda-redo-all)))
+
+#+end_src
+** =org-fancy-priorities=
+#+begin_src emacs-lisp
+  (use-package org-fancy-priorities
+    :ensure t
+    :hook
+    (org-mode . org-fancy-priorities-mode)
+    :config
+    (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
+#+end_src
+
+#+caption: image from [[https://github.com/harrybournis/org-fancy-priorities][their readme page]]
+[[https://github.com/harrybournis/org-fancy-priorities/raw/master/screenshots/screenshot1.png]]
+** =org-modern=
+
+#+caption: org-modern
+[[./org-modern.png][file:org-modern.png]]
+This package implements a modern style for your Org buffers using font locking and text properties. The package styles headlines, keywords, tables and source blocks. The styling is configurable, you can enable, disable or modify the style of each syntax element individually via the org-modern customization group.
+#+caption: org-modern configuration (mainly from their [[https://github.com/minad/org-modern/][github page]])
+#+begin_src emacs-lisp
+  (use-package org-modern
+    :ensure t
+    :init
+    (menu-bar-mode -1)
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1)
+    (load-theme 'modus-vivendi t)
+    :config
+    (set-face-attribute 'org-modern-symbol nil :family "Iosevka Nerd Font")
+    (set-face-attribute 'default nil :family "Iosevka Nerd Font Mono")
+    (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Mono")
+    (modify-all-frames-parameters
+     '((right-divider-width . 40)
+       (internal-border-width . 40)))
+    (dolist (face '(window-divider
+                    window-divider-first-pixel
+                    window-divider-last-pixel))
+      (face-spec-reset-face face)
+      (set-face-foreground face (face-attribute 'default :background)))
+    (set-face-background 'fringe (face-attribute 'default :background))
+    (setq
+     ;; Edit settings
+     org-auto-align-tags nil
+     org-tags-column 0
+     org-catch-invisible-edits 'show-and-error
+     org-special-ctrl-a/e t
+     org-insert-heading-respect-content t
+
+     ;; Org styling, hide markup etc.
+     org-hide-emphasis-markers t
+     org-pretty-entities t
+     org-ellipsis "…"
+
+     ;; Agenda styling
+     org-agenda-tags-column 0
+     org-agenda-block-separator ?─
+     org-agenda-time-grid
+     '((daily today require-timed)
+       (800 1000 1200 1400 1600 1800 2000)
+       " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+     org-agenda-current-time-string
+     "◀── now ─────────────────────────────────────────────────")
+    (global-org-modern-mode))
+#+end_src
+
+#+caption: org-modern agenda
+[[./org-modern-agenda.png][file:org-modern-agenda.png]]
+** builtin packages
+When you visit a file, point goes to the last place where it was when you previously visited the save file.
+*** =saveplace=
+#+begin_src emacs-lisp
+  (use-package saveplace
+    :init
+    (save-place-mode 1)
+    :custom
+    (save-place-file (expand-file-name "places" user-emacs-directory)))
+#+end_src
+*** =savehist=
+Save the minibuffer history
+#+begin_src emacs-lisp
+  (use-package savehist
+    :init
+    (savehist-mode 1)
+    :custom
+    (savehist-file (expand-file-name "history" user-emacs-directory))
+    (savehist-coding-system 'utf-8)
+    (savehist-additional-variables
+     '(evil-jumps-history
+       kill-ring
+       register-alist
+       mark-ring
+       global-mark-ring
+       search-ring
+       regexp-search-ring)))
+#+end_src
+*** various =files= configuration
+#+begin_src emacs-lisp
+  (use-package files
+    :custom
+    (find-file-visit-truename t)
+    (version-control t)
+    (backup-by-copying t)
+    (delete-old-versions t)
+    (kept-new-versions 6)
+    (kept-old-versions 2)
+    (auto-save-include-big-deletions t)
+    (auto-save-list-file-prefix (expand-file-name ".autosave/" user-emacs-directory))
+    (backup-directory-alist `(("." . ,(expand-file-name ".backup" user-emacs-directory)))))
+#+end_src
+- =find-file-visit-truename= :: if the visited file is a symlink, it will find the truename of the file instead.
+- =version-control= :: make numeric backup versions unconditionally.
+- =backup-by-copying= :: always use copying to create backup files.
+- =delete-old-versions= :: delete excess backup versions silently
 * Footnotes
 [fn:1] By using another instance of /Emacs/, but with a specific command arguments:
 #+begin_src sh
