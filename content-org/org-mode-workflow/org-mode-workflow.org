@@ -23,6 +23,65 @@ Basically what I want is:
 - [ ] Sync between Laptop, PC, and android
 
 * Using /org-mode/
+#+begin_src plantuml :file ./task-flow.svg :exports results
+title Life of a Tasks
+
+:incoming;
+:org-capture;
+note right
+Capture as much details as possible
+endnote
+if (require action?) then (yes)
+  if (more than one action?) then (yes)
+    note
+    tasks
+    endnote
+    :project;
+    note right
+    will have separate sub tasks
+    endnote
+    kill
+  else (no)
+    :determine next action;
+    if (will it takes less than 2 minutes) then (yes)
+      :do it now and mark it DONE;
+      kill
+    else (no)
+      if (can it be done by myself?) then (yes)
+        :defer it;
+        note
+          do other high priority tasks
+        end note
+        if (should it be done at specific time?) then (yes)
+          :schedule it mark TODO;
+          kill
+        else (no)
+          :mark it NEXT;
+          kill
+        endif
+      else (no)
+        :delegate;
+        kill
+      endif
+    endif
+  endif
+else (no)
+  if (worth keeping?) then (yes)
+    if (require action later) then (yes)
+      :mark it NEXT;
+    else (no)
+      :reference;
+    endif
+    kill
+  else (no)
+    :trash;
+  endif
+  kill
+endif
+#+end_src
+
+#+RESULTS:
+[[file:./task-flow.svg]]
 An /Emacs/ nerd as I am, of course the first stop is =org-mode=. And I really want to try from the ground up, using a /vanilla/ /Emacs/ with no interference from my actual configuration file[fn:1]. First of all, we need to set the minimal keybinding suggested by the [[https://orgmode.org/manual/Activation.html][manual]]:
 
 ** Keybindings
@@ -68,21 +127,21 @@ Assuming your =user-emacs-directory= is in =~/.emacs.d~=, then your =org-directo
 The =org-todo-keywords= also need to be customized, the default keywords are just =TODO=, and =DONE=. I've thought of this for a while, and perhaps this will suffice:
 
 #+caption: my todo keywords
-| TODO Keyword | What it is                                                                                                                                                                                                     |
-|--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| =TODO=       | Tasks that are not started, also not planned. There can be many of them.                                                                                                                                       |
-| =NEXT=       | Tasks that are planned to do immediately.                                                                                                                                                                      |
-| =WAIT=       | Tasks that needs other form of interaction in order for it to be set as =PROG= or =DONE= or =KILL=.                                                                                                            |
-| =PROG=       | Tasks that are actively in working progress, these are usually the kind of tasks that can be done by myself, or have gone through the =WAIT= phase. Which also means that this can also revert back to =WAIT=. |
-| =HOLD=       | The kind of tasks that suspended without an escalation (these things happens im my workplace).                                                                                                              |
+| TODO Keyword | What it is                                                                                                                                                                                                 |
+|--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| =TODO=         | Tasks that are not started, also not planned. There can be many of them.                                                                                                                                   |
+| =NEXT=         | Tasks that are planned to do immediately.                                                                                                                                                                  |
+| =WAIT=         | Tasks that needs other form of interaction in order for it to be set as =PROG= or =DONE= or =KILL=.                                                                                                              |
+| =PROG=         | Tasks that are actively in working progress, these are usually the kind of tasks that can be done by myself, or have gone through the =WAIT= phase. Which also means that this can also revert back to =WAIT=. |
+| =HOLD=         | The kind of tasks that suspended without an escalation (these things happens im my workplace).                                                                                                             |
 These =TODO= keywords are the ones that (supposed) to have further actions. I only have three keywords with no further actions:
 
 #+caption: keywords with no further actions
 | TODO keyword | What it is                                              |
 |--------------+---------------------------------------------------------|
-| =DONE=       | GG, well played!                                        |
-| =DELEGATED=  | I got someone else doing my job, GG, well played!       |
-| =KILL=       | Cancelled, or my boss gave me a task beyond my paygrade |
+| =DONE=         | GG, well played!                                        |
+| =DELEGATED=    | I got someone else doing my job, GG, well played!       |
+| =KILL=         | Cancelled, or my boss gave me a task beyond my paygrade |
 
 Translate these into /Emacs Lisp/:
 
