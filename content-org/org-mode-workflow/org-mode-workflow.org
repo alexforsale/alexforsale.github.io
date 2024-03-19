@@ -12,15 +12,19 @@
 #+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 
-* Task Management System
+* How I mapped my brain to /org-mode/
+Initially, this post was titled /Getting Things Done in Emacs/. But as I keep adding more information into this post, and how I interact with /org-mode/ and /Emacs/ in general, it was about capturing my thought process. Tasks is one thing, and the important one since that's what I'm paid for.
+
+I've used /Emacs/ for more than five years now it's becoming hard for me to open up my laptop / PC, and not having /Emacs/ auto-started.
+
 Lately I found that I am in dire need of an effective task management system as an /IT/ support. There are some days where everything is hectic and I'm lost prioritizing my assignments. There's moment where I was in the middle of doing one task, and suddenly another request / assignment came out of nowhere (not exactly nowhere, but you get the idea). Task management system is also useful for creating some kind of reporting, although this is not the main goal.
 
 Basically what I want is:
 - [X] daily planner.
 - [X] Simple UI for task highlighting or focusing.
 - [X] automation or templating for capturing tasks.
-- [ ] reviewing
-- [ ] Sync between Laptop, PC, and android
+- [X] reviewing
+- [X] Sync between Laptop, PC, and android
 
 * Using /org-mode/
 #+begin_src plantuml :file ./task-flow.svg :exports results
@@ -30,51 +34,80 @@ title Life of a Tasks
 :org-capture;
 note right
 Capture as much details as possible
-endnote
-if (require action?) then (yes)
-  if (more than one action?) then (yes)
+end note
+    if (require action?) then (yes)
+    -[#81a1c1]->
     note
     tasks
-    endnote
+    end note
+    #bf616a:mark it TODO;
+  if (more than one action?) then (yes)
     :project;
-    note right
+    note left
     will have separate sub tasks
-    endnote
+    end note
     kill
   else (no)
     :determine next action;
     if (will it takes less than 2 minutes) then (yes)
-      :do it now and mark it DONE;
+      note
+      prioritize this when possible
+      endnote
+      #a3be8c:do it now and mark it DONE;
       kill
     else (no)
       if (can it be done by myself?) then (yes)
         :defer it;
         note
-          do other high priority tasks
+          do other high priority tasks when possible
         end note
         if (should it be done at specific time?) then (yes)
-          :schedule it mark TODO;
+          #bf616a:schedule and mark it TODO;
           kill
         else (no)
-          :mark it NEXT;
+          #81a1c1:mark it NEXT;
           kill
         endif
       else (no)
         :delegate;
+        if (will I have to process after delegation?) then (yes)
+          #5e81ac:mark it PROG;
+        else (no)
+          #8fbcbb:mark it DELEGATE;
+        endif
         kill
       endif
     endif
   endif
 else (no)
+  -[#a3be8c]->
+  note right
+  information
+  end note
   if (worth keeping?) then (yes)
     if (require action later) then (yes)
-      :mark it NEXT;
+      #81a1c1:mark it NEXT;
+      note
+      ideas etc
+      end note
     else (no)
-      :reference;
+      #88c0d0:reference;
+      split 
+        :org-roam;
+        kill
+      split again
+        :org-journal;
+        kill
+      split again
+        :notes;
+        kill
+      end split
     endif
     kill
   else (no)
-    :trash;
+    #a3be8c:archive it,
+    mark it DONE if
+    necessary;
   endif
   kill
 endif
@@ -82,7 +115,9 @@ endif
 
 #+RESULTS:
 [[file:./task-flow.svg]]
-An /Emacs/ nerd as I am, of course the first stop is =org-mode=. And I really want to try from the ground up, using a /vanilla/ /Emacs/ with no interference from my actual configuration file[fn:1]. First of all, we need to set the minimal keybinding suggested by the [[https://orgmode.org/manual/Activation.html][manual]]:
+An /Emacs/ nerd as I am, of course the first stop is =org-mode=. Please forgive this messy chart since I'm still learning on /[[https://plantuml.com/][plantuml]]/.
+
+I really want to try from the ground up, using a /vanilla/ /Emacs/ with no interference from my actual configuration file[fn:1]. First of all, we need to set the minimal keybinding suggested by the [[https://orgmode.org/manual/Activation.html][manual]]:
 
 ** Keybindings
 #+caption: suggested keybindings
@@ -127,21 +162,21 @@ Assuming your =user-emacs-directory= is in =~/.emacs.d~=, then your =org-directo
 The =org-todo-keywords= also need to be customized, the default keywords are just =TODO=, and =DONE=. I've thought of this for a while, and perhaps this will suffice:
 
 #+caption: my todo keywords
-| TODO Keyword | What it is                                                                                                                                                                                                 |
-|--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| =TODO=         | Tasks that are not started, also not planned. There can be many of them.                                                                                                                                   |
-| =NEXT=         | Tasks that are planned to do immediately.                                                                                                                                                                  |
-| =WAIT=         | Tasks that needs other form of interaction in order for it to be set as =PROG= or =DONE= or =KILL=.                                                                                                              |
-| =PROG=         | Tasks that are actively in working progress, these are usually the kind of tasks that can be done by myself, or have gone through the =WAIT= phase. Which also means that this can also revert back to =WAIT=. |
-| =HOLD=         | The kind of tasks that suspended without an escalation (these things happens im my workplace).                                                                                                             |
+| TODO Keyword | What it is                                                                                                                                                                                                     |
+|--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| =TODO=       | Tasks that are not started, also not planned. There can be many of them.                                                                                                                                       |
+| =NEXT=       | Tasks that are planned to do immediately.                                                                                                                                                                      |
+| =WAIT=       | Tasks that needs other form of interaction in order for it to be set as =PROG= or =DONE= or =KILL=.                                                                                                            |
+| =PROG=       | Tasks that are actively in working progress, these are usually the kind of tasks that can be done by myself, or have gone through the =WAIT= phase. Which also means that this can also revert back to =WAIT=. |
+| =HOLD=       | The kind of tasks that suspended without an escalation (these things happens im my workplace).                                                                                                                 |
 These =TODO= keywords are the ones that (supposed) to have further actions. I only have three keywords with no further actions:
 
 #+caption: keywords with no further actions
 | TODO keyword | What it is                                              |
 |--------------+---------------------------------------------------------|
-| =DONE=         | GG, well played!                                        |
-| =DELEGATED=    | I got someone else doing my job, GG, well played!       |
-| =KILL=         | Cancelled, or my boss gave me a task beyond my paygrade |
+| =DONE=       | GG, well played!                                        |
+| =DELEGATED=  | I got someone else doing my job, GG, well played!       |
+| =KILL=       | Cancelled, or my boss gave me a task beyond my paygrade |
 
 Translate these into /Emacs Lisp/:
 
@@ -173,6 +208,13 @@ Prioritizing tasks is important in my daily routines. And I would like to quickl
           (?D . (:foreground "#3b4252" :weight bold :underline t))))
 #+end_src
 This will set a list of priority from =A= to =D=, the default keybinding is ~C-c ,~.
+*** Tags
+Another useful way to implement labels and contexts for headlines, in =org-mode= tags must be preceeded and followed by a single colon (=:=), for example =:work:=, several tags can be specified, as in =:work:urgent=. Although I don't use tags that often, there are several variables that I should customize:
+#+begin_src emacs-lisp
+(setq org-use-tag-inheritance t
+      org-tags-exclude-from-inheritance '("crypt"))
+#+end_src
+The first one should be obvious, I want my sub-level headlines to inherit the tags from their parent headline. the second one is the tag that should not be inherited. The =:crypt:= tag is usually used for tagging headlines that contains password etc. The default keybinding for inserting tag is ~C-c C-c~ when the point is in the headline, or ~C-c C-q~ when under a headline.
 ** Deadlines and Schedules
 *** Time-stamp
 In =org-mode= it's a timestamp with a special keywords. Adding timestamp can be done with ~C-c .~ inside a heading, to insert an inactive timestamp (that doesn't show in org-agenda) use ~C-c !~. This will only insert date, to also insert time, use a ~C-u~ prefix (e.g. ~C-u C-c .~ or ~C-u C-c !~).
@@ -209,10 +251,13 @@ Just as deadline, a different syntax also available:
 - ~*~ for toggling sticky agenda views.
 - ~n~ for all agendas and =TODOs=.
 
-The magic of /Emacs/ is that it's all configureable (with a little /Emacs Lisp/ magic).
+The agenda view is what I use the most for reviewing all my tasks, luckily there's a package called [[https://github.com/emacs-dashboard/emacs-dashboard][dashboard]] that also display several items from your agenda.
+#+caption: my /dashboard/
+[[./emacs-dashboard.png][file:emacs-dashboard.png]]
 
 #+caption: Vanilla Emacs =org-agenda=
 [[./vanilla-emacs-org-agenda.png][file:vanilla-emacs-org-agenda.png]]
+
 *** Configuring =org-agenda-custom-commands=
 This is the meat of my workflow, so I should have the information I want with just pressing each keyword.
 **** Viewing the custom agenda
@@ -412,7 +457,7 @@ We'll also need to add a [[https://www.gnu.org/software/emacs/manual/html_node/e
 #+end_src
 *** Things of interest
 - [[https://200ok.ch/posts/2022-02-13_integrating_org_mode_agenda_into_other_calendar_apps.html][Exporting /org-agenda/ to /thunderdbird/]] :: I use /thunderbird/, and also have setup my /thunderbird/ calendar to sync my /Outlook/ calendars using /[[https://davmail.sourceforge.net/][davmail]]/.
-** Capturing new tasks
+** Using =org-capture=
 Of course all of the above would be useless if I have to manually create a task. At least I would like to have an /org-capture/ template to make this easier.
 
 #+caption: org-capture-templates
@@ -477,6 +522,10 @@ This will create a template for a 2nd level heading, with org [[https://orgmode.
 
 *** Things of interest
 - [[https://bzg.fr/en/some-emacs-org-mode-features-you-may-not-know/][Using context-aware capture-templates]] :: the link is not just about =org-capture=.
+* Synchronization
+I mainly use /[[https://syncthing.net/][syncthing]]/ for synchronizing my =org-directory= across my devices. It has support for /android/, on which I use [[https://orgzly.com/][orgzly]] mostly for viewing the org files. Once you've set the repository inside /orgzly/ to point to =org-directory= (which already synced by /syncthing/), you're ready to go. Also don't forget to match the todo keywords with the one you've set in /Emacs/. The downside is you cannot attach to the org-file while in /orgzly/.
+
+And, depending on your /android/ version, /syncthing/ cannot sync properly on some filesystems. So it's better to store your sync directory on the device internal storage than the external one.
 * /org-mode/ extensions
 Although all the configuration listed above is enough for my /task management/ workflow, there are many packages for /Emacs/ (builtin or external) to enhance your /org-mode/ experience. Here are some of them:
 ** =Evil-mode=
