@@ -584,7 +584,8 @@ This will create a template for a 2nd level heading, with org [[https://orgmode.
 * Synchronization
 I mainly use /[[https://syncthing.net/][syncthing]]/ for synchronizing my =org-directory= across my devices. It has support for /android/, on which I use [[https://orgzly.com/][orgzly]] mostly for viewing the org files. Once you've set the repository inside /orgzly/ to point to =org-directory= (which already synced by /syncthing/), you're ready to go. Also don't forget to match the todo keywords with the one you've set in /Emacs/. The downside is you cannot attach to the org-file while in /orgzly/.
 
-And, depending on your /android/ version, /syncthing/ cannot sync properly on some filesystems. So it's better to store your sync directory on the device internal storage than the external one.
+And, depending on your /android/ version, /syncthing/ cannot sync properly on some filesystems. So it's better to store your sync directory on the device internal storage than the external one. With that being said, I am still exploring other possibilities:
+- /google's keep/ :: I never got the comfort of typing or navigating with my finger on a touchscreen. And to me, /Android/ is such a mess by trying to pick comfort over functionality. Google Keep is the one app that (was) very simple and the only one app that I still consider a /Google App/. I can sync a note between my phone and my pc, I can also attach media to it (try taking photos of 41 printers of the same model, and guess each location, etc). But here comes the new UI updates... 
 * /org-mode/ extensions
 Although all the configuration listed above is enough for my /task management/ workflow, there are many packages for /Emacs/ (builtin or external) to enhance your /org-mode/ experience. Here are some of them:
 ** =Evil-mode=
