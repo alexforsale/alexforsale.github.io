@@ -15,106 +15,158 @@
 * How I mapped my brain to /org-mode/
 Initially, this post was titled /Getting Things Done in Emacs/. But as I keep adding more information into this post, and how I interact with /org-mode/ and /Emacs/ in general, it was about capturing my thought process. Tasks is one thing, and the important one since that's what I'm paid for.
 
+I promise one day this post will make sense (to me most especially).
+
 I've used /Emacs/ for more than five years now it's becoming hard for me to open up my laptop / PC, and not having /Emacs/ auto-started.
 
 Lately I found that I am in dire need of an effective task management system as an /IT/ support. There are some days where everything is hectic and I'm lost prioritizing my assignments. There's moment where I was in the middle of doing one task, and suddenly another request / assignment came out of nowhere (not exactly nowhere, but you get the idea). Task management system is also useful for creating some kind of reporting, although this is not the main goal.
 
-Basically what I want is:
+I've known about the /Getting Things Done/ method for a while now, even though I don't actively trying to mimic the workflow. subconsciously I created my own workflow that (more and less) similar.
+
+** Basically what I want is
 - [X] daily planner.
 - [X] Simple UI for task highlighting or focusing.
 - [X] automation or templating for capturing tasks.
 - [X] reviewing
 - [X] Sync between Laptop, PC, and android
 
+** The 5 Steps from David Allen's GTD Method
+- Capture :: Empty your mind
+- Clarify :: Describe
+- Organize :: Place it where it belongs
+- Reflect :: Reflect on your progress
+- Engage :: Take action
+*** Capture
+#+begin_quote
+Our minds are for having ideas, not for holding them.
+#+end_quote
+
+Each capture should produce just /one/ headline. Put a line below write every thing that's on my head at the time of capturing process.
+
+- Dumping every ideas into text should be avoided. Not everything should go into the system, only add what I really need.
+- Separate each capture into categories, tasks, notes, ideas, or other information that I took interest of.
+- Since it's necessary to me, I also separate my personal tasks/notes/ideas using /tag/.
+
+This is the first step of my workflow, and this is not necessarily about /Emacs/. I try to capture everything that interest me, or things that need my attention.
+- A request came via /E-mail/, /messaging apps/, /phone calls/, or in person.
+- An interesting book about meditation that requires a dedicated time to read.
+- A topic about /GNU/Linux/ from a /debian/ mailing list (yes, silent reader here, but I still read it).
+
+As it seems, I don't really need to capture it immediately into my /inbox/ file, though it's better, as long as I have some kind of media to note them.
+- Mail messages have their received date and time.
+- So do every messaging apps known to man.
+- In-person requests / inquiries time doesn't have to be precise to the minutes.
+*** Clarify
+Create sub tasks if needed. Reading a hierarchy of lists is better than reading a long line of text. Since I made these notes for me, I should understand it just by looking at them. But still every details count, especially product-related information (type, serial numbers, conditions etc).
+
+Another important details are date, time, and location. These are usually tasks related to meetings, appointments and such.
+
+This is also the first step to decide whether a tasks is considered a project. When I encounter tasks that take prolonged time of actions, and would create another task, I put it in the =:project:= category.
+
+For every other captures that doesn't require any actions, I tried to collect as much information as possible. It could be a link to some internet articles that I've already collected, but somehow I forgot, it'd be nice if I knew the reason why I capture it in the first place. So the second time I encounter it I can immediately decide if it worth keeping.
+*** Organize
+Use =org-refile= to organize your inbox file.
+
+A further sorting of all the lists I've acquired. Including all that I've captured previously. This phase is where I separate my tasks (actionable) with information, notes, links etc (non-actionable).
+
+I usually don't trash any of my notes, if I made mistakes, it was my mistakes and I can (hopefully) learn from it.
+*** Reflect
+A deeper inspection of my =org-agenda= view. I should have an /agenda view/ that shows everything happening for the current day, all the tasks that hasn't yet completed, and all prioritized tasks for the upcoming week. Within the =org-agenda=, I can decide what tasks should I do first and mark them in-progress (=PROG=), what should I do next (=:schedule:= or =:deadline:= them if necessary).
+
+I'm still contemplating on having a separate =org-agenda= view for weekly. The problem is it really took a mental energy to view them and make decisions about a large inventory of open loops. Ath the moment I only set them for prioritized / scheduled / deadline tasks.
+*** Engage
+
+Take action. Useful questions:
+- Context :: is this the right context for this action?
+- Priority :: Is this the most important / impactful activity?
+- Energy :: Do I have enough energy to do this?
+- Time :: Do I have enough time to do this?
+ 
+*** What I will need
+- Time :: This is basically building a habit, fortunately since I've used /Emacs/ for a while now, this is nothing strange to me.
+- Keep It Simple :: My /Emacs/ configuration is already bloated enough, also the reason why I use /vanilla Emacs/ to build this system.
+*** References
+- https://medium.com/praxis-blog/building-a-second-brain-in-emacs-and-org-mode-faa20ae06fc
+- https://fortelabs.com/blog/para/
+- https://fortelabs.com/blog/progressive-summarization-a-practical-technique-for-designing-discoverable-notes/
+- https://www.float.com/resources/getting-things-done-method/
 * Using /org-mode/
 #+begin_src plantuml :file ./task-flow.svg :exports results
-title Life of a Tasks
+!include <archimate/Archimate>
 
-:incoming;
-:org-capture;
-note right
-Capture as much details as possible
-end note
-    if (require action?) then (yes)
-    -[#81a1c1]->
-    note
-    tasks
-    end note
-    #bf616a:mark it TODO;
-  if (more than one action?) then (yes)
-    :project;
-    note left
-    will have separate sub tasks
-    end note
-    kill
-  else (no)
-    :determine next action;
-    if (will it takes less than 2 minutes) then (yes)
-      note
-      prioritize this when possible
-      endnote
-      #a3be8c:do it now and mark it DONE;
-      kill
-    else (no)
-      if (can it be done by myself?) then (yes)
-        :defer it;
-        note
-          do other high priority tasks when possible
-        end note
-        if (should it be done at specific time?) then (yes)
-          #bf616a:schedule and mark it TODO;
-          kill
-        else (no)
-          #81a1c1:mark it NEXT;
-          kill
-        endif
-      else (no)
-        :delegate;
-        if (will I have to process after delegation?) then (yes)
-          #5e81ac:mark it PROG;
-        else (no)
-          #8fbcbb:mark it DELEGATE;
-        endif
-        kill
-      endif
-    endif
-  endif
-else (no)
-  -[#a3be8c]->
-  note right
-  information
-  end note
-  if (worth keeping?) then (yes)
-    if (require action later) then (yes)
-      #81a1c1:mark it NEXT;
-      note
-      ideas etc
-      end note
-    else (no)
-      #88c0d0:reference;
-      split 
-        :org-roam;
-        kill
-      split again
-        :org-journal;
-        kill
-      split again
-        :notes;
-        kill
-      end split
-    endif
-    kill
-  else (no)
-    #a3be8c:archive it,
-    mark it DONE if
-    necessary;
-  endif
-  kill
-endif
+sprite $bProcess jar:archimate/business-process
+sprite $bValue jar:archimate/business-value
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+sprite $Meaning jar:archimate/meaning
+sprite $Goal jar:archimate/goal
+sprite $GoalFilled jar:archimate/goal-filled
+sprite $StrategyResource jar:archimate/strategy-resource
+
+rectangle "notes, thought, ideas, links" as A1 <<$Meaning>> #ebcb8b
+rectangle "Is it **actionable?**" as A2 <<$Meaning>> #8fbcbb
+rectangle "YES\n**TODO**" as A3 <<$GoalFilled>> #a3be8c
+rectangle "What is the\n**next action**?" as A4 <<$StrategyResource>> #81a1c1
+rectangle "**Do it**\nIf I can start this immediately\nor can be finished within acceptable time" as A5 #bf616a
+rectangle "**Defer it**\nDo other higher priority tasks when possible" as A6 #8fbcbb
+rectangle "**Delegate it**\nWho is the right person\nto do this?" as A7 #8fbcbb
+rectangle "**WAIT**\nWill I have to process this\nagain in the future?" as A8 #ebcb8b
+rectangle "**DELEGATE**\nMeans my contributions in this item is finished" as A9 #8fbcbb
+rectangle "**Project**\nIdentified with **:project:** tag" as B1 <<$bValue>> #ccffeedd
+rectangle "**Project Plans**\n- //Sub Tasks//\n- //Delegations//\n- //Project Notes//" as B2 <<$bValue>> #ccffeedd
+rectangle "**DONE**\nCongrats!" as B3 #b48ead
+rectangle "**:schedule:** / **:deadline:**\nContextual tagging(places, occasions)" as C1 #8fbcbb
+rectangle "**NO**" as C2 <<$Goal>> #bf616a
+rectangle "**:archive:**\nTry to organize neatly for easier access" as C3 #ebcb8b
+rectangle "**Review**\n**org-agenda**\n* //Notes//, //ideas//, or //links//\ncould potentially become **actionable**\n* **DONE** items that become **actionable**\n* Tracking **PROG** items state via synchronization" as C4 <<$Meaning>> #88c0d0
+rectangle "**refile**\nKeep the main **inbox** file clean" as C5 #b48ead
+rectangle "//project file//\n**projects.org**" as D1 <<$bValue>> #ccffeedd
+rectangle "//note file//\n**notes.org**" as D2 #b48ead
+rectangle "//roam node//\n**org-roam**" as D3 #b48ead
+rectangle "Mark it **NEXT** (no schedule)" as D4 #81a1c1
+rectangle "**PROG**\nKeep track of items state" as D5 #5e81ac
+
+A1 -down-> A2
+A2 -down-> A3
+A4 -right-> A5
+A4 -down-> A6
+A3 -down-> A4
+A4 -down-> A7
+A7 -down-> A8
+A7 -down-> A9
+A3 -left-> B1
+B1 -up-> B2
+B2 -right-> A2
+A6 -down-> C1
+
+A6 -right-> D4
+D4 -up-> C4
+A8 -up-> C4
+A9 -up-> C4
+C1 -up-> C4
+
+A2 -right-> C2
+B3 -right-> C4
+
+A5 -right-> B3
+C4 -up-> C3
+C4 -up-> C5
+
+C2 -down-> C4
+
+C4 -up-> A2
+
+C5 -up-> D3
+C5 -up-> D2
+C5 -up-> D1
+
+C4 -right-> D5
+D5 -left-> C4
 #+end_src
 
 #+RESULTS:
 [[file:./task-flow.svg]]
+
 An /Emacs/ nerd as I am, of course the first stop is =org-mode=. Please forgive this messy chart since I'm still learning on /[[https://plantuml.com/][plantuml]]/.
 
 I really want to try from the ground up, using a /vanilla/ /Emacs/ with no interference from my actual configuration file[fn:1]. First of all, we need to set the minimal keybinding suggested by the [[https://orgmode.org/manual/Activation.html][manual]]:
@@ -122,9 +174,10 @@ I really want to try from the ground up, using a /vanilla/ /Emacs/ with no inter
 ** Keybindings
 #+caption: suggested keybindings
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c l") #'org-store-link)
-  (global-set-key (kbd "C-c a") #'org-agenda)
-  (global-set-key (kbd "C-c c") #'org-capture)
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
+(global-set-key (kbd "C-c C") #'org-capture-goto-last-stored)
 #+end_src
 
 ** Specific =org-mode= variables
@@ -154,6 +207,10 @@ Assuming your =user-emacs-directory= is in =~/.emacs.d~=, then your =org-directo
 
 *** =org-archive-location=
 =org-archive-location= is another variable that I should consider, will I want an archiving method? If I do, where should I put it? Is storing archived task (the done, cancelled etc) in a designated file necessary?
+#+caption: An example of setting the =org-archive-location= to a file /archives.org/ inside the =org-directory=
+#+begin_src emacs-lisp
+(setq org-archive-location (concat (expand-file-name "archives.org" org-directory) "::datetree/* Archived Tasks"))
+#+end_src
 
 *** =org-todo-keywords=
 :PROPERTIES:
@@ -416,10 +473,9 @@ So I simply just use the tag =project= for tasks that I considered as a project.
 
 #+caption: my =org-stuck-projects=
 #+begin_src emacs-lisp
-  (setq org-stuck-projects
-        '("+LEVEL=2/-DONE/-DELEGATED/-KILL"
-          ("TODO" "NEXT" "PROG")
-          nil ""))
+(setq org-stuck-projects '("+{project*}-killed-Archives/-DONE-KILL-DELEGATED"
+                      ("TODO" "NEXT" "IDEA" "PROG")
+                      nil ""))
 #+end_src
 
 Then you can use org agenda to list all the stuck project with the key =#=, or with the command ~M-x org-agenda #~.
@@ -480,7 +536,9 @@ Let say there are some entries that usually have a similar format, we can provid
 :PROPERTIES:
 :USER: %^{User}
 :UNIT: %^{Unit|MKN|GMN|STN}
-:CATEGORY: %^{Category|Meeting|Purchase|Repair|Assistance}
+:DATE: %T
+:LOCATION:
+:CATEGORY: %^{Category|Meeting|Purchase|Repair|Assistance|Tech Issue|Complaints|Account Management}
 :REQUEST_VIA: %^{Request via|In Person|Phone/Messaging|Mail}
 :ITEM: %^{Item}
 :QTY: %^{Quantity|1}
@@ -493,6 +551,7 @@ Let say there are some entries that usually have a similar format, we can provid
 ,*** Requirements
 - [ ] Escalation
 - [ ] Approval
+- [ ] Vendor 
 #+end_example
 This will create a template for a 2nd level heading, with org [[https://orgmode.org/manual/Properties-and-Columns.html][properties]] and a logbook [[https://orgmode.org/manual/Drawers.html][drawer]]. But we also need some inputs:
 - =%^{User}= :: prompt for /User/.
