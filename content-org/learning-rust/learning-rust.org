@@ -127,6 +127,9 @@ The rest of this main function is by using the two functions earlier.
   <<main>>
 #+end_src
 
+This is the running code.
+#+caption: the code in action
+[[./rust-perfect-number.png][file:rust-perfect-number.png]]
 * Footnotes
 
 [fn:1] https://en.wikipedia.org/wiki/Perfect_number
