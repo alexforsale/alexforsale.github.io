@@ -115,7 +115,7 @@ The conversion from string to integer is done by declaring it into another varia
 - ~.parse~ :: parsing it into another type, in this case =i32=, and lastly,
 - ~.expect~ :: Guard it in case it is a different type
 
- The rest of this main function is by using the two functions earlier.
+The rest of this main function is by using the two functions earlier.
 * The Whole Code
 #+begin_src rust -n :noweb yes
   <<imports>>
