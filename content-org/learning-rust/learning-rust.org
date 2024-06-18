@@ -107,7 +107,7 @@ I'm sure there are packages that simplify this process, but when I'm learning ne
 - ~String::new~ :: It creates an empty string.
   I don't actually know if all stdin should be treated as string.
 - ~io::stdin~ :: From the =std::io= module.
-- ~.readline~ :: The actual reading.
+- ~.readline~ :: The actual reading. The =&mut= before the variable =input_number= means it is a mutable reference to the variable =input_number=.
 - ~.expect~ :: In case the input is not a string.
 
 The conversion from string to integer is done by declaring it into another variable and:
