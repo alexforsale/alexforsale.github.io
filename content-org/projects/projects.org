@@ -1,0 +1,27 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:nil p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:nil todo:t |:t
+#+title: Projects
+#+date: <2024-06-23 Sun>
+#+author: Kristian Alexander P
+#+email: alexforsale@yahoo.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.3 (Org mode 9.6.15)
+#+cite_export:
+#+startup: content indent
+#+hugo_base_dir: ../../
+#+hugo_section: /
+
+* Things That I've Done / Currently Doing
+** Literate Configurations
+These repositories are configured in [[https://en.wikipedia.org/wiki/Org-mode][org-mode]], and the actual configuration codes are stored inside the documentation [[https://en.wikipedia.org/wiki/Noweb][noweb-style]], and then "tangled" into the actual file(s).
+- [[https://alexforsale.github.io/literate-emacs/][literate emacs]] :: [[https://en.wikipedia.org/wiki/Emacs][Emacs]] configuration file.
+- [[https://alexforsale.github.io/dotfiles-shells/][dotfiles-shells]] :: Common shells configuration / startup files. Designed to serve [[https://en.wikipedia.org/wiki/POSIX][POSIX]]-compliant shells that I used ([[https://en.wikipedia.org/wiki/Bash_(Unix_shell)][bash]], [[https://en.wikipedia.org/wiki/Z_shell][zsh]], [[https://en.wikipedia.org/wiki/Almquist_shell][dash/ash/sh]], and [[https://en.wikipedia.org/wiki/Tcsh][tcsh]]) on various machines.
+- [[https://alexforsale.github.io/dotfiles-bash/][dotfiles-bash]] :: Bash startup files, configured mostly for command-line applications that I used.
+- [[https://alexforsale.github.io/dotfiles-hyprland/][dotfiles-hyprland]] :: [[https://wiki.hyprland.org/][A fully autonomous Display Server for linux]], considered to be an Xorg replacement. This repository stores the configuration files. It matured enough to be my daily window manager.
+- [[https://alexforsale.github.io/dotfiles-apps/][dotfiles-apps]] :: Collection of configuration for various applications, usualy it stays in this repository until it warrant a separate repository for the app.
+** Others
+- [[https://alexforsale.github.io/braindump/][braindump]] :: My attempt at creating a [[https://en.wikipedia.org/wiki/Zettelkasten][zettelkasten]]-like personal knowledge management using org-mode and [[https://ox-hugo.scripter.co/][hugo]]. Still needs tweaking to make it works, and I'm considering other options.

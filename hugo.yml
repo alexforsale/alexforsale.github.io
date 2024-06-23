@@ -58,10 +58,8 @@ params:
     #imageWidth: 120 # custom size
     #imageHeight: 120 # custom size
     buttons:
-      - name: "Braindump"
-        url: "/braindump/"
-      - name: "Literate Emacs"
-        url: "/literate-emacs/"
+      - name: "Projects"
+        url: "/projects/"
       - name: "Posts"
         url: "/posts/"
 
