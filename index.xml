@@ -6,8 +6,16 @@
     <description>Recent content on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Jun 2024 13:32:45 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Jun 2024 14:55:50 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Projects</title>
+      <link>https://alexforsale.github.io/projects/</link>
+      <pubDate>Sun, 23 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/projects/</guid>
+      <description>Things That I&amp;rsquo;ve Done / Currently Doing Literate Configurations These repositories are configured in org-mode, and the actual configuration codes are stored inside the documentation noweb-style, and then &amp;ldquo;tangled&amp;rdquo; into the actual file(s).
+literate emacs Emacs configuration file. dotfiles-shells Common shells configuration / startup files. Designed to serve POSIX-compliant shells that I used (bash, zsh, dash/ash/sh, and tcsh) on various machines. dotfiles-bash Bash startup files, configured mostly for command-line applications that I used.</description>
+    </item>
     <item>
       <title>learning Rust Series: Perfect Number</title>
       <link>https://alexforsale.github.io/posts/learning-rust/</link>
