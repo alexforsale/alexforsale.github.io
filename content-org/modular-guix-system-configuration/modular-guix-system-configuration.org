@@ -1,0 +1,159 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t ^:{}
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil expand-links:t f:t inline:t num:nil p:nil pri:nil prop:nil
+#+options: stat:t tags:t tasks:t tex:t timestamp:t title:t toc:nil todo:t |:t
+#+title: Modular Guix System 
+#+date: <2024-07-13 Sat>
+#+author: Kristian Alexander P
+#+email: alexforsale@yahoo.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.4 (Org mode 9.8-pre)
+#+cite_export:
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+hugo_draft: false
+#+hugo_tags: guix
+#+hugo_categories: operating-systems
+#+hugo_auto_set_lastmod: t
+#+startup: inlineimages
+* A Reusable Guix System Configuration
+
+/[[https://en.wikipedia.org/wiki/GNU_Guix_System][Gnu Guix System]]/ has always been my favourite /Linux/ operating system. It's uses the /[[https://en.wikipedia.org/wiki/Linux-libre][Linux Libre]]/ kernel, uses a rolling release system for packages, and it's a declarative operating system[fn:1]. The init system itself is managed using [[https://www.gnu.org/software/shepherd/manual/shepherd.html][GNU Shepherd]] init system.
+* Installing GNU Guix
+:PROPERTIES:
+:header-args: :tangle no :exports code
+:END:
+** Using the manual installation
+/Guix/ actually have a nice terminal interface for "graphical" installation. Later after the installation, you can edit the configuration file.
+
+But apparently, the installer lacks the options to set manual /IP address/, so I have to use the manual installation.
+*** Setting the IP Address
+This is just standard /Linux/ /[[https://en.wikipedia.org/wiki/Iproute2][iproute2]]/.
+#+caption: this will set the ip address
+#+begin_src sh
+  ip addr add 10.80.1.94/24 dev eno16777736
+#+end_src
+
+We'll also need to set the default route:
+#+begin_src sh
+  ip route add default via 10.80.1.1 dev eno16777736
+#+end_src
+**** resolv.conf
+This is needed to resolve domain names, edit the =/etc/resolv.conf= file
+#+begin_src conf
+  nameserver 1.1.1.1
+  nameserver 1.0.0.1
+#+end_src
+*** Starting SSH service
+
+**** set the root password 
+#+begin_src sh
+  passwd root
+#+end_src
+
+**** Herd service
+#+begin_src sh
+  herd start sshd
+#+end_src
+
+Usually for other linux distribution, this is enough to start /SSH/-ing from another machine. From /Emacs/ I can start connecting using /TRAMP/, but /GNU Guix/ has a unique file structure and /Emacs TRAMP/ expect a common location for the =ls= program (which is usually located at ~/bin/~), so I need to symlink the actual =ls= to ~/bin/~.
+#+begin_src sh
+  ln -sv /run/current-system/profile/bin/ls /bin/ls
+#+end_src
+
+Now I can start connecting using /Emacs/.
+#+caption: SSH from /Emacs/
+[[./TRAMP.png/][file:TRAMP.png]]
+
+*** Disk Partitioning
+The machine is booted using /[[https://en.wikipedia.org/wiki/UEFI][UEFI]]/, so I definitely need to create an /EFI/ partition.
+
+#+caption: EFI Partitioning
+[[./EFI-partition.png][file:EFI-partition.png]]
+
+And the rest will go to one partition.
+
+#+caption: linux partition
+[[./linux-partition.png][file:linux-partition.png]]
+**** Formatting the partition
+***** The /EFI/ Partition
+We'll be using the /mkfs/ tools
+#+begin_src sh
+  mkfs.fat -F32 -n EFI /dev/sda1
+#+end_src
+***** The /Linux/ partition
+We're using /btrfs/ filesystem.
+#+begin_src sh
+  mkfs.btrfs -L linux /dev/sda2
+#+end_src
+
+#+caption: filesystem
+[[./filesystem.png][file:filesystem.png]]
+**** Mounting the Disks
+For /btrfs/ first we'll need to create the subvolumes, I won't be using a complex subvolumes structure.
+
+#+caption: Mounting the partition
+#+begin_src sh
+  mount -v LABEL=linux /mnt
+#+end_src
+
+#+caption: mounting the btrfs partition
+[[./mount-btrfs.png][file:mount-btrfs.png]]
+
+#+caption: creating subdirectories
+#+begin_src sh
+  cd /mnt
+  btrfs subvolume create guix-root
+  btrfs subvolume create guix-root/home
+#+end_src
+
+#+caption: btrfs subvolumes
+[[./btrfs-subvolumes.png][file:btrfs-subvolumes.png]]
+
+Unmount the btrfs partition, and then mounting the subvolumes directory.
+
+#+caption: mounting subvolumes
+#+begin_src sh
+  cd /
+  umount /mnt
+  mount -v /dev/sda2 -o subvol=guix-root,compress-force=zstd,space_cache=v2 /mnt
+  mkdir -pv /mnt/boot/efi
+  mount -v /dev/sda1 /mnt/boot/efi
+#+end_src
+
+#+caption: mounting subvolumes
+[[./mounting-subvolumes.png][file:mounting-subvolumes.png]]
+
+We'll also want to have a swapfile.
+
+#+caption: creating swapfile
+#+begin_src emacs-lisp
+  cd /mnt/
+  btrfs subvolume create swap
+  btrfs filesystem mkswapfile --size 4g ./swap/swapfile
+#+end_src
+
+#+caption: creating swapfile
+[[./swapfile-creation.png][file:swapfile-creation.png]]
+We don't actually need to mount it during the installation.
+*** Proceeding with the installation
+**** Starting the herd cow-store service
+
+#+caption: cow-store
+#+begin_src sh
+  herd start cow-store /mnt
+#+end_src
+
+#+caption: cow-store
+[[./cow-store.png][file:cow-store.png]]
+**** The configuration file
+This will be stored in /mnt/etc/guix/ directory so it will carry on into the actual system.
+**** Initializing
+#+begin_src sh
+  guix system init -L /mnt/etc/guix/guix-mkn /mnt/etc/guix/guix-mkn/guix-mkn/nigeria/system-configuration.scm /mnt
+#+end_src
+* Footnotes
+
+[fn:1] https://guix.gnu.org/manual/en/html_node/Using-the-Configuration-System.html 

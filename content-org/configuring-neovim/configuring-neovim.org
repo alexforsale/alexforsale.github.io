@@ -1,0 +1,91 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+creator: Emacs 29.4 (Org mode 9.8-pre + ox-hugo)
+#+hugo_base_dir: ../../
+#+date: <2024-06-28 Fri>
+#+title: Configuring NeoVim
+#+description: Configuring Neovim
+#+keywords: vim neovim
+#+hugo_tags: vim
+#+hugo_categories: editors
+#+hugo_draft: false
+#+hugo_section: posts
+#+hugo_auto_set_lastmod: t
+#+startup: inlineimages
+
+* Plugins
+Different approach than when I'm configuring /Emacs/, I start with listing all the plugins that I would use. The best part to look is usually at [[https://github.com/rockerBOO/awesome-neovim][Awesome Neovim]].
+- Plugin management
+  There's a lot of options, for now I'll try these first.
+  - [[https://github.com/folke/lazy.nvim][lazy.nvim]] :: features a graphical interface.
+    - [[https://github.com/roobert/activate.nvim][activate.nvim]] :: A plugin installation system designed to complement =lazy.nvim=.
+  - [[https://github.com/nvim-neorocks/rocks.nvim][rocks.nvim]] :: A modern approach to plugin management using Luarocks, inspired by Cargo.
+- Completion
+  - [[https://github.com/hrsh7th/nvim-cmp][nvim-cmp]] :: A completion plugin written in Lua. New version of =nvim-compe=.
+    - [[https://github.com/lukas-reineke/cmp-under-comparator][cmp-under-comparator]] :: A nvim-cmp function for better sorting.
+    - [[https://github.com/SergioRibera/cmp-dotenv][cmp-dotenv]] :: Load environment variables from the shell or from your =.env= files.
+    - [[https://github.com/deathbeam/autocomplete.nvim][autocomplete.vim]] :: Very simple and minimal autocompletion for cmdline and buffer using LSP and Tree-sitter with signature help.
+- LSP
+  This should be the first plugin to try.
+  - [[https://github.com/neovim/nvim-lspconfig][nvim-lspconfig]] :: Quickstart configurations for the LSP client.
+- Git
+  - [[https://github.com/NeogitOrg/neogit][neogit]] :: An interactive and powerful Git interface for Neovim, inspired by Magit.
+- Keybinding Stuffs
+  - [[https://github.com/folke/which-key.nvim][which-key]] :: Neovim plugin that shows a popup with possible keybindings of the command you started typing.
+  - [[https://github.com/max397574/better-escape.nvim][better-escape]] :: Create shortcuts to escape insert mode without getting delay.
+- Comment
+  - [[https://github.com/numToStr/Comment.nvim][Comment.nvim]] :: Smart and Powerful comment plugin. Supports commentstring, motions, dot-repeat and more.
+- Syntax
+  - [[https://github.com/kylechui/nvim-surround][nvim-surround]] :: A plugin for adding/changing/deleting surrounding delimiter pairs.
+    - [[https://github.com/roobert/surround-ui.nvim][surround-ui]] :: Helper or training aid for kylechui/nvim-surround.
+  - [[https://github.com/nvim-treesitter/nvim-treesitter][nvim-treesitter]] :: Neovim Treesitter configurations and abstraction layer.
+    - [[https://github.com/nvim-treesitter/nvim-treesitter-textobjects][nvim-treesitter-textobject]] :: Create your own textobjects using tree-sitter queries.
+- Tmux integration
+  - [[https://github.com/aserowy/tmux.nvim][tmux.nvim]] :: Tmux integration features pane movement and resizing.
+- Formatting
+  - [[https://github.com/cappyzawa/trim.nvim][trim.nvim]] :: This plugin trims trailing whitespace and lines.
+- Editings
+  - [[https://github.com/windwp/nvim-ts-autotag][nvim-ts-autotag]] :: Use treesitter to autoclose and autorename xml,html,jsx tag.
+  - [[https://github.com/windwp/nvim-autopairs][nvim-autopairs]] :: autopairs for neovim written in lua.
+  - [[https://github.com/HiPhish/rainbow-delimiters.nvim][rainbow-delimiters.nvim]] :: Rainbow delimiters for Neovim with Tree-sitter.
+  - [[https://github.com/okuuva/auto-save.nvim][auto-save.nvim]] :: Automatically saves your work as often as needed and as seldom as possible. Customizable with smart defaults.
+  - [[https://github.com/kevinhwang91/nvim-bqf][nvim-bgf]] :: Better quickfix window in Neovim, polish old quickfix window. 
+
+* The Configuration
+
+** Plugin management
+This is the first stop.
+#+name: ~/.config/nvim/init.lua
+#+begin_src lua
+  require("config.lazy")
+#+end_src
+The actual plugin configuration
+#+name: ~/.config/nvim/lua/config/lazy.lua
+#+begin_src lua
+  -- Bootstrap lazy.nvim
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  end
+  vim.opt.rtp:prepend(lazypath)
+
+  -- Make sure to setup `mapleader` and `maplocalleader` before
+  -- loading lazy.nvim so that mappings are correct.
+  -- This is also a good place to setup other settings (vim.opt)
+  vim.g.mapleader = " "
+  vim.g.maplocalleader = "\\"
+
+  -- Setup lazy.nvim
+  require("lazy").setup({
+    spec = {
+      -- import your plugins
+      { import = "plugins" },
+    },
+    -- Configure any other settings here. See the documentation for more details.
+    -- colorscheme that will be used when installing plugins.
+    install = { colorscheme = { "habamax" } },
+    -- automatically check for plugin updates
+    checker = { enabled = true },
+  })
+#+end_src
