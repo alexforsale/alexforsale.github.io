@@ -6,8 +6,23 @@
     <description>Recent content on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Jun 2024 14:55:50 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jul 2024 12:24:09 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Modular Guix System</title>
+      <link>https://alexforsale.github.io/posts/modular-guix-system-configuration/</link>
+      <pubDate>Sat, 13 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/modular-guix-system-configuration/</guid>
+      <description>A Reusable Guix System Configuration Gnu Guix System has always been my favourite Linux operating system. It&amp;rsquo;s uses the Linux Libre kernel, uses a rolling release system for packages, and it&amp;rsquo;s a declarative operating system1. The init system itself is managed using GNU Shepherd init system.
+Installing GNU Guix Using the manual installation Guix actually have a nice terminal interface for &amp;ldquo;graphical&amp;rdquo; installation. Later after the installation, you can edit the configuration file.</description>
+    </item>
+    <item>
+      <title>Configuring NeoVim</title>
+      <link>https://alexforsale.github.io/posts/configuring-neovim/</link>
+      <pubDate>Fri, 28 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/configuring-neovim/</guid>
+      <description>Configuring Neovim</description>
+    </item>
     <item>
       <title>Projects</title>
       <link>https://alexforsale.github.io/projects/</link>
