@@ -13,7 +13,7 @@
 #+cite_export:
 #+hugo_section: posts
 #+hugo_base_dir: ../../
-#+hugo_draft: false
+#+hugo_draft: true
 #+hugo_tags: guix
 #+hugo_categories: operating-systems
 #+hugo_auto_set_lastmod: t
