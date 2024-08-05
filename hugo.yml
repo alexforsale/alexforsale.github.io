@@ -50,8 +50,12 @@ params:
   #   Text: "Suggest changes"
   #   appendFilePath: true
 
+  homeInfoParams:
+    title: "Kristian Alexander" # optional default will be site title
+    content: "Documenting my way around..."
+
   profileMode:
-    enabled: true
+    enabled: false
     title: "Kristian Alexander" # optional default will be site title
     # subtitle: "This is subtitle"
     imageUrl: "/images/riki_sneeze.png" # optional
