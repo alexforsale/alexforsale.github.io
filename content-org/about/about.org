@@ -11,12 +11,19 @@
 ** Kristian Alexander P
 
 *** Profile
-  I'm currently working as an IT Support at Multi Kontrol Nusantara since October 2022. My responsibilities are mainly about installing and configuring computers / laptops, and various other hardwares, monitoring and also maintaining them.
+  I'm currently working as an IT Support at Multi Kontrol Nusantara since October 2022. My responsibilities are mainly about:
+  - Resolving IT support requests from employees.
+  - Answering employee questions regarding computer systems.
+  - Gathering and analyzing data to diagnose problems with computer systems.
+  - Changing configurations, settings and permissions to fix computer issues.
+  - Installing new software and hardware drivers and updating existing ones as needed
+
   I'm also running a small networking service, providing internet connection from house to house, the main reason I'm doing this is mainly to put my Gnu/Linux knowledge to use for managing all the necessary services which I do so manually.
 *** Personal Infos
 **** Web Spaces
    - https://alexforsale.github.io
-   - https://alexforsale.gitlab.io
+   - https://github.com/alexforsale
+   - https://linkedin.com/in/alexforsale
 **** Instant Messaging
    - Telegram: https:/t.me/alexforsale
 *** Skills
