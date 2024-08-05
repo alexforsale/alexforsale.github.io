@@ -106,14 +106,22 @@ menu:
       name: archives
       url: /archives/
       weight: 40
+    - identifier: projects
+      name: projects
+      url: /projects/
+      weight: 50
     - identifier: about
       name: about
       url: /about/
-      weight: 50
+      weight: 60
     - identifier: search
       name: search
       url: /search/
-      weight: 60
+      weight: 70
+    - identifier: home
+      name: home
+      url: /
+      weight: 80
 
 outputs:
   home:
