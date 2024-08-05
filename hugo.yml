@@ -25,7 +25,7 @@ pygmentsUseClasses: true
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  keywords: [Blog, PaperMod, org-roam, emacs]
+  keywords: [Blog, PaperMod, emacs]
   ShowCodeCopyButtons: true
   defaultTheme: auto
   disableThemeToggle: false
