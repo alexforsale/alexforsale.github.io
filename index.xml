@@ -6,7 +6,7 @@
     <description>Recent content on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Jul 2024 12:25:25 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Aug 2024 02:28:32 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Projects</title>
@@ -142,7 +142,8 @@ Function to determine the perfect number 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 
       <link>https://alexforsale.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/about/</guid>
-      <description>About Kristian Alexander P Profile I&amp;rsquo;m currently working as an IT Support at Multi Kontrol Nusantara since October 2022. My responsibilities are mainly about installing and configuring computers / laptops, and various other hardwares, monitoring and also maintaining them. I&amp;rsquo;m also running a small networking service, providing internet connection from house to house, the main reason I&amp;rsquo;m doing this is mainly to put my Gnu/Linux knowledge to use for managing all the necessary services which I do so manually.</description>
+      <description>About Kristian Alexander P Profile I&amp;rsquo;m currently working as an IT Support at Multi Kontrol Nusantara since October 2022. My responsibilities are mainly about:
+Resolving IT support requests from employees. Answering employee questions regarding computer systems. Gathering and analyzing data to diagnose problems with computer systems. Changing configurations, settings and permissions to fix computer issues. Installing new software and hardware drivers and updating existing ones as needed I&amp;rsquo;m also running a small networking service, providing internet connection from house to house, the main reason I&amp;rsquo;m doing this is mainly to put my Gnu/Linux knowledge to use for managing all the necessary services which I do so manually.</description>
     </item>
   </channel>
 </rss>
