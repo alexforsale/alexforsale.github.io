@@ -19,7 +19,7 @@ Hyprland is a wlroots-based tiling Wayland compositor written in C++. Noteworthy
 * Starting Hyprland
 Hyprland can be started via a display manager (GDM, Lightdm etc), or via the command line (in =archlinux= it's ~/usr/bin/Hyprland~, notice the capital =H=).
 * Configuration
-The default configuration file is =~/.config/hypr/hyprland.conf=, though it support splitting the configuration into multiple files and including them in the main file (=hyprland.conf=). If you're familiar with /i3wm/, this configuration is similar to that. Either way, the [[https://wiki.hyprland.org/Configuring/Configuring-Hyprland/][wiki]] provides enough information to start configuring.
+The default configuration file is =~/.config/hypr/hyprland.conf=, though it support splitting the configuration into multiple files and including them in the main file (=hyprland.conf=). If you're familiar with /i3wm/, this configuration is similar to that. Either way, the [[https://wiki.hyprland.org/Configuring/Configuring-Hyprland/][wiki]] provides enough information to start configuring. My own configuration for /hyprland/ is available at my [[https://github.com/alexforsale/dotfiles-hyprland][github]].
 
 ** Default configuration file
 #+caption: default configuration file
