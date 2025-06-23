@@ -24,7 +24,7 @@ For me, i3wm is a good starting point for delving into window managers. You can 
 
 #+caption: i3wm scratchpad feature
 #+name: i3wm-scratch-2025-06-23 22-53.gif
-[[./i3wm-scratch-2025-06-23 22-53.gif][file:i3wm-scratch-2025-06-23 22-53.gif]]
+[[./i3wm-scratch-2025-06-23 22-53.gif]]
 
 I have a separate [[https://alexforsale.github.io/dotfiles-i3/][configuration]], and it's stored at my [[https://github.com/alexforsale/dotfiles-i3][github repository]]. At first, I thought configuring i3 is just tinkering inside the config file (=~/.config/i3/config=).
 
