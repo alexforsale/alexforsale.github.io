@@ -1,0 +1,33 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+title: I3wm
+#+date: <2025-06-23 Mon>
+#+description: How I made i3 my goto window manager
+#+hugo_tags: i3 linux unix window-manager
+#+hugo_categories: desktop
+#+hugo_auto_set_lastmod: t
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+language: en
+#+creator: Emacs 30.1 (Org mode 9.8-pre)
+#+startup: inlineimages
+
+I3wm is my first venture into the world of [[https://en.wikipedia.org/wiki/Tiling_window_manager][tiling window manager]]. After several months getting familiar to /gnome/ desktop environment (in /fedora/, /debian/, and /ubuntu/ of course), I got to know /archlinux/. I got to know how a /linux/ desktop is basically a collection of packages (just like the operating system itself). And with /archlinux/, I have this freedom (for better or worse), to choose what packages I want to install into my system.
+
+#+caption: Emacs inside i3wm
+#+name: i3wm-2025-06-23_22-28.png
+[[./i3wm-2025-06-23_22-28.png][file:i3wm-2025-06-23_22-28.png]]
+
+So why i3wm? I tried many other window managers, both tiling and dynamic, and maybe just like many others, i3wm was the first I tried. And it just happens that the default configuration is usable (for me at least, aside from the weird ~j~, ~k~, ~l~, ~;~ keys).
+
+For me, i3wm is a good starting point for delving into window managers. You can start using it with minimal dependencies (=dmenu= and =i3status=).
+
+#+caption: i3wm scratchpad feature
+#+name: i3wm-scratch-2025-06-23 22-53.gif
+[[./i3wm-scratch-2025-06-23 22-53.gif][file:i3wm-scratch-2025-06-23 22-53.gif]]
+
+I have a separate [[https://alexforsale.github.io/dotfiles-i3/][configuration]], and it's stored at my [[https://github.com/alexforsale/dotfiles-i3][github repository]]. At first, I thought configuring i3 is just tinkering inside the config file (=~/.config/i3/config=).
+
+#+caption: i3wm in action
+#+name:
+[[./i3wm-2025-06-23 23:42:18.mp4][file:i3wm-2025-06-23 23:42:18.mp4]]
