@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Window-Manager on alexforsale.github.io</title>
+    <link>https://alexforsale.github.io/tags/window-manager/</link>
+    <description>Recent content in Window-Manager on alexforsale.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Jun 2025 18:54:15 +0000</lastBuildDate>
+    <atom:link href="https://alexforsale.github.io/tags/window-manager/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>I3wm</title>
+      <link>https://alexforsale.github.io/posts/i3wm/</link>
+      <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/i3wm/</guid>
+      <description>How I made i3 my goto window manager</description>
+    </item>
+  </channel>
+</rss>
