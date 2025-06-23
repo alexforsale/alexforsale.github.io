@@ -30,4 +30,4 @@ I have a separate [[https://alexforsale.github.io/dotfiles-i3/][configuration]],
 
 #+caption: i3wm in action
 #+name:
-[[./i3wm-2025-06-23 23:42:18.mp4]]
+[[./i3wm-2025-06-23 23:42:18.gif]]
