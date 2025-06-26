@@ -1,0 +1,48 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+title: Why Use MPD in 2025
+#+date: <2025-06-26 Thu>
+#+author: Kristian Alexander P
+#+email: alexforsale@yahoo.com
+#+description: The story of my music playing experience
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 30.1 (Org mode 9.8-pre)
+#+cite_export:
+#+hugo_tags: linux mpd music music-player
+#+hugo_categories: desktop
+#+hugo_auto_set_lastmod: t
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+
+Music Player Daemon (MPD) is a flexible, powerful, server-side application for playing music. Through plugins and libraries it can play a variety of sound files while being controlled by its network protocol[fn:1].
+
+It plays audio files, organizes playlists and maintains a music database, all while using very few resources. In order to interface with it, a separate client is needed. [fn:2]
+
+#+caption: ncmpcpp, one of many /mpd/ terminal clients.
+[[./ncmpcpp-2025-06-26_22-44.png]]
+
+So why using a server - client model for playing music?
+
+* Simplicity
+For me, I just want to listen to music. I don't have a preferred application for listening music, though I really don't enjoy all the streaming services. Mostly because the songs I liked now is still the same music I liked 10 years ago. I rarely listen to new music (most bands that I liked don't release new record anymore). Which brings us the next reason.
+
+#+caption: cantata, another GUI client for /mpd/.
+[[./cantata-2025-06-26_22-54.png]]
+
+* I only want to listen to music
+I don't want to depend on internet just to fill my ear with music. Even when internet connection is /kinda/ mandatory nowadays, I can proudly (or humbly?) say: "I want some time for myself, and it does not require internet connection". This is why I store my music locally, just like the old days. I even store my music locally in my phone. Would it be a hassle to synchronize? No, actually, If you use a GUI client for /MPD/, such as /cantata/, it has a feature for synch between devices (most player have this functionality). I used [[https://syncthing.net/][syncthing]] for file synchronization and it works as expected.
+
+
+* It's about the music, not the music player
+Back when I don't know about MPD, I have to choose various options for music player (which sometimes limited by the desktop environment I'm using at the time, /Rhythmbox/ does not look good on /KDE/). And when I'm started using /window manager/ instead of a full desktop environment, most of the music player I've tried ended up wasting 1 workspace just for listening music.
+
+And /MPD/ does not need a dedicated client to run, by default, it has /mpc/, which is the commmand line interface for mpd (usually packaged as =mpc=, but sometimes differently depending on your distribution since there's already a package named =libmpc= for arithmetic library).
+
+#+caption: mpc commands
+[[./mpc-2025-06-26_23-41.png]]
+
+* Footnotes
+[fn:2] https://wiki.archlinux.org/title/Music_Player_Daemon
+
+[fn:1] https://www.musicpd.org/
