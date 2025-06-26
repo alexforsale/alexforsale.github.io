@@ -1,0 +1,36 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+title: Syncthing is Underrated
+#+date: <2025-06-27 Thu>
+#+author: Kristian Alexander P
+#+email: alexforsale@yahoo.com
+#+description: Seriously, this is good
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 30.1 (Org mode 9.8-pre)
+#+cite_export:
+#+hugo_tags: linux syncthing synchronization
+#+hugo_categories: desktop
+#+hugo_auto_set_lastmod: t
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+
+[[https://syncthing.net/][Syncthing]] is an open-source file synchronization client/server application written in Go, which implements its own - equally free - [[https://docs.syncthing.net/specs/bep-v1.html][Block Exchange Protocol]]. All transit communications between syncthing nodes are encrypted using TLS and all nodes are uniquely identified with cryptographic certificates.[fn:1]
+
+* Why I use it
+My main motivation for using /syncthing/ is for one thing: Music synchronization. I want to listen the same music in my phone as in my laptop or PC (by now you should know I don't use music streaming services).
+
+At first, it just simply copying my music from one pc into another, then it becomes copying into my phone, and then to other devices. And when this process becoming such a chore, I really needed another solution.
+
+* Enter syncthing
+
+#+caption: web interface for syncthing
+[[./syncthing-web-2025-06-27_00-11.png]]
+
+I've been using /syncthing/ for years now, and while there are better options for synchronization depending on the file types (such as for source code, it's better to use git, and github or gitlab). I use it primarily for media files (music, videos, or pictures).
+
+And my other uses for syncthing is for copying my /org-mode/ files, kinda overkill to use git for these files, and my /org-mode/ files mostly contains sensitive information anyway (my calendars, journal and such), using git is not an option.
+
+* Footnotes
+
+[fn:1] https://wiki.archlinux.org/title/Syncthing
