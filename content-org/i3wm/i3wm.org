@@ -16,7 +16,7 @@ I3wm is my first venture into the world of [[https://en.wikipedia.org/wiki/Tilin
 
 #+caption: Emacs inside i3wm
 #+name: i3wm-2025-06-23_22-28.png
-[[./i3wm-2025-06-23_22-28.png][file:i3wm-2025-06-23_22-28.png]]
+[[./i3wm-2025-06-23_22-28.png]]
 
 So why i3wm? I tried many other window managers, both tiling and dynamic, and maybe just like many others, i3wm was the first I tried. And it just happens that the default configuration is usable (for me at least, aside from the weird ~j~, ~k~, ~l~, ~;~ keys).
 
