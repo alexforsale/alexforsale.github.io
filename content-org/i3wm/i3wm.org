@@ -18,15 +18,17 @@ I3wm is my first venture into the world of [[https://en.wikipedia.org/wiki/Tilin
 #+name: i3wm-2025-06-23_22-28.png
 [[./i3wm-2025-06-23_22-28.png]]
 
-So why i3wm? I tried many other window managers, both tiling and dynamic, and maybe just like many others, i3wm was the first I tried. And it just happens that the default configuration is usable (for me at least, aside from the weird ~j~, ~k~, ~l~, ~;~ keys).
+So why I3wm? I tried many other window managers, both tiling and dynamic, and maybe just like many others, I3wm was the first I tried. And it just happens that the default configuration is usable (for me at least, aside from the weird ~j~, ~k~, ~l~, ~;~ keys).
 
-For me, i3wm is a good starting point for delving into window managers. You can start using it with minimal dependencies (=dmenu= and =i3status=).
+For me, i3wm is a good starting point for delving into window managers. You can start using it with minimal dependencies (=dmenu= and =i3status=). And the [[https://i3wm.org/docs/userguide.html][documentation on their website]] is very detailed.
+
+And though it is still currently maintained, it rarely breaks when updated. I pretty much use I3wm even for my work environment (which mostly doing remote connection to other machines). I do like /wayland/, but I really don't see the benefit of moving to it when /Xorg/ is doing just fine.
 
 #+caption: i3wm scratchpad feature
 #+name: i3wm-scratch-2025-06-23 22-53.gif
 [[./i3wm-scratch-2025-06-23 22-53.gif]]
 
-I have a separate [[https://alexforsale.github.io/dotfiles-i3/][configuration]], and it's stored at my [[https://github.com/alexforsale/dotfiles-i3][github repository]]. At first, I thought configuring i3 is just tinkering inside the config file (=~/.config/i3/config=).
+I have a separate [[https://alexforsale.github.io/dotfiles-i3/][configuration]], and it's stored at my [[https://github.com/alexforsale/dotfiles-i3][github repository]]. At first, I thought configuring I3 is just tinkering inside the config file (=~/.config/i3/config=). As I started using I3 also learn how to configure my i3status, replace /dmenu/ with /rofi/, using dunst for notification, and also configuring /picom/.
 
 #+caption: i3wm in action
 #+name:
