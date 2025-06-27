@@ -1,5 +1,5 @@
 #+options: ':nil -:nil ^:{} num:nil toc:nil
-#+title: Terminal Shells Tips and Tricks
+#+title: Shell Tips and Tricks
 #+description: Knowing your way in the terminal
 #+date: <2025-06-28 Fri>
 #+author: Kristian Alexander P
