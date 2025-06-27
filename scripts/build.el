@@ -24,7 +24,7 @@
    (lua . t)
    (org . t)
    (perl . t)
-   (plantuml . t)
+   ;; (plantuml . t)
    (python .t)
    (ruby . t)
    (shell . t)
