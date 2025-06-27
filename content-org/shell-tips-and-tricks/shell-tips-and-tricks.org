@@ -1,0 +1,94 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+title: Terminal Shells Tips and Tricks
+#+description: Knowing your way in the terminal
+#+date: <2025-06-28 Fri>
+#+author: Kristian Alexander P
+#+email: alexforsale@yahoo.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 30.1 (Org mode 9.8-pre)
+#+cite_export:
+#+hugo_tags: unix terminal linux shell bash zsh
+#+hugo_categories: shell
+#+hugo_auto_set_lastmod: t
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+
+Having used /Linux/ for a while, it's safe to say I've accumulated a bit of experience about the terminal, it is unavoidable since /Linux/ desktop was different back then. Booting into live environment for testing /Linux/ distribution wasn't as straight forward as today, for me at least, doing a kernel parameter override for modesetting is a must. USB modems (which was common back then) is a pain to set up. Having X showing the natural screen resolution is a luxury to have in live environment. And once you think you've already installed /Linux/ into your system, something broke, and you can't log in or some kernel panic stuffs. You're back in the live environment, setting up internet connection (/archlinux/ bbs and /Ubuntu/ forum is mandatory, even now I still prefer information from /archlinux/ forum).
+
+This will be a collection of all the small things that I think worth noting, or ones I should use modre often, but perhaps not the obvious stuffs. Expect many updates on this post (when I'm feeling like it).
+* Directories
+:PROPERTIES:
+:header-args: :dir /tmp/ :results output
+:END:
+** Create directory and quickly change to it
+#+begin_src shell
+  mkdir -pv test && cd $_
+  pwd
+#+end_src
+
+#+RESULTS:
+: /tmp/test
+
+* Parameter Expansion
+:PROPERTIES:
+:header-args: :dir /tmp/ :results output
+:END:
+This is perhaps a part of /bash/, though I'm sure it will work on /zsh/. This is from the /bash/ manual page.
+** String expansion
+*** ${parameter:-word}
+if /parameter/ is unset or null, the expansion of /word/ is subtituted.
+#+begin_src shell
+  a=1234
+  echo ${a:-345}
+  unset a
+  echo ${a:-345}
+  a=
+  echo ${a:-456}
+#+end_src
+
+#+RESULTS:
+| 1234 |
+|  345 |
+|  456 |
+*** ${parameter:=word}
+If parameter is unset or null, the expansion of word is assigned to parameter. The value of parameter is then substituted.
+#+begin_src shell
+  var=
+  : ${var:=DEFAULT}
+  echo $var
+  var=test
+  : ${var:=DEFAULT}
+  echo $var
+#+end_src
+
+#+RESULTS:
+| DEFAULT |
+| test    |
+* Misc
+:PROPERTIES:
+:header-args: :dir /tmp/ :results output
+:END:
+** brace expansion
+Useful for generating sequences of numbers.
+#+begin_src shell
+  echo {0..10}
+  touch test-{0..9}.txt
+  ls *.txt
+#+end_src
+
+#+RESULTS:
+#+begin_example
+0 1 2 3 4 5 6 7 8 9 10
+test-0.txt
+test-1.txt
+test-2.txt
+test-3.txt
+test-4.txt
+test-5.txt
+test-6.txt
+test-7.txt
+test-8.txt
+test-9.txt
+#+end_example
