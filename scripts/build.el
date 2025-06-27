@@ -5,6 +5,33 @@
 (package-install 'ox-hugo)
 (require 'ox-hugo)
 (setq org-confirm-babel-evaluate nil)
+(require 'org)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (awk . t)
+   (C . t)
+   (css . t)
+   (calc . t)
+   ;; (ditaa . t) ; needs the `ditaa' package
+   ;; (dot . t ) ; `graphviz'
+   (screen . t)
+   (haskell . t)
+   (java . t)
+   (js . t)
+   (latex . t)
+   (lisp . t)
+   (lua . t)
+   (org . t)
+   (perl . t)
+   (plantuml . t)
+   (python .t)
+   (ruby . t)
+   (shell . t)
+   (sed . t)
+   (scheme . t)
+   (sql . t)
+   (sqlite . t)))
 
 (defun export-org-files ()
   "Export files to hugo markdown."
