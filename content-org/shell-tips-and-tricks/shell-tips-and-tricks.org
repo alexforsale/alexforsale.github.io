@@ -1,9 +1,9 @@
 #+options: ':nil -:nil ^:{} num:nil toc:nil
 #+title: Shell Tips and Tricks
-#+description: Knowing your way in the terminal
 #+date: <2025-06-28 Fri>
 #+author: Kristian Alexander P
 #+email: alexforsale@yahoo.com
+#+description: Knowing your way in the terminal
 #+language: en
 #+select_tags: export
 #+exclude_tags: noexport
@@ -14,7 +14,6 @@
 #+hugo_auto_set_lastmod: t
 #+hugo_section: posts
 #+hugo_base_dir: ../../
-#+hugo_draft: false
 
 Having used /Linux/ for a while, it's safe to say I've accumulated a bit of experience about the terminal, it is unavoidable since /Linux/ desktop was different back then. Booting into live environment for testing /Linux/ distribution wasn't as straight forward as today, for me at least, doing a kernel parameter override for modesetting is a must. USB modems (which was common back then) is a pain to set up. Having X showing the natural screen resolution is a luxury to have in live environment. And once you think you've already installed /Linux/ into your system, something broke, and you can't log in or some kernel panic stuffs. You're back in the live environment, setting up internet connection (/archlinux/ bbs and /Ubuntu/ forum is mandatory, even now I still prefer information from /archlinux/ forum).
 
