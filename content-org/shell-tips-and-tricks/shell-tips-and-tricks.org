@@ -10,7 +10,7 @@
 #+creator: Emacs 30.1 (Org mode 9.8-pre)
 #+cite_export:
 #+hugo_tags: unix terminal linux shell bash zsh
-#+hugo_categories: shell
+#+hugo_categories: terminals
 #+hugo_auto_set_lastmod: t
 #+hugo_section: posts
 #+hugo_base_dir: ../../
