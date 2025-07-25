@@ -1,6 +1,6 @@
 #+options: ':nil -:nil ^:{} num:nil toc:nil
 #+author: Kristian Alexander P
-#+title: I3wm
+#+title: Emacs in Debian WSL
 #+date: <2025-07-25 Fri>
 #+description: Compiling Emacs on Debian WSL
 #+hugo_tags: windows wsl emacs
@@ -159,7 +159,7 @@ This is for locally serving my blog.
 #+end_src
 *** Spellcheck
 #+begin_src sh
-  sudo apt install hunspell wbritish enchant-2
+  sudo apt install hunspell wbritish enchant-2 libenchant-2-dev
 #+end_src
 *** Password Store
 #+begin_src sh
