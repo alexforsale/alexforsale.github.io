@@ -1,0 +1,167 @@
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+author: Kristian Alexander P
+#+title: I3wm
+#+date: <2025-07-25 Fri>
+#+description: Compiling Emacs on Debian WSL
+#+hugo_tags: windows wsl emacs
+#+hugo_categories: emacs
+#+hugo_auto_set_lastmod: t
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+language: en
+#+creator: Emacs 30.1 (Org mode 9.8-pre)
+#+startup: inlineimages
+
+#+caption: Emacs WSL
+[[./Emacs-WSL.png]]
+
+For some reason, I needed to work on /Windows/, and considering my shift is a 12 hours work, I needed something to tinker when I get some quiet time. I just realised it's been years since I've use /Windows/ for something other than web browsing.
+
+So this post is an experience on installing /Emacs/ on /Debian/.
+* WSL
+You should follow the official documentation on how to install /WSL/, so I won't be writing about it here.
+
+As for the reasoning for choosing /Debian/? Because it's not /Ubuntu/, nothing against it, I just wan't a simpler /distro/, and I use /archlinux/, this is /WSL/, it's doesn't make any sense trying to have /archlinux/ inside it.
+** Updating APT sources
+Out of the box, the sources list doesn't have any of the /deb-src/ and /non-free-firmware/ stuffs.
+#+name: /etc/apt/sources.list
+#+caption: Always check the Debian wiki!
+#+begin_src conf
+deb http://deb.debian.org/debian bookworm main non-free-firmware
+deb-src https://deb.debian.org/debian bookworm main non-free-firmware
+
+deb http://deb.debian.org/debian bookworm-updates main non-free-firmware
+deb-src https://security.debian.org/debian-security bookworm-security main non-free-firmware
+
+deb http://security.debian.org/debian-security bookworm-security main non-free-firmware
+deb-src https://deb.debian.org/debian bookworm-updates main non-free-firmware
+
+deb http://ftp.debian.org/debian bookworm-backports main non-free-firmware
+#+end_src
+
+#+caption:
+[[./WSL-2025-07-25 231457.png]]
+* Emacs
+After updating /apt/, run this:
+#+name: apt build-dep
+#+begin_src sh :tangle no
+  sudo apt build-dep emacs
+#+end_src
+
+I'm guessing this is for /Emacs/ dependencies. But I still need install other packages via /apt/:
+
+#+name: other dependencies
+#+begin_src sh :tangle no
+  sudo apt install libmagickwand-dev libmagickcore-dev wget curl git
+#+end_src
+/wget/ and /git/ are for getting the sources.
+
+I also build /tree-sitter/ from source.
+
+#+name: tree-sitter
+#+begin_src sh :tangle no
+  mkdir -pv sources
+  cd ~/source/
+  git clone https://github.com/tree-sitter/tree-sitter.git
+  cd tree-sitter
+  make
+  sudo make install
+#+end_src
+
+or you could also use /apt/ to install it. This is not a hard dependency, so it can be skipped if not used.
+
+As for the /Emacs/ source, I use the tarball, their git repo is just too large. If you want to use their git repo I recommend using the --depth=1 option.
+
+#+name: when using tarball
+#+begin_src sh
+  cd ~/sources
+  wget https://ftp.gnu.org/gnu/emacs/emacs-29.4.tar.xz
+  tar xf emacs-29.4.tar.xz
+  cd emacs-29.4
+#+end_src
+
+So this is my configure options:
+#+name: compile Emacs
+#+begin_src sh
+  ./configure --with-native-compilation --with-pgtk --with-tree-sitter --with-modules --with-threads --with-mailutils --with-imagemagick --with-json
+  make
+  sudo make install
+#+end_src
+I suppose you can use other flags, but for now this is more than enough for me.
+
+This will install Emacs using the default prefix (=/usr/local=), meaning the binary will be placed at =/usr/local/bin/=. Debian already include them to the shell path.
+* Others
+** Running Emacs
+I usually just type this in the terminal:
+#+name: running Emacs
+#+begin_src sh
+  setsid emacs
+#+end_src
+** My Emacs packages dependencies
+*** fd-find and ripgrep
+#+begin_src sh
+  sudo apt install fd-find ripgrep
+#+end_src
+*** cmake
+This is for compiling /vterm/.
+#+begin_src sh
+  sudo apt install cmake
+#+end_src
+*** all-the-icons
+This package have it's own command for installing icons: ~all-the-icons-install-fonts~, run in inside Emacs using ~M-x~.
+*** nerd-icons
+This font collection is not on /Debian/ repository. I just pick some script I got from github, and modified it to store the fonts to ~~/.local/share/fonts~.
+#+begin_src sh
+  sudo apt install unzip
+#+end_src
+
+#+name: nerd-fonts installer script
+#+begin_src sh :shebang /usr/bin/env bash :tangle no
+  fons_list=("Agave" "AnonymousPro" "Arimo" "AurulentSansMono" "BigBlueTerminal" "BitstreamVeraSansMono" "CascadiaCode" "CodeNewRoman" "ComicShannsMono" "Cousine" "DaddyTimeMono" "DejaVuSansMono" "FantasqueSansMono" "FiraCode" "FiraMono" "Gohu" "Go-Mono" "Hack" "Hasklig" "HeavyData" "Hermit" "iA-Writer" "IBMPlexMono" "InconsolataGo" "InconsolataLGC" "Inconsolata" "IosevkaTerm" "JetBrainsMono" "Lekton" "LiberationMono" "Lilex" "Meslo" "Monofur" "Monoid" "Mononoki" "MPlus" "NerdFontsSymbolsOnly" "Noto" "OpenDyslexic" "Overpass" "ProFont" "ProggyClean" "RobotoMono" "ShareTechMono" "SourceCodePro" "SpaceMono" "Terminus" "Tinos" "UbuntuMono" "Ubuntu" "VictorMono")
+  for font_name in "${fons_list[@]}"; do
+      if [ -n "$font_name" ]; then
+
+          echo "Starting download $font_name nerd font"
+
+          if [ "$(command -v curl)" ]; then
+              echo "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_name.zip"
+              curl -OL "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_name.zip"
+              echo "creating fonts folder: ${HOME}/.local/share/fonts"
+              mkdir -p  "$HOME/.local/share/fonts"
+              echo "unzip the $font_name.zip"
+              unzip "$font_name.zip" -d "$HOME/.local/share/fonts/$font_name/"
+              fc-cache -fv
+              echo "$font_name done!"
+
+          elif [ "$(command -v wget)" ]; then
+              echo "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_name.zip"
+              wget "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_name.zip"
+              echo "creating fonts folder: ${HOME}/.local/share/fonts"
+              mkdir -p  "$HOME/.local/share/fonts"
+              echo "unzip the $font_name.zip"
+              unzip "$font_name.zip" -d "$HOME/.local/share/fonts/$font_name/"
+              fc-cache -fv
+              echo "done!"
+
+          else
+              echo "We cannot find the curl and wget command. First, install the curl and wget command, one of them."
+              break
+          fi
+      fi
+  done
+#+end_src
+
+Please beware this will download automatically all the font in the =font_list=.
+*** Hugo
+This is for locally serving my blog.
+#+begin_src sh
+  sudo apt install hugo
+#+end_src
+*** Spellcheck
+#+begin_src sh
+  sudo apt install hunspell wbritish enchant-2
+#+end_src
+*** Password Store
+#+begin_src sh
+  sudo apt install pass pass-otp
+#+end_src
