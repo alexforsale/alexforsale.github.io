@@ -32,5 +32,13 @@ Primarily used for quick navigation within a file or across multiple files. They
 The Emacs mark is a single, active point used in conjunction with the cursor (point) to define a region of text. This region is then used for various operations like copying, cutting, or formatting.
 
 Also in Emacs, there's a Mark Ring that belongs to each buffer, and a Global Mark Ring which recorded if you have switched buffers since the previous mark setting. The global mark ring records a sequence of buffers that you have been in, and, for each buffer, a place where you set the mark.
+** Bookmark
+Emacs bookmarks are a feature that allows users to save and quickly navigate to specific locations within files or even save entire files for later access. They are particularly useful for managing multiple projects or frequently accessed files across different Emacs sessions.
 * Registers
 This is where Emacs differs from Vim, Emacs registers can stores different information, such as point position, text, numbers, window and frame configuration, buffer and file names.
+* Is it really that good?
+The only way to benefit from marks and registers is by getting the habit of using it.
+** Vim-style mark
+The default keybindings for mark in /evil-mode/ is untouch so I can get accustomed to it in /Vim/ or Emacs. Set mark in /normal-mode/ with ~m~ followed by a letter. And jump back to it using ~'~ and that same letter.
+** Register
+I've set a keybinding (~SPC .~) for storing register, and (~SPC C-.~) for loading registers. Also ~SPC s "~ for viewing the registers. It feels like a cheat since I'm using /consult/.
