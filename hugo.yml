@@ -59,12 +59,8 @@ params:
     #imageWidth: 120 # custom size
     #imageHeight: 120 # custom size
     buttons:
-      - name: "Projects"
-        url: "/projects/"
-      - name: "Posts"
-        url: "/posts/"
-      - name: "Dotfiles"
-        url: "/dotfiles/"
+      - name: "About"
+        url: "/about/"
 
   socialIcons: # optional
     - name: "github"

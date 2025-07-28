@@ -4,47 +4,55 @@
 #+hugo_base_dir: ../../
 #+hugo_section: /
 #+startup: inlineimages
+
+* About This Blog.
+This is a static site powered by [[https://gohugo.io/][hugo]]. The theme is provided by the [[https://github.com/adityatelange/hugo-PaperMod/][PaperMod theme]]. The content itself is written in [[https://github.com/alexforsale/alexforsale.github.io/tree/main/content-org/][Emacs org-mode]] and exported into /markdown/ using [[https://ox-hugo.scripter.co/][ox-hugo]].
+
+This blog is mostly about /Emacs/, a bit about /archlinux/, and other related things in between.
 * About
 :PROPERTIES:
 :EXPORT_FILE_NAME: about
 :END:
+
 ** Kristian Alexander P
 
 *** Profile
-  I was an IT Support at Multi Kontrol Nusantara since October 2022 until September 2024. My responsibilities are mainly about:
-  - Resolving IT support requests from employees.
-  - Answering employee questions regarding computer systems.
-  - Gathering and analyzing data to diagnose problems with computer systems.
-  - Changing configurations, settings and permissions to fix computer issues.
-  - Installing new software and hardware drivers and updating existing ones as needed
+I'm currently working as a Customer Service Agent. Currently my responsibilities are handling customer inquiries, resolve complaints, processing orders, and provide product or service informations.
+
+I was an IT Support at Multi Kontrol Nusantara since October 2022 until September 2024. My responsibilities are mainly about:
+- Resolving IT support requests from employees.
+- Answering employee questions regarding computer systems.
+- Gathering and analyzing data to diagnose problems with computer systems.
+- Changing configurations, settings and permissions to fix computer issues.
+- Installing new software and hardware drivers and updating existing ones as needed
 
   I'm also running a small networking service, providing internet connection from house to house, the main reason I'm doing this is mainly to put my Gnu/Linux knowledge to use for managing all the necessary services which I do so manually.
 *** Personal Infos
 **** Web Spaces
-   - https://alexforsale.github.io
-   - https://github.com/alexforsale
-   - https://linkedin.com/in/alexforsale
+- https://alexforsale.github.io
+- https://github.com/alexforsale
+- https://linkedin.com/in/alexforsale
 **** Instant Messaging
-   - Telegram: https:/t.me/alexforsale
+- Telegram: https:/t.me/alexforsale
 *** Skills
-   - Experience in /Linux/, /FreeBSD/, and /Microsoft Windows/ administration, installation, and maintenance.
-   - Installation and configuration of webserver / proxy such as /Apache/, /nginx/ and /haproxy/ on /Linux/ and /FreeBSD/.
-   - Installation and configuration of /Linux/ and /BSD/ system as a router or internet gateway, eliminating the need for premade / proprietary routers such as /Mikrotik/ or /PfSense/.
-   - Troubleshooting skills with network protocols such as DNS, TCP/IP, and SMTP.
-   - Administration of networking devices such as routers, and switches.
-   - Experience in writing basic /Shell Scripts/ using /ksh/, /bash/, and /zsh/ for process automation of application, backup and scheduling.
-   - Knowledge in Storage, Disk Management, Logical Volume Management(LVM) and logical partitioning.
-   - Basic knowledge in Vim and Emacs.
-   - Source code management with /git/ to track progress of any development work, viewing version histories and creating version branches.
-   - Git version control with /github/ and /gitlab/, also local hosting with /Gitea/.
-   - Containerization software with /Docker/, /QEMU/, and /VirtualBox/.
-   - Configuration management with ansible.
-   - Management of user accounts, system security, and performance tuning.
-   - Quick learner.
+- Experience in /Linux/, /FreeBSD/, and /Microsoft Windows/ administration, installation, and maintenance.
+- Installation and configuration of webserver / proxy such as /Apache/, /nginx/ and /haproxy/ on /Linux/ and /FreeBSD/.
+- Installation and configuration of /Linux/ and /BSD/ system as a router or internet gateway, eliminating the need for premade / proprietary routers such as /Mikrotik/ or /PfSense/.
+- Troubleshooting skills with network protocols such as DNS, TCP/IP, and SMTP.
+- Administration of networking devices such as routers, and switches.
+- Experience in writing basic /Shell Scripts/ using /ksh/, /bash/, and /zsh/ for process automation of application, backup and scheduling.
+- Knowledge in Storage, Disk Management, Logical Volume Management(LVM) and logical partitioning.
+- Basic knowledge in Vim and Emacs.
+- Source code management with /git/ to track progress of any development work, viewing version histories and creating version branches.
+- Git version control with /github/ and /gitlab/, also local hosting with /Gitea/.
+- Containerization software with /Docker/, /QEMU/, and /VirtualBox/.
+- Configuration management with ansible.
+- Management of user accounts, system security, and performance tuning.
+- Quick learner.
 *** Educational Background
-  - 2000 – 2005 : University of Krisnadwipayana, Jakarta
-  - 1999 – 1996 : SMU Negeri 3, Bekasi
-  - 1996 – 1993 : SLTP Negeri 10, Bekasi
+- 2000 – 2005 : University of Krisnadwipayana, Jakarta
+- 1999 – 1996 : SMU Negeri 3, Bekasi
+- 1996 – 1993 : SLTP Negeri 10, Bekasi
 *** Employment History
 **** Multi Kontrol Nusantara
 ***** IT Support                                                 :Jakarta:
@@ -58,34 +66,34 @@
   - Testing new technology
 **** Java Komputindo
 ***** Computer Technician
-    - *9/2020 - 2/2021*
-      - OS installation for desktop and laptop systems (MS Windows, Gnu/linux, /*BSD,/ and MacOS).
-      - Provides IT support and/or consultation to customers.
+- *9/2020 - 2/2021*
+  - OS installation for desktop and laptop systems (MS Windows, Gnu/linux, /*BSD,/ and MacOS).
+  - Provides IT support and/or consultation to customers.
 **** Yummy Foodcourt
 ***** Captain
-    - *2/2017 to 7/2017*
-      - Supervising daily operations.
-      - Take an active role in coaching and developing junior staffs.
-      - Completes the daily responsibilities that are set for each individual shifts.
-      - Any other duties related to food and beverage services assigned by the manager.
+- *2/2017 to 7/2017*
+  - Supervising daily operations.
+  - Take an active role in coaching and developing junior staffs.
+  - Completes the daily responsibilities that are set for each individual shifts.
+  - Any other duties related to food and beverage services assigned by the manager.
 **** Damco Indonesia
 ***** Customer Service Representative                            :Jakarta:
-    - *4/2013 to 7/2013*
-      - Respond to telephone inquiries, providing quality service to customers and associates inquiring about the availability of products or status of orders.
+- *4/2013 to 7/2013*
+  - Respond to telephone inquiries, providing quality service to customers and associates inquiring about the availability of products or status of orders.
 **** DHL Supply Chains
 ***** Customer Service Representative                            :Jakarta:
-    - *8/2011 to 4/2013*
-      - Respond to telephone inquiries, providing quality service to customers and associates inquiring about the availability of products or status of orders.
+- *8/2011 to 4/2013*
+  - Respond to telephone inquiries, providing quality service to customers and associates inquiring about the availability of products or status of orders.
 **** Juishin Indonesia
 ***** Administrative Assistant                                   :Jakarta:
-    - *9/2008 to 1/2011*
-      - Maintaining sales and inventory report for region branches.
-      - Assisting Area Manager on daily administrative duties.
+- *9/2008 to 1/2011*
+  - Maintaining sales and inventory report for region branches.
+  - Assisting Area Manager on daily administrative duties.
 ***** Marketing Administrative Staff                               :Medan:
-    - *11/2014 to 12/2016*
-      - Maintaining daily administrative tasks.
-      - Maintaining sales and inventory report for Medan branch.
+- *11/2014 to 12/2016*
+  - Maintaining daily administrative tasks.
+  - Maintaining sales and inventory report for Medan branch.
 **** Telkomsel
 ***** Call Center Inbound Agent                                  :Jakarta:
-    - *8/2008 to 8/2009*
-      - Respond to telephone inquiries, providing quality service to customers inquiring about various product informations.
+- *8/2008 to 8/2009*
+  - Respond to telephone inquiries, providing quality service to customers inquiring about various product informations.
