@@ -6,7 +6,7 @@
     <description>Recent content in Tags on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Jul 2025 14:33:09 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Jul 2025 14:48:09 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emacs</title>
@@ -23,10 +23,31 @@
       <description></description>
     </item>
     <item>
+      <title>Linux</title>
+      <link>https://alexforsale.github.io/tags/linux/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Mark</title>
       <link>https://alexforsale.github.io/tags/mark/</link>
       <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/mark/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mpd</title>
+      <link>https://alexforsale.github.io/tags/mpd/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/mpd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Music</title>
+      <link>https://alexforsale.github.io/tags/music/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/tags/music/</guid>
       <description></description>
     </item>
     <item>
@@ -79,13 +100,6 @@
       <description></description>
     </item>
     <item>
-      <title>Linux</title>
-      <link>https://alexforsale.github.io/tags/linux/</link>
-      <pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/tags/linux/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Shell</title>
       <link>https://alexforsale.github.io/tags/shell/</link>
       <pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate>
@@ -118,27 +132,6 @@
       <link>https://alexforsale.github.io/tags/syncthing/</link>
       <pubDate>Fri, 27 Jun 2025 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/tags/syncthing/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Mpd</title>
-      <link>https://alexforsale.github.io/tags/mpd/</link>
-      <pubDate>Thu, 26 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/tags/mpd/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Music</title>
-      <link>https://alexforsale.github.io/tags/music/</link>
-      <pubDate>Thu, 26 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/tags/music/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Music-Player</title>
-      <link>https://alexforsale.github.io/tags/music-player/</link>
-      <pubDate>Thu, 26 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://alexforsale.github.io/tags/music-player/</guid>
       <description></description>
     </item>
     <item>
