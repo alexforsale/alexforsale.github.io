@@ -6,8 +6,15 @@
     <description>Recent content in Posts on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Jul 2025 11:59:06 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Jul 2025 07:56:18 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning How to Learn</title>
+      <link>https://alexforsale.github.io/posts/learning-how-to-learn00/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://alexforsale.github.io/posts/learning-how-to-learn00/</guid>
+      <description>Streamlining My Learning Process.</description>
+    </item>
     <item>
       <title>Emacs in Debian WSL</title>
       <link>https://alexforsale.github.io/posts/emacs-debian-wsl/</link>
