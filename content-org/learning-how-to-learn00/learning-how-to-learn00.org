@@ -1,0 +1,21 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil expand-links:t f:t inline:t num:t p:nil pri:nil prop:nil
+#+options: stat:t tags:t tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: Learning How to Learn
+#+date: <2025-07-28 Mon>
+#+author: Kristian Alexander P
+#+email: alexforsale@yahoo.com
+#+description: Streamlining My Learning Process.
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 30.1 (Org mode 9.8-pre)
+#+cite_export:
+#+hugo_tags: learning prog-modes programming
+#+hugo_categories: learning
+#+hugo_auto_set_lastmod: t
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+
+I accidentally stumbled upon an interesting blog post on [[https://aliabdaal.com/studying/how-to-learn-anything-faster/][how to learn anything faster]]. This is a good excuse to document my learning process.
