@@ -1,0 +1,36 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil expand-links:t f:t inline:t num:nil p:nil pri:nil prop:nil
+#+options: stat:t tags:t tasks:t tex:t timestamp:t title:t toc:nil todo:t |:t
+#+title: Marks and Registers in Emacs
+#+date: <2025-07-28 Mon>
+#+author: Kristian Alexander P
+#+email: alexforsale@yahoo.com
+#+description: for easier text navigation
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 30.1 (Org mode 9.8-pre)
+#+cite_export:
+#+hugo_tags: emacs vim mark register
+#+hugo_categories: emacs
+#+hugo_auto_set_lastmod: t
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+hugo_draft: false
+
+I never actually used them before, but I'm curious when looking at the =consult-mark=, and =consult-register= commands from the consult package.
+* Marks
+As I further looking for resources on marks, I also found out that /Vim/ has it's own implementation of mark. This interest me since I've been using /evil-mode/ for a long time, and now I have the opportunity to use both Emacs and Vim marks, and see which one fits for me.
+** Vim Mark
+Primarily used for quick navigation within a file or across multiple files. They act as bookmark for specific location.
+*** Types
+- Lowercase marks (a-z) :: Local to the current buffer (file).
+- Uppercase marks (A-Z) :: Global and persist across different buffers. They can be used to jump to a specific location in another file.
+- Special marks :: Include marks for the last jump (='=), the last change (=.=), and the last visual selection (=<=, =>=).
+** Emacs Mark
+The Emacs mark is a single, active point used in conjunction with the cursor (point) to define a region of text. This region is then used for various operations like copying, cutting, or formatting.
+
+Also in Emacs, there's a Mark Ring that belongs to each buffer, and a Global Mark Ring which recorded if you have switched buffers since the previous mark setting. The global mark ring records a sequence of buffers that you have been in, and, for each buffer, a place where you set the mark.
+* Registers
+This is where Emacs differs from Vim, Emacs registers can stores different information, such as point position, text, numbers, window and frame configuration, buffer and file names.
