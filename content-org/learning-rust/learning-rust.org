@@ -14,8 +14,8 @@
 #+hugo_section: posts
 #+hugo_base_dir: ../../
 #+hugo_draft: false
-#+hugo_tags: emacs org-mode org GTD
-#+hugo_categories: emacs
+#+hugo_tags: learning prog-modes programming
+#+hugo_categories: learning
 #+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 

@@ -19,3 +19,34 @@
 #+hugo_base_dir: ../../
 
 I accidentally stumbled upon an interesting blog post on [[https://aliabdaal.com/studying/how-to-learn-anything-faster/][how to learn anything faster]]. This is a good excuse to document my learning process.
+
+In short, it advised us to use these 9 this for learning:
+* Sharpen The Axe
+** It's About the Meta Learning
+Do some research on the topic you want to learn, usually other people has done it before.
+* Use Crutches to Optimise Focus
+** Do It Actively
+** 5-minutes Rule
+- work it for 5 minutes.
+- stop it if you don't want to do it anymore. Perhaps re-evaluate the first tips?
+** Remove distraction
+* Find Opportunities for Immersion
+** We learn best when we’re in the environment where we’re actually going to be using the skill.
+* Figure Out Your Weak Links
+** Focus on drills to improve them.
+* Test Yourself
+** Active Recall
+We actually learn, counterintuitively, by trying to take stuff out of our brains.
+** Set a desirable difficulty
+* Get Regular intense feedback
+** Getting a coach?
+* Overlearn
+** Continuously asking why a thing works the way that it does.
+** Tweak stuffs.
+* Use Spacing
+** Spaced repetition.
+*** NEXT How much space though?
+:LOGBOOK:
+- State "NEXT"       from              [2025-07-28 Mon 15:39]
+:END:
+* Teach What You’re Learning
