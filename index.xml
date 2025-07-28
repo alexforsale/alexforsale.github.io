@@ -6,7 +6,7 @@
     <description>Recent content on alexforsale.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Jul 2025 13:14:47 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Jul 2025 14:26:10 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Learning How to Learn</title>
@@ -259,18 +259,13 @@
       <link>https://alexforsale.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://alexforsale.github.io/about/</guid>
-      <description>&lt;h2 id=&#34;about&#34;&gt;About&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;about-this-blog-dot&#34;&gt;About This Blog.&lt;/h2&gt;
+&lt;p&gt;This is a static site powered by &lt;a href=&#34;https://gohugo.io/&#34;&gt;hugo&lt;/a&gt;. The theme is provided by the &lt;a href=&#34;https://github.com/adityatelange/hugo-PaperMod/&#34;&gt;PaperMod theme&lt;/a&gt;. The content itself is written in &lt;a href=&#34;https://github.com/alexforsale/alexforsale.github.io/tree/main/content-org/&#34;&gt;Emacs org-mode&lt;/a&gt; and exported into &lt;em&gt;markdown&lt;/em&gt; using &lt;a href=&#34;https://ox-hugo.scripter.co/&#34;&gt;ox-hugo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This blog is mostly about &lt;em&gt;Emacs&lt;/em&gt;, a bit about &lt;em&gt;archlinux&lt;/em&gt;, and other related things in between.&lt;/p&gt;
+&lt;h2 id=&#34;about&#34;&gt;About&lt;/h2&gt;
 &lt;h3 id=&#34;kristian-alexander-p&#34;&gt;Kristian Alexander P&lt;/h3&gt;
 &lt;h4 id=&#34;profile&#34;&gt;Profile&lt;/h4&gt;
-&lt;p&gt;I was an IT Support at Multi Kontrol Nusantara since October 2022 until September 2024. My responsibilities are mainly about:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Resolving IT support requests from employees.&lt;/li&gt;
-&lt;li&gt;Answering employee questions regarding computer systems.&lt;/li&gt;
-&lt;li&gt;Gathering and analyzing data to diagnose problems with computer systems.&lt;/li&gt;
-&lt;li&gt;Changing configurations, settings and permissions to fix computer issues.&lt;/li&gt;
-&lt;li&gt;Installing new software and hardware drivers and updating existing ones as needed&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I&amp;rsquo;m also running a small networking service, providing internet connection from house to house, the main reason I&amp;rsquo;m doing this is mainly to put my Gnu/Linux knowledge to use for managing all the necessary services which I do so manually.&lt;/p&gt;</description>
+&lt;p&gt;I&amp;rsquo;m currently working as a Customer Service Agent. Currently my responsibilities are handling customer inquiries, resolve complaints, processing orders, and provide product or service informations.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
