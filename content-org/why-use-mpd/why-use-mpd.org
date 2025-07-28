@@ -1,6 +1,6 @@
 #+options: ':nil -:nil ^:{} num:nil toc:nil
 #+title: Why Use MPD in 2025
-#+date: <2025-06-26 Thu>
+#+date: <2025-07-28 Mon>
 #+author: Kristian Alexander P
 #+email: alexforsale@yahoo.com
 #+description: The story of my music playing experience
@@ -9,8 +9,8 @@
 #+exclude_tags: noexport
 #+creator: Emacs 30.1 (Org mode 9.8-pre)
 #+cite_export:
-#+hugo_tags: linux mpd music music-player
-#+hugo_categories: desktop
+#+hugo_tags: linux mpd music
+#+hugo_categories: music
 #+hugo_auto_set_lastmod: t
 #+hugo_section: posts
 #+hugo_base_dir: ../../
