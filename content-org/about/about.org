@@ -9,7 +9,7 @@
 This is a static site powered by [[https://gohugo.io/][hugo]]. The theme is provided by the [[https://github.com/adityatelange/hugo-PaperMod/][PaperMod theme]]. The content itself is written in [[https://github.com/alexforsale/alexforsale.github.io/tree/main/content-org/][Emacs org-mode]] and exported into /markdown/ using [[https://ox-hugo.scripter.co/][ox-hugo]].
 
 This blog is mostly about /Emacs/, a bit about /archlinux/, and other related things in between.
-* About
+* About Me
 :PROPERTIES:
 :EXPORT_FILE_NAME: about
 :END:
