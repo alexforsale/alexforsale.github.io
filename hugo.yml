@@ -59,6 +59,8 @@ params:
     #imageWidth: 120 # custom size
     #imageHeight: 120 # custom size
     buttons:
+      - name: "Braindump"
+        url: "/braindump/"
       - name: "About"
         url: "/about/"
 
