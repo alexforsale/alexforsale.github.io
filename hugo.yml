@@ -61,6 +61,8 @@ params:
     buttons:
       - name: "Braindump"
         url: "/braindump/"
+      - name: "Projects"
+        url: "/projects/"
       - name: "About"
         url: "/about/"
 
