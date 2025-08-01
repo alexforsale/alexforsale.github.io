@@ -24,6 +24,13 @@ In short, it advised us to use these 9 this for learning:
 * Sharpen The Axe
 ** It's About the Meta Learning
 Do some research on the topic you want to learn, usually other people has done it before.
+** Methods used for personal knowledge management
+- [[https://en.wikipedia.org/wiki/Zettelkasten][Zettelkasten]] :: Knowledge management methods by storing small information stored in paper slip or cards.
+- [[https://fortelabs.com/blog/para/][PARA Method]] :: Project, Area, Resource, Archive.
+
+Also I don't intend to fully use this as a personal knowledge management. I'm more into the =second brain= part of the system, organizing digital information, including notes and files.
+
+For now I'm using the tool that I've known for a while, [[https://www.orgroam.com/][Org-Roam]].
 * Use Crutches to Optimise Focus
 ** Do It Actively
 ** 5-minutes Rule
