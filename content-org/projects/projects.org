@@ -22,5 +22,7 @@ These repositories are configured in [[https://en.wikipedia.org/wiki/Org-mode][o
 - [[https://alexforsale.github.io/dotfiles-shells/][dotfiles-shells]] :: Common shells configuration / startup files. Designed to serve [[https://en.wikipedia.org/wiki/POSIX][POSIX]]-compliant shells that I used ([[https://en.wikipedia.org/wiki/Bash_(Unix_shell)][bash]], [[https://en.wikipedia.org/wiki/Z_shell][zsh]], [[https://en.wikipedia.org/wiki/Almquist_shell][dash/ash/sh]], and [[https://en.wikipedia.org/wiki/Tcsh][tcsh]]) on various machines.
 - [[https://alexforsale.github.io/dotfiles-bash/][dotfiles-bash]] :: Bash startup files, configured mostly for command-line applications that I used.
 - [[https://alexforsale.github.io/dotfiles-hyprland/][dotfiles-hyprland]] :: [[https://wiki.hyprland.org/][A fully autonomous Display Server for linux]], considered to be an Xorg replacement. This repository stores the configuration files. It matured enough to be my daily window manager.
+** Programming
+- [[https://github.com/alexforsale/hyprland-wofi-windowcd][hyprland-wofi-windowcd]] :: Wofi windowcd for hyprland written in Rust.
 ** Others
 - [[https://alexforsale.github.io/braindump/][braindump]] :: My attempt at creating a [[https://en.wikipedia.org/wiki/Zettelkasten][zettelkasten]]-like personal knowledge management using org-mode, org-roam, and [[https://ox-hugo.scripter.co/][hugo]]. Still needs tweaking to make it works, and I'm considering other options.
