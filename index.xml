@@ -6,7 +6,7 @@
     <description>Recent content on alexforsale.github.io</description>
     <generator>Hugo -- 0.148.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Aug 2025 10:00:32 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 14:24:05 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Learning How to Learn</title>
@@ -74,6 +74,11 @@
 &lt;dd&gt;Bash startup files, configured mostly for command-line applications that I used.&lt;/dd&gt;
 &lt;dt&gt;&lt;a href=&#34;https://alexforsale.github.io/dotfiles-hyprland/&#34;&gt;dotfiles-hyprland&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;&lt;a href=&#34;https://wiki.hyprland.org/&#34;&gt;A fully autonomous Display Server for linux&lt;/a&gt;, considered to be an Xorg replacement. This repository stores the configuration files. It matured enough to be my daily window manager.&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;h3 id=&#34;programming&#34;&gt;Programming&lt;/h3&gt;
+&lt;dl&gt;
+&lt;dt&gt;&lt;a href=&#34;https://github.com/alexforsale/hyprland-wofi-windowcd&#34;&gt;hyprland-wofi-windowcd&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;Wofi windowcd for hyprland written in Rust.&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;h3 id=&#34;others&#34;&gt;Others&lt;/h3&gt;
 &lt;dl&gt;
