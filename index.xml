@@ -6,7 +6,7 @@
     <description>Recent content on alexforsale.github.io</description>
     <generator>Hugo -- 0.148.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Aug 2025 23:51:05 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Aug 2025 09:28:55 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Learning How to Learn</title>
@@ -81,6 +81,8 @@
 &lt;dd&gt;&lt;a href=&#34;https://github.com/SimplyCEO/wofi&#34;&gt;Wofi&lt;/a&gt; &lt;em&gt;windowcd&lt;/em&gt; for &lt;a href=&#34;https://hypr.land/&#34;&gt;hyprland&lt;/a&gt; written in Rust.&lt;/dd&gt;
 &lt;dt&gt;&lt;a href=&#34;https://github.com/alexforsale/showclip&#34;&gt;showclip&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;Send clipboard to notification using &lt;em&gt;xsel&lt;/em&gt; (for &lt;a href=&#34;https://en.wikipedia.org/wiki/X.Org_Server&#34;&gt;Xorg&lt;/a&gt;) or &lt;em&gt;wl-copy&lt;/em&gt; (for &lt;a href=&#34;https://en.wikipedia.org/wiki/Wayland_(protocol)&#34;&gt;wayland&lt;/a&gt;) and &lt;em&gt;notify-send&lt;/em&gt;, written in Rust.&lt;/dd&gt;
+&lt;dt&gt;&lt;a href=&#34;https://github.com/alexforsale/browser-search&#34;&gt;Browser-search&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;a simple wrapper for browser search written in Rust.&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;h3 id=&#34;others&#34;&gt;Others&lt;/h3&gt;
 &lt;dl&gt;
