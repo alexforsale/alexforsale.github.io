@@ -106,22 +106,26 @@ menu:
       name: archives
       url: /archives/
       weight: 40
+    - identifier: braindump
+      name: braindump
+      url: /braindump/
+      weight: 50
     - identifier: projects
       name: projects
       url: /projects/
-      weight: 50
+      weight: 60
     - identifier: about
       name: about
       url: /about/
-      weight: 60
+      weight: 70
     - identifier: search
       name: search
       url: /search/
-      weight: 70
+      weight: 80
     - identifier: home
       name: home
       url: /
-      weight: 80
+      weight: 90
 
 outputs:
   home:
