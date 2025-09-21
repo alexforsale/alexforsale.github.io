@@ -1,0 +1,132 @@
+#+options: ':nil -:nil ^:nil num:nil toc:nil
+#+author: Kristian Alexander P
+#+title: Finally Got AMD setup on Archlinux
+#+description:
+#+date: <2025-09-12 Fri>
+#+hugo_categories: desktop
+#+hugo_tags: amd linux gpu xorg
+#+hugo_auto_set_lastmod: t
+#+hugo_section: posts
+#+hugo_base_dir: ../../
+#+language: en
+#+startup: inlineimages
+
+I got this Hewlett-Packard PC few years ago, which now I use regularly.
+#+begin_src sh :exports both :results verbatim :tangle no
+sudo dmidecode -t chassis
+#+end_src
+
+#+RESULTS:
+#+begin_example
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 3.0.0 present.
+
+Handle 0x0003, DMI type 3, 22 bytes
+Chassis Information
+	Manufacturer: Hewlett-Packard
+	Type: Desktop
+	Lock: Not Present
+	Version:  
+	Serial Number: SGH525Q1P2
+	Asset Tag: SGH525Q1P2
+	Boot-up State: Safe
+	Power Supply State: Safe
+	Thermal State: Safe
+	Security Status: None
+	OEM Information: 0x4C414E5F
+	Height: Unspecified
+	Number Of Power Cords: 1
+	Contained Elements: 0
+	SKU Number:  
+#+end_example
+
+It has a built-in graphic controller and an AMD VGA controller:
+#+begin_src sh :exports both :results verbatim :tangle no
+lspci -k -d ::03xx
+#+end_src
+
+#+RESULTS:
+#+begin_example
+00:02.0 Display controller: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics Controller (rev 06)
+	DeviceName:  Onboard IGD
+	Subsystem: Hewlett-Packard Company Device 21f5
+	Kernel driver in use: i915
+	Kernel modules: i915
+01:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Oland [Radeon HD 8570 / R5 430 OEM / R7 240/340 / Radeon 520 OEM] (rev 87)
+	Subsystem: Hewlett-Packard Company Device 3375
+	Kernel driver in use: amdgpu
+	Kernel modules: radeon, amdgpu
+#+end_example
+Note that this output of =lspci= is after I made all the modifications below.
+
+I've never used any AMD GPU in /linux/ before, and I just assume it will just work. But out of the box /archlinux/ will use the =radeon= driver for this card, while it works fine, =steam= refuse to open using this driver, and even worse some application on =wayland= produce strange errors.
+* What I've done
+** Installed Softwares
+- =mesa= and =lib32-mesa=.
+- =xf86-video-amdgpu=.
+- =vulkan-radeon= and =lib32-vulkan-radeon=.
+- =linux-firmware-amdgpu=, this should be installed by default.
+  
+  Don't install =amdvlk= to avoid issue.[fn:1]
+** Set the kernel module parameters
+#+begin_src shell :tangle no
+cat /proc/cmdline
+#+end_src
+
+#+RESULTS:
+: root=LABEL=root rootflags=subvol=@arch-root initrd=\initramfs-linux.img rw quiet splash consoleblank=600 radeon.si_support=0 amdgpu.si_support=1
+
+The relevant line is =radeon.si_support=0 amdgpu.si_support=1= for Southern Islands (SI).[fn:2] Also there should be no =nomodeset= or =vga= in the kernel command line.
+
+Also in the =/etc/modprobe.d=.
+#+begin_src shell :tangle no :exports both :results verbatim
+cat /etc/modprobe.d/amdgpu.conf
+#+end_src
+
+#+RESULTS:
+: options amdgpu si_support=1
+: options amdgpu cik_support=1
+
+#+begin_src shell :tangle no :exports both :results verbatim
+cat /etc/modprobe.d/radeon.conf
+#+end_src
+
+#+RESULTS:
+: options radeon si_support=0
+: options radeon cik_support=0
+
+List =amdgpu= first before =radeon= in the =mkinitcpio.conf=
+
+#+begin_src shell :tangle no :exports both :results verbatim
+cat /etc/mkinitcpio.conf |grep -i '^modules'
+#+end_src
+
+#+RESULTS:
+: MODULES=(amdgpu radeon btrfs)
+** For Xorg
+Another step necessary for Xorg, the wiki said Xorg will automatically load the driver, but in my case, after all the steps above it still picks =radeon= first.
+#+name: /etc/X11/xorg.conf.d/20-amdgpu.conf
+#+begin_example
+  Section "OutputClass"
+       Identifier "AMD"
+       MatchDriver "amdgpu"
+       Driver "amdgpu"
+  EndSection
+#+end_example
+
+Or for reducing output latency
+#+name: /etc/X11/xorg.conf.d/20-amdgpu.conf
+#+begin_example
+  Section "OutputClass"
+       Identifier "AMD"
+       MatchDriver "amdgpu"
+       Driver "amdgpu"
+       Option "EnablePageFlip" "off"
+       Option "TearFree" "false"
+  EndSection
+#+end_example
+* Footnotes
+[fn:2] https://wiki.archlinux.org/title/AMDGPU#Enable_Southern_Islands_(SI)_and_Sea_Islands_(CIK)_support 
+
+[fn:1] https://wiki.archlinux.org/title/AMDGPU#Installation 
