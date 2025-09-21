@@ -92,6 +92,8 @@ options amdgpu si_support=1
 options amdgpu cik_support=1
 #+end_example
 
+The recommended can be seen from the =dmesg= output when there's no =amdgpu= options is set.
+
 #+begin_src shell :tangle no :exports both :results verbatim
 cat /etc/modprobe.d/radeon.conf
 #+end_src
