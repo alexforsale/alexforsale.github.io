@@ -82,7 +82,7 @@ root=LABEL=root rootflags=subvol=@arch-root initrd=\initramfs-linux.img rw quiet
 The relevant line is =radeon.si_support=0 amdgpu.si_support=1= for Southern Islands (SI).[fn:2] Also there should be no =nomodeset= or =vga= in the kernel command line.
 
 Also in the =/etc/modprobe.d=.
-#+begin_src shell :tangle no :exports both :results verbatim raw
+#+begin_src shell :tangle no :exports both :results verbatim
 cat /etc/modprobe.d/amdgpu.conf
 #+end_src
 
@@ -92,7 +92,7 @@ options amdgpu si_support=1
 options amdgpu cik_support=1
 #+end_example
 
-#+begin_src shell :tangle no :exports both :results verbatim raw
+#+begin_src shell :tangle no :exports both :results verbatim
 cat /etc/modprobe.d/radeon.conf
 #+end_src
 
@@ -104,7 +104,7 @@ options radeon cik_support=0
 
 List =amdgpu= first before =radeon= in the =mkinitcpio.conf=
 
-#+begin_src shell :tangle no :exports both :results verbatim raw
+#+begin_src shell :tangle no :exports both :results verbatim
 cat /etc/mkinitcpio.conf |grep -i '^modules'
 #+end_src
 
