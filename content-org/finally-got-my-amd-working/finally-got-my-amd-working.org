@@ -112,6 +112,7 @@ MODULES=(amdgpu radeon btrfs)
 ** For Xorg
 Another step necessary for Xorg, the wiki said Xorg will automatically load the driver, but in my case, after all the steps above it still picks =radeon= first.
 #+name: /etc/X11/xorg.conf.d/20-amdgpu.conf
+#+caption: /etc/X11/xorg.conf.d/20-amdgpu.conf
 #+begin_example
   Section "OutputClass"
        Identifier "AMD"
@@ -122,6 +123,7 @@ Another step necessary for Xorg, the wiki said Xorg will automatically load the 
 
 Or for reducing output latency
 #+name: /etc/X11/xorg.conf.d/20-amdgpu.conf
+#+caption: /etc/X11/xorg.conf.d/20-amdgpu.conf
 #+begin_example
   Section "OutputClass"
        Identifier "AMD"
