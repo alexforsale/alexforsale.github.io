@@ -97,8 +97,8 @@ cat /etc/modprobe.d/radeon.conf
 #+begin_example
 options radeon si_support=0
 options radeon cik_support=0
-
 #+end_example
+Turn off all radeon options.
 
 List =amdgpu= first before =radeon= in the =mkinitcpio.conf=
 
