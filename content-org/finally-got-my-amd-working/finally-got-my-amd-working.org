@@ -70,7 +70,7 @@ I've never used any AMD GPU in /linux/ before, and I just assume it will just wo
   
   Don't install =amdvlk= to avoid issue.[fn:1]
 ** Set the kernel module parameters
-#+begin_src shell :tangle no :exports both :results verbatim
+#+begin_src sh :tangle no :exports both :results verbatim
 cat /proc/cmdline
 #+end_src
 
@@ -82,7 +82,7 @@ root=LABEL=root rootflags=subvol=@arch-root initrd=\initramfs-linux.img rw quiet
 The relevant line is =radeon.si_support=0 amdgpu.si_support=1= for Southern Islands (SI).[fn:2] Also there should be no =nomodeset= or =vga= in the kernel command line.
 
 Also in the =/etc/modprobe.d=.
-#+begin_src shell :tangle no :exports both :results verbatim
+#+begin_src sh :tangle no :exports both :results verbatim
 cat /etc/modprobe.d/amdgpu.conf
 #+end_src
 
@@ -90,11 +90,12 @@ cat /etc/modprobe.d/amdgpu.conf
 #+begin_example
 options amdgpu si_support=1
 options amdgpu cik_support=1
+
 #+end_example
 
 The recommended can be seen from the =dmesg= output when there's no =amdgpu= options is set.
 
-#+begin_src shell :tangle no :exports both :results verbatim
+#+begin_src sh :tangle no :exports both :results verbatim
 cat /etc/modprobe.d/radeon.conf
 #+end_src
 
@@ -102,17 +103,19 @@ cat /etc/modprobe.d/radeon.conf
 #+begin_example
 options radeon si_support=0
 options radeon cik_support=0
+
 #+end_example
 
 List =amdgpu= first before =radeon= in the =mkinitcpio.conf=
 
-#+begin_src shell :tangle no :exports both :results verbatim
+#+begin_src sh :tangle no :exports both :results verbatim
 cat /etc/mkinitcpio.conf |grep -i '^modules'
 #+end_src
 
 #+RESULTS:
 #+begin_example
 MODULES=(amdgpu radeon btrfs)
+
 #+end_example
 ** For Xorg
 Another step necessary for Xorg, the wiki said Xorg will automatically load the driver, but in my case, after all the steps above it still picks =radeon= first.
