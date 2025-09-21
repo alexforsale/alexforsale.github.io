@@ -6,7 +6,7 @@
     <description>Recent content on alexforsale.github.io</description>
     <generator>Hugo -- 0.150.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Sep 2025 07:30:17 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Sep 2025 16:22:25 +0000</lastBuildDate>
     <atom:link href="https://alexforsale.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Finally Got AMD setup on Archlinux</title>
@@ -132,12 +132,15 @@
 &lt;dl&gt;
 &lt;dt&gt;&lt;a href=&#34;https://alexforsale.github.io/literate-emacs/&#34;&gt;literate emacs&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Emacs&#34;&gt;Emacs&lt;/a&gt; configuration file.&lt;/dd&gt;
-&lt;dt&gt;&lt;a href=&#34;https://alexforsale.github.io/dotfiles-shells/&#34;&gt;dotfiles-shells&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Common shells configuration / startup files. Designed to serve &lt;a href=&#34;https://en.wikipedia.org/wiki/POSIX&#34;&gt;POSIX&lt;/a&gt;-compliant shells that I used (&lt;a href=&#34;https://en.wikipedia.org/wiki/Bash_(Unix_shell)&#34;&gt;bash&lt;/a&gt;, &lt;a href=&#34;https://en.wikipedia.org/wiki/Z_shell&#34;&gt;zsh&lt;/a&gt;, &lt;a href=&#34;https://en.wikipedia.org/wiki/Almquist_shell&#34;&gt;dash/ash/sh&lt;/a&gt;, and &lt;a href=&#34;https://en.wikipedia.org/wiki/Tcsh&#34;&gt;tcsh&lt;/a&gt;) on various machines.&lt;/dd&gt;
-&lt;dt&gt;&lt;a href=&#34;https://alexforsale.github.io/dotfiles-bash/&#34;&gt;dotfiles-bash&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Bash startup files, configured mostly for command-line applications that I used.&lt;/dd&gt;
-&lt;dt&gt;&lt;a href=&#34;https://alexforsale.github.io/dotfiles-hyprland/&#34;&gt;dotfiles-hyprland&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;&lt;a href=&#34;https://wiki.hyprland.org/&#34;&gt;A fully autonomous Display Server for linux&lt;/a&gt;, considered to be an Xorg replacement. This repository stores the configuration files. It matured enough to be my daily window manager.&lt;/dd&gt;
+&lt;dt&gt;&lt;a href=&#34;https://alexforsale.github.io/dotfiles/&#34;&gt;dotfiles&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;The main &lt;a href=&#34;https://wiki.archlinux.org/title/Dotfiles&#34;&gt;dotfiles&lt;/a&gt; repository, containing various git sub modules for applications that I used frequently:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://alexforsale.github.io/dotfiles-shells/&#34;&gt;dotfiles-shells&lt;/a&gt;:&lt;/strong&gt; Common shells configuration / startup files. Designed to serve &lt;a href=&#34;https://en.wikipedia.org/wiki/POSIX&#34;&gt;POSIX&lt;/a&gt;-compliant shells that I used (&lt;a href=&#34;https://en.wikipedia.org/wiki/Bash_(Unix_shell)&#34;&gt;bash&lt;/a&gt;, &lt;a href=&#34;https://en.wikipedia.org/wiki/Z_shell&#34;&gt;zsh&lt;/a&gt;, &lt;a href=&#34;https://en.wikipedia.org/wiki/Almquist_shell&#34;&gt;dash/ash/sh&lt;/a&gt;, and &lt;a href=&#34;https://en.wikipedia.org/wiki/Tcsh&#34;&gt;tcsh&lt;/a&gt;) on various machines.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://alexforsale.github.io/dotfiles-bash/&#34;&gt;dotfiles-bash&lt;/a&gt;:&lt;/strong&gt; Bash startup files, configured mostly for command-line applications that I used.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://alexforsale.github.io/dotfiles-hyprland/&#34;&gt;dotfiles-hyprland&lt;/a&gt;:&lt;/strong&gt; &lt;a href=&#34;https://wiki.hyprland.org/&#34;&gt;A fully autonomous Display Server for linux&lt;/a&gt;, considered to be an Xorg replacement. This repository stores the configuration files. It matured enough to be my daily window manager.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://alexforsale.github.io/dotfiles-i3/&#34;&gt;dotfiles-i3&lt;/a&gt;:&lt;/strong&gt; Configuration for &lt;a href=&#34;https://i3wm.org/&#34;&gt;i3wm&lt;/a&gt;, a popular tiling window manager. It&amp;rsquo;s stable enough for my daily driver.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;h3 id=&#34;programming&#34;&gt;Programming&lt;/h3&gt;
 &lt;dl&gt;
