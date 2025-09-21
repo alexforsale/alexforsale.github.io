@@ -26,29 +26,37 @@ sudo dmidecode -t chassis
 15
 16
 17
+18
+19
+20
+21
 
 
-# dmidecode 3.5
+# dmidecode 3.6
 Getting SMBIOS data from sysfs.
-SMBIOS 2.3 present.
+SMBIOS 3.0.0 present.
 
-Handle 0x0003, DMI type 3, 17 bytes
+Handle 0x0003, DMI type 3, 22 bytes
 Chassis Information
-	Manufacturer: Microsoft Corporation
+	Manufacturer: Hewlett-Packard
 	Type: Desktop
 	Lock: Not Present
-	Version: 7.0
-	Serial Number: 3187-2391-7436-3366-0921-7735-54
-	Asset Tag: 7783-7084-3265-9085-8269-3286-77
+	Version:
+	Serial Number: SGH525Q1P2
+	Asset Tag: SGH525Q1P2
 	Boot-up State: Safe
 	Power Supply State: Safe
-	Thermal State: Other
-	Security Status: Other
-	OEM Information: 0x00000000
+	Thermal State: Safe
+	Security Status: None
+	OEM Information: 0x4C414E5F
+	Height: Unspecified
+	Number Of Power Cords: 1
+	Contained Elements: 0
+	SKU Number:
 
 
 It has a built-in graphic controller and an AMD VGA controller:"><meta name=author content="Kristian Alexander P"><link rel=canonical href=https://alexforsale.github.io/posts/finally-got-my-amd-working/><link crossorigin=anonymous href=/assets/css/stylesheet.2211ca3164be7830024f6aad2b3a2e520843a64f8f048445c3401c1249aa051d.css integrity="sha256-IhHKMWS+eDACT2qtKzouUghDpk+PBIRFw0AcEkmqBR0=" rel="preload stylesheet" as=style><link rel=icon href=https://alexforsale.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://alexforsale.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://alexforsale.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://alexforsale.github.io/apple-touch-icon.png><link rel=mask-icon href=https://alexforsale.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://alexforsale.github.io/posts/finally-got-my-amd-working/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:url" content="https://alexforsale.github.io/posts/finally-got-my-amd-working/"><meta property="og:site_name" content="alexforsale.github.io"><meta property="og:title" content="Finally Got AMD setup on Archlinux"><meta property="og:description" content="I got this Hewlett-Packard PC few years ago, which now I use regularly.
-1 sudo dmidecode -t chassis 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # dmidecode 3.5 Getting SMBIOS data from sysfs. SMBIOS 2.3 present. Handle 0x0003, DMI type 3, 17 bytes Chassis Information Manufacturer: Microsoft Corporation Type: Desktop Lock: Not Present Version: 7.0 Serial Number: 3187-2391-7436-3366-0921-7735-54 Asset Tag: 7783-7084-3265-9085-8269-3286-77 Boot-up State: Safe Power Supply State: Safe Thermal State: Other Security Status: Other OEM Information: 0x00000000 It has a built-in graphic controller and an AMD VGA controller:"><meta property="og:locale" content="en-us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-09-12T00:00:00+00:00"><meta property="article:modified_time" content="2025-09-21T07:01:23+00:00"><meta property="article:tag" content="Amd"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Gpu"><meta property="article:tag" content="Xorg"><meta name=twitter:card content="summary"><meta name=twitter:title content="Finally Got AMD setup on Archlinux"><meta name=twitter:description content="I got this Hewlett-Packard PC few years ago, which now I use regularly.
+1 sudo dmidecode -t chassis 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 # dmidecode 3.6 Getting SMBIOS data from sysfs. SMBIOS 3.0.0 present. Handle 0x0003, DMI type 3, 22 bytes Chassis Information Manufacturer: Hewlett-Packard Type: Desktop Lock: Not Present Version: Serial Number: SGH525Q1P2 Asset Tag: SGH525Q1P2 Boot-up State: Safe Power Supply State: Safe Thermal State: Safe Security Status: None OEM Information: 0x4C414E5F Height: Unspecified Number Of Power Cords: 1 Contained Elements: 0 SKU Number: It has a built-in graphic controller and an AMD VGA controller:"><meta property="og:locale" content="en-us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-09-12T00:00:00+00:00"><meta property="article:modified_time" content="2025-09-21T07:05:28+00:00"><meta property="article:tag" content="Amd"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Gpu"><meta property="article:tag" content="Xorg"><meta name=twitter:card content="summary"><meta name=twitter:title content="Finally Got AMD setup on Archlinux"><meta name=twitter:description content="I got this Hewlett-Packard PC few years ago, which now I use regularly.
 
 
 1
@@ -76,30 +84,38 @@ sudo dmidecode -t chassis
 15
 16
 17
+18
+19
+20
+21
 
 
-# dmidecode 3.5
+# dmidecode 3.6
 Getting SMBIOS data from sysfs.
-SMBIOS 2.3 present.
+SMBIOS 3.0.0 present.
 
-Handle 0x0003, DMI type 3, 17 bytes
+Handle 0x0003, DMI type 3, 22 bytes
 Chassis Information
-	Manufacturer: Microsoft Corporation
+	Manufacturer: Hewlett-Packard
 	Type: Desktop
 	Lock: Not Present
-	Version: 7.0
-	Serial Number: 3187-2391-7436-3366-0921-7735-54
-	Asset Tag: 7783-7084-3265-9085-8269-3286-77
+	Version:
+	Serial Number: SGH525Q1P2
+	Asset Tag: SGH525Q1P2
 	Boot-up State: Safe
 	Power Supply State: Safe
-	Thermal State: Other
-	Security Status: Other
-	OEM Information: 0x00000000
+	Thermal State: Safe
+	Security Status: None
+	OEM Information: 0x4C414E5F
+	Height: Unspecified
+	Number Of Power Cords: 1
+	Contained Elements: 0
+	SKU Number:
 
 
-It has a built-in graphic controller and an AMD VGA controller:"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://alexforsale.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Finally Got AMD setup on Archlinux","item":"https://alexforsale.github.io/posts/finally-got-my-amd-working/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Finally Got AMD setup on Archlinux","name":"Finally Got AMD setup on Archlinux","description":"I got this Hewlett-Packard PC few years ago, which now I use regularly.\n1 sudo dmidecode -t chassis 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # dmidecode 3.5 Getting SMBIOS data from sysfs. SMBIOS 2.3 present. Handle 0x0003, DMI type 3, 17 bytes Chassis Information Manufacturer: Microsoft Corporation Type: Desktop Lock: Not Present Version: 7.0 Serial Number: 3187-2391-7436-3366-0921-7735-54 Asset Tag: 7783-7084-3265-9085-8269-3286-77 Boot-up State: Safe Power Supply State: Safe Thermal State: Other Security Status: Other OEM Information: 0x00000000 It has a built-in graphic controller and an AMD VGA controller:\n","keywords":["amd","linux","gpu","xorg"],"articleBody":"I got this Hewlett-Packard PC few years ago, which now I use regularly.\n1 sudo dmidecode -t chassis 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # dmidecode 3.5 Getting SMBIOS data from sysfs. SMBIOS 2.3 present. Handle 0x0003, DMI type 3, 17 bytes Chassis Information Manufacturer: Microsoft Corporation Type: Desktop Lock: Not Present Version: 7.0 Serial Number: 3187-2391-7436-3366-0921-7735-54 Asset Tag: 7783-7084-3265-9085-8269-3286-77 Boot-up State: Safe Power Supply State: Safe Thermal State: Other Security Status: Other OEM Information: 0x00000000 It has a built-in graphic controller and an AMD VGA controller:\n1 lspci -k -d ::03xx 1 2 3 00:08.0 VGA compatible controller: Microsoft Corporation Hyper-V virtual VGA Kernel driver in use: hyperv_drm Kernel modules: hyperv_drm Note that this output of lspci is after I made all the modifications below.\nI’ve never used any AMD GPU in linux before, and I just assume it will just work. But out of the box archlinux will use the radeon driver for this card, while it works fine, steam refuse to open using this driver, and even worse some application on wayland produce strange errors.\nWhat I’ve done Installed Softwares mesa and lib32-mesa.\nxf86-video-amdgpu.\nvulkan-radeon and lib32-vulkan-radeon.\nlinux-firmware-amdgpu, this should be installed by default.\nDon’t install amdvlk to avoid issue.1\nSet the kernel module parameters 1 cat /proc/cmdline 1 BOOT_IMAGE=/vmlinuz-6.11.0-1018-azure root=PARTUUID=92675679-fbc2-4e93-bc37-3604088c3831 ro console=tty1 console=ttyS0 earlyprintk=ttyS0 nvme_core.io_timeout=240 panic=-1 The relevant line is radeon.si_support=0 amdgpu.si_support=1 for Southern Islands (SI).2 Also there should be no nomodeset or vga in the kernel command line.\nAlso in the /etc/modprobe.d.\n1 cat /etc/modprobe.d/amdgpu.conf The recommended can be seen from the dmesg output when there’s no amdgpu options is set.\n1 cat /etc/modprobe.d/radeon.conf List amdgpu first before radeon in the mkinitcpio.conf\n1 cat /etc/mkinitcpio.conf |grep -i '^modules' For Xorg Another step necessary for Xorg, the wiki said Xorg will automatically load the driver, but in my case, after all the steps above it still picks radeon first.\n1 2 3 4 5 Section \"OutputClass\" Identifier \"AMD\" MatchDriver \"amdgpu\" Driver \"amdgpu\" EndSection Or for reducing output latency\n1 2 3 4 5 6 7 Section \"OutputClass\" Identifier \"AMD\" MatchDriver \"amdgpu\" Driver \"amdgpu\" Option \"EnablePageFlip\" \"off\" Option \"TearFree\" \"false\" EndSection https://wiki.archlinux.org/title/AMDGPU#Installation ↩︎\nhttps://wiki.archlinux.org/title/AMDGPU#Enable_Southern_Islands_(SI)_and_Sea_Islands_(CIK)_support ↩︎\n","wordCount":"367","inLanguage":"en","datePublished":"2025-09-12T00:00:00Z","dateModified":"2025-09-21T07:01:23Z","author":[{"@type":"Person","name":"Kristian Alexander P"}],"mainEntityOfPage":{"@type":"WebPage","@id":"https://alexforsale.github.io/posts/finally-got-my-amd-working/"},"publisher":{"@type":"Organization","name":"alexforsale.github.io","logo":{"@type":"ImageObject","url":"https://alexforsale.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://alexforsale.github.io/ accesskey=h title="alexforsale.github.io (Alt + H)">alexforsale.github.io</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+It has a built-in graphic controller and an AMD VGA controller:"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://alexforsale.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Finally Got AMD setup on Archlinux","item":"https://alexforsale.github.io/posts/finally-got-my-amd-working/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Finally Got AMD setup on Archlinux","name":"Finally Got AMD setup on Archlinux","description":"I got this Hewlett-Packard PC few years ago, which now I use regularly.\n1 sudo dmidecode -t chassis 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 # dmidecode 3.6 Getting SMBIOS data from sysfs. SMBIOS 3.0.0 present. Handle 0x0003, DMI type 3, 22 bytes Chassis Information Manufacturer: Hewlett-Packard Type: Desktop Lock: Not Present Version: Serial Number: SGH525Q1P2 Asset Tag: SGH525Q1P2 Boot-up State: Safe Power Supply State: Safe Thermal State: Safe Security Status: None OEM Information: 0x4C414E5F Height: Unspecified Number Of Power Cords: 1 Contained Elements: 0 SKU Number: It has a built-in graphic controller and an AMD VGA controller:\n","keywords":["amd","linux","gpu","xorg"],"articleBody":"I got this Hewlett-Packard PC few years ago, which now I use regularly.\n1 sudo dmidecode -t chassis 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 # dmidecode 3.6 Getting SMBIOS data from sysfs. SMBIOS 3.0.0 present. Handle 0x0003, DMI type 3, 22 bytes Chassis Information Manufacturer: Hewlett-Packard Type: Desktop Lock: Not Present Version: Serial Number: SGH525Q1P2 Asset Tag: SGH525Q1P2 Boot-up State: Safe Power Supply State: Safe Thermal State: Safe Security Status: None OEM Information: 0x4C414E5F Height: Unspecified Number Of Power Cords: 1 Contained Elements: 0 SKU Number: It has a built-in graphic controller and an AMD VGA controller:\n1 lspci -k -d ::03xx 1 2 3 4 5 6 7 8 9 00:02.0 Display controller: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics Controller (rev 06) DeviceName: Onboard IGD Subsystem: Hewlett-Packard Company Device 21f5 Kernel driver in use: i915 Kernel modules: i915 01:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Oland [Radeon HD 8570 / R5 430 OEM / R7 240/340 / Radeon 520 OEM] (rev 87) Subsystem: Hewlett-Packard Company Device 3375 Kernel driver in use: amdgpu Kernel modules: radeon, amdgpu Note that this output of lspci is after I made all the modifications below.\nI’ve never used any AMD GPU in linux before, and I just assume it will just work. But out of the box archlinux will use the radeon driver for this card, while it works fine, steam refuse to open using this driver, and even worse some application on wayland produce strange errors.\nWhat I’ve done Installed Softwares mesa and lib32-mesa.\nxf86-video-amdgpu.\nvulkan-radeon and lib32-vulkan-radeon.\nlinux-firmware-amdgpu, this should be installed by default.\nDon’t install amdvlk to avoid issue.1\nSet the kernel module parameters 1 cat /proc/cmdline 1 root=LABEL=root rootflags=subvol=@arch-root initrd=\\initramfs-linux.img rw quiet splash consoleblank=600 radeon.si_support=0 amdgpu.si_support=1 The relevant line is radeon.si_support=0 amdgpu.si_support=1 for Southern Islands (SI).2 Also there should be no nomodeset or vga in the kernel command line.\nAlso in the /etc/modprobe.d.\n1 cat /etc/modprobe.d/amdgpu.conf 1 2 options amdgpu si_support=1 options amdgpu cik_support=1 The recommended can be seen from the dmesg output when there’s no amdgpu options is set.\n1 cat /etc/modprobe.d/radeon.conf 1 2 options radeon si_support=0 options radeon cik_support=0 List amdgpu first before radeon in the mkinitcpio.conf\n1 cat /etc/mkinitcpio.conf |grep -i '^modules' 1 MODULES=(amdgpu radeon btrfs) For Xorg Another step necessary for Xorg, the wiki said Xorg will automatically load the driver, but in my case, after all the steps above it still picks radeon first.\n1 2 3 4 5 Section \"OutputClass\" Identifier \"AMD\" MatchDriver \"amdgpu\" Driver \"amdgpu\" EndSection Or for reducing output latency\n1 2 3 4 5 6 7 Section \"OutputClass\" Identifier \"AMD\" MatchDriver \"amdgpu\" Driver \"amdgpu\" Option \"EnablePageFlip\" \"off\" Option \"TearFree\" \"false\" EndSection https://wiki.archlinux.org/title/AMDGPU#Installation ↩︎\nhttps://wiki.archlinux.org/title/AMDGPU#Enable_Southern_Islands_(SI)_and_Sea_Islands_(CIK)_support ↩︎\n","wordCount":"463","inLanguage":"en","datePublished":"2025-09-12T00:00:00Z","dateModified":"2025-09-21T07:05:28Z","author":[{"@type":"Person","name":"Kristian Alexander P"}],"mainEntityOfPage":{"@type":"WebPage","@id":"https://alexforsale.github.io/posts/finally-got-my-amd-working/"},"publisher":{"@type":"Organization","name":"alexforsale.github.io","logo":{"@type":"ImageObject","url":"https://alexforsale.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://alexforsale.github.io/ accesskey=h title="alexforsale.github.io (Alt + H)">alexforsale.github.io</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
 <svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://alexforsale.github.io/categories/ title=categories><span>categories</span></a></li><li><a href=https://alexforsale.github.io/tags/ title=tags><span>tags</span></a></li><li><a href=https://alexforsale.github.io/posts/ title=posts><span>posts</span></a></li><li><a href=https://alexforsale.github.io/archives/ title=archives><span>archives</span></a></li><li><a href=https://alexforsale.github.io/braindump/ title=braindump><span>braindump</span></a></li><li><a href=https://alexforsale.github.io/projects/ title=projects><span>projects</span></a></li><li><a href=https://alexforsale.github.io/about/ title=about><span>about</span></a></li><li><a href=https://alexforsale.github.io/search/ title="search (Alt + /)" accesskey=/><span>search</span></a></li><li><a href=https://alexforsale.github.io/ title=home><span>home</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://alexforsale.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://alexforsale.github.io/posts/>Posts</a></div><h1 class="post-title entry-hint-parent">Finally Got AMD setup on Archlinux</h1><div class=post-meta><span title='2025-09-12 00:00:00 +0000 UTC'>September 12, 2025</span>&nbsp;·&nbsp;<span title='2025-09-21 07:01:23 +0000 UTC'>(updated September 21, 2025)</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;367 words&nbsp;·&nbsp;Kristian Alexander P</div></header><div class=post-content><p>I got this Hewlett-Packard PC few years ago, which now I use regularly.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://alexforsale.github.io/categories/ title=categories><span>categories</span></a></li><li><a href=https://alexforsale.github.io/tags/ title=tags><span>tags</span></a></li><li><a href=https://alexforsale.github.io/posts/ title=posts><span>posts</span></a></li><li><a href=https://alexforsale.github.io/archives/ title=archives><span>archives</span></a></li><li><a href=https://alexforsale.github.io/braindump/ title=braindump><span>braindump</span></a></li><li><a href=https://alexforsale.github.io/projects/ title=projects><span>projects</span></a></li><li><a href=https://alexforsale.github.io/about/ title=about><span>about</span></a></li><li><a href=https://alexforsale.github.io/search/ title="search (Alt + /)" accesskey=/><span>search</span></a></li><li><a href=https://alexforsale.github.io/ title=home><span>home</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://alexforsale.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://alexforsale.github.io/posts/>Posts</a></div><h1 class="post-title entry-hint-parent">Finally Got AMD setup on Archlinux</h1><div class=post-meta><span title='2025-09-12 00:00:00 +0000 UTC'>September 12, 2025</span>&nbsp;·&nbsp;<span title='2025-09-21 07:05:28 +0000 UTC'>(updated September 21, 2025)</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;463 words&nbsp;·&nbsp;Kristian Alexander P</div></header><div class=post-content><p>I got this Hewlett-Packard PC few years ago, which now I use regularly.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo dmidecode -t chassis
 </span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -118,41 +134,71 @@ It has a built-in graphic controller and an AMD VGA controller:"><script type=ap
 </span><span class=lnt>15
 </span><span class=lnt>16
 </span><span class=lnt>17
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl># dmidecode 3.5
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl># dmidecode 3.6
 </span></span><span class=line><span class=cl>Getting SMBIOS data from sysfs.
-</span></span><span class=line><span class=cl>SMBIOS 2.3 present.
+</span></span><span class=line><span class=cl>SMBIOS 3.0.0 present.
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Handle 0x0003, DMI type 3, 17 bytes
+</span></span><span class=line><span class=cl>Handle 0x0003, DMI type 3, 22 bytes
 </span></span><span class=line><span class=cl>Chassis Information
-</span></span><span class=line><span class=cl>	Manufacturer: Microsoft Corporation
+</span></span><span class=line><span class=cl>	Manufacturer: Hewlett-Packard
 </span></span><span class=line><span class=cl>	Type: Desktop
 </span></span><span class=line><span class=cl>	Lock: Not Present
-</span></span><span class=line><span class=cl>	Version: 7.0
-</span></span><span class=line><span class=cl>	Serial Number: 3187-2391-7436-3366-0921-7735-54
-</span></span><span class=line><span class=cl>	Asset Tag: 7783-7084-3265-9085-8269-3286-77
+</span></span><span class=line><span class=cl>	Version:
+</span></span><span class=line><span class=cl>	Serial Number: SGH525Q1P2
+</span></span><span class=line><span class=cl>	Asset Tag: SGH525Q1P2
 </span></span><span class=line><span class=cl>	Boot-up State: Safe
 </span></span><span class=line><span class=cl>	Power Supply State: Safe
-</span></span><span class=line><span class=cl>	Thermal State: Other
-</span></span><span class=line><span class=cl>	Security Status: Other
-</span></span><span class=line><span class=cl>	OEM Information: 0x00000000
+</span></span><span class=line><span class=cl>	Thermal State: Safe
+</span></span><span class=line><span class=cl>	Security Status: None
+</span></span><span class=line><span class=cl>	OEM Information: 0x4C414E5F
+</span></span><span class=line><span class=cl>	Height: Unspecified
+</span></span><span class=line><span class=cl>	Number Of Power Cords: 1
+</span></span><span class=line><span class=cl>	Contained Elements: 0
+</span></span><span class=line><span class=cl>	SKU Number:
 </span></span></code></pre></td></tr></table></div></div><p>It has a built-in graphic controller and an AMD VGA controller:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>lspci -k -d ::03xx
 </span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>00:08.0 VGA compatible controller: Microsoft Corporation Hyper-V virtual VGA
-</span></span><span class=line><span class=cl>	Kernel driver in use: hyperv_drm
-</span></span><span class=line><span class=cl>	Kernel modules: hyperv_drm
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>00:02.0 Display controller: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics Controller (rev 06)
+</span></span><span class=line><span class=cl>	DeviceName:  Onboard IGD
+</span></span><span class=line><span class=cl>	Subsystem: Hewlett-Packard Company Device 21f5
+</span></span><span class=line><span class=cl>	Kernel driver in use: i915
+</span></span><span class=line><span class=cl>	Kernel modules: i915
+</span></span><span class=line><span class=cl>01:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Oland [Radeon HD 8570 / R5 430 OEM / R7 240/340 / Radeon 520 OEM] (rev 87)
+</span></span><span class=line><span class=cl>	Subsystem: Hewlett-Packard Company Device 3375
+</span></span><span class=line><span class=cl>	Kernel driver in use: amdgpu
+</span></span><span class=line><span class=cl>	Kernel modules: radeon, amdgpu
 </span></span></code></pre></td></tr></table></div></div><p>Note that this output of <code>lspci</code> is after I made all the modifications below.</p><p>I&rsquo;ve never used any AMD GPU in <em>linux</em> before, and I just assume it will just work. But out of the box <em>archlinux</em> will use the <code>radeon</code> driver for this card, while it works fine, <code>steam</code> refuse to open using this driver, and even worse some application on <code>wayland</code> produce strange errors.</p><h2 id=what-i-ve-done>What I&rsquo;ve done<a hidden class=anchor aria-hidden=true href=#what-i-ve-done>#</a></h2><h3 id=installed-softwares>Installed Softwares<a hidden class=anchor aria-hidden=true href=#installed-softwares>#</a></h3><ul><li><p><code>mesa</code> and <code>lib32-mesa</code>.</p></li><li><p><code>xf86-video-amdgpu</code>.</p></li><li><p><code>vulkan-radeon</code> and <code>lib32-vulkan-radeon</code>.</p></li><li><p><code>linux-firmware-amdgpu</code>, this should be installed by default.</p><p>Don&rsquo;t install <code>amdvlk</code> to avoid issue.<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup></p></li></ul><h3 id=set-the-kernel-module-parameters>Set the kernel module parameters<a hidden class=anchor aria-hidden=true href=#set-the-kernel-module-parameters>#</a></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>cat /proc/cmdline
 </span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>BOOT_IMAGE=/vmlinuz-6.11.0-1018-azure root=PARTUUID=92675679-fbc2-4e93-bc37-3604088c3831 ro console=tty1 console=ttyS0 earlyprintk=ttyS0 nvme_core.io_timeout=240 panic=-1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>root=LABEL=root rootflags=subvol=@arch-root initrd=\initramfs-linux.img rw quiet splash consoleblank=600 radeon.si_support=0 amdgpu.si_support=1
 </span></span></code></pre></td></tr></table></div></div><p>The relevant line is <code>radeon.si_support=0 amdgpu.si_support=1</code> for Southern Islands (SI).<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup> Also there should be no <code>nomodeset</code> or <code>vga</code> in the kernel command line.</p><p>Also in the <code>/etc/modprobe.d</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>cat /etc/modprobe.d/amdgpu.conf
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>options amdgpu si_support=1
+</span></span><span class=line><span class=cl>options amdgpu cik_support=1
 </span></span></code></pre></td></tr></table></div></div><p>The recommended can be seen from the <code>dmesg</code> output when there&rsquo;s no <code>amdgpu</code> options is set.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>cat /etc/modprobe.d/radeon.conf
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>options radeon si_support=0
+</span></span><span class=line><span class=cl>options radeon cik_support=0
 </span></span></code></pre></td></tr></table></div></div><p>List <code>amdgpu</code> first before <code>radeon</code> in the <code>mkinitcpio.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>cat /etc/mkinitcpio.conf <span class=p>|</span>grep -i <span class=s1>&#39;^modules&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>MODULES=(amdgpu radeon btrfs)
 </span></span></code></pre></td></tr></table></div></div><h3 id=for-xorg>For Xorg<a hidden class=anchor aria-hidden=true href=#for-xorg>#</a></h3><p>Another step necessary for Xorg, the wiki said Xorg will automatically load the driver, but in my case, after all the steps above it still picks <code>radeon</code> first.</p><p><a id=org-example-block---etc-X11-xorg.conf.d-20-amdgpu.conf></a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
