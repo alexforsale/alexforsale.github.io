@@ -34,6 +34,10 @@ I was an IT Support at Multi Kontrol Nusantara since October 2022 until Septembe
 - https://linkedin.com/in/alexforsale
 **** Instant Messaging
 - Telegram: https:/t.me/alexforsale
+*** Educational Background
+- 2000 – 2005 : University of Krisnadwipayana, Jakarta
+- 1999 – 1996 : SMU Negeri 3, Bekasi
+- 1996 – 1993 : SLTP Negeri 10, Bekasi
 *** Skills
 - Experience in /Linux/, /FreeBSD/, and /Microsoft Windows/ administration, installation, and maintenance.
 - Installation and configuration of webserver / proxy such as /Apache/, /nginx/ and /haproxy/ on /Linux/ and /FreeBSD/.
@@ -49,10 +53,6 @@ I was an IT Support at Multi Kontrol Nusantara since October 2022 until Septembe
 - Configuration management with ansible.
 - Management of user accounts, system security, and performance tuning.
 - Quick learner.
-*** Educational Background
-- 2000 – 2005 : University of Krisnadwipayana, Jakarta
-- 1999 – 1996 : SMU Negeri 3, Bekasi
-- 1996 – 1993 : SLTP Negeri 10, Bekasi
 *** Employment History
 **** Multi Kontrol Nusantara
 ***** IT Support                                                 :Jakarta:
