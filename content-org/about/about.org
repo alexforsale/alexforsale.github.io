@@ -53,6 +53,10 @@ I was an IT Support at Multi Kontrol Nusantara since October 2022 until Septembe
 - Configuration management with ansible.
 - Management of user accounts, system security, and performance tuning.
 - Quick learner.
+*** Licenses & certifications
+**** Ultimate AWS Certified Developer Associate 2025 DVA-C02
+- https://www.udemy.com/certificate/UC-b94dc817-8036-4f1c-b59e-248f503121ab/
+- Udemy :: November 2025
 *** Employment History
 **** Multi Kontrol Nusantara
 ***** IT Support                                                 :Jakarta:
