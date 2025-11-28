@@ -57,6 +57,9 @@ I was an IT Support at Multi Kontrol Nusantara since October 2022 until Septembe
 **** Ultimate AWS Certified Developer Associate 2025 DVA-C02
 - https://www.udemy.com/certificate/UC-b94dc817-8036-4f1c-b59e-248f503121ab/
 - Udemy :: November 2025
+**** The Web Developer Bootcamp 2025
+- https://www.udemy.com/certificate/UC-a23676d9-e907-4235-9c19-165f70a49618/
+- Udemy :: November 2025
 *** Employment History
 **** Multi Kontrol Nusantara
 ***** IT Support                                                 :Jakarta:
