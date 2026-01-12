@@ -5,7 +5,6 @@
 #+date: <2025-09-12 Fri>
 #+hugo_categories: desktop
 #+hugo_tags: amd linux gpu xorg
-#+hugo_auto_set_lastmod: t
 #+hugo_section: posts
 #+hugo_base_dir: ../../
 #+language: en
