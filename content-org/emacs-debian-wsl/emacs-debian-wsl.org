@@ -5,7 +5,6 @@
 #+description: Compiling Emacs on Debian WSL
 #+hugo_tags: windows wsl emacs
 #+hugo_categories: emacs
-#+hugo_auto_set_lastmod: t
 #+hugo_section: posts
 #+hugo_base_dir: ../../
 #+language: en

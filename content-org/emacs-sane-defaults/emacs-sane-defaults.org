@@ -9,7 +9,6 @@
 #+hugo_tags: emacs configuration
 #+hugo_categories: emacs
 #+hugo_publishdate: <2024-02-23 Thu>
-#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 
 #+caption: Default Emacs

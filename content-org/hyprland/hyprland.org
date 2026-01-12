@@ -9,7 +9,6 @@
 #+hugo_tags: hyprland linux
 #+hugo_categories: desktop
 #+hugo_publishdate: <2024-02-22 Thu>
-#+hugo_auto_set_lastmod: t
 #+startup: showall
 
 #+caption: hyprland

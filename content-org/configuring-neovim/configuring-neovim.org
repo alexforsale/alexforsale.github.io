@@ -10,7 +10,6 @@
 #+hugo_categories: editors
 #+hugo_draft: true
 #+hugo_section: posts
-#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 
 * Plugins

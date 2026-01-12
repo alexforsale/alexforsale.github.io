@@ -9,7 +9,6 @@
 #+hugo_draft: false
 #+hugo_tags: emacs org-mode org GTD
 #+hugo_categories: emacs
-#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 
 * How I mapped my brain to /org-mode/

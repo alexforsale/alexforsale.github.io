@@ -16,7 +16,6 @@
 #+hugo_draft: true
 #+hugo_tags: guix
 #+hugo_categories: operating-systems
-#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 * A Reusable Guix System Configuration
 

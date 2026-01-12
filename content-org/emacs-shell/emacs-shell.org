@@ -9,7 +9,6 @@
 #+hugo_tags: emacs configuration shell eshell vterm terminal
 #+hugo_categories: emacs
 #+hugo_publishdate: <2024-02-28 Thu>
-#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 * Eshell
 It is a shell written in /Emacs Lisp/. Eshell is both a command shell and an /Emacs Lisp/ REPL (Read Eval Print Loop), as a result, you can invoke commands in two different ways: /command form/ or in /Lisp form/.

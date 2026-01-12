@@ -9,7 +9,6 @@
 #+hugo_draft: false
 #+hugo_tags: tmux screen linux unix ssh remote
 #+hugo_categories: terminals
-#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 
 * What is a terminal multiplexer?

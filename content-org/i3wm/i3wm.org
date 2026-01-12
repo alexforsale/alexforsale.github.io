@@ -5,7 +5,6 @@
 #+description: How I made i3 my goto window manager
 #+hugo_tags: i3 linux unix window-manager
 #+hugo_categories: desktop
-#+hugo_auto_set_lastmod: t
 #+hugo_section: posts
 #+hugo_base_dir: ../../
 #+language: en

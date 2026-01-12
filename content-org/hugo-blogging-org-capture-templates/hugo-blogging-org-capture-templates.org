@@ -8,7 +8,6 @@
 #+description: My blogging workflow
 #+hugo_tags: hugo emacs org
 #+hugo_categories: emacs
-#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 
 * Blogging with =org-mode=
@@ -125,7 +124,6 @@ So I need to tweak it a bit in order to automatically create a file within a sub
 #+description: My blogging workflow
 #+hugo_tags: hugo emacs org
 #+hugo_categories: emacs
-#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 #+end_src
 Some metadata will be different for each capture; =title=, =description=, =hugo_tags=, and =hugo_categories=. =dates= should be set as the capture date, the other will be needing a user input, including the filename, for the =org-capture= process.
@@ -169,7 +167,6 @@ Basically it will look for a directory named "alexforsale.github.io" (it's my gi
   ,#+description: %^{description}
   ,#+hugo_tags: %^{tags}
   ,#+hugo_categories: %^{categories}
-  ,#+hugo_auto_set_lastmod: t
   ,#+startup: inlineimages\n%?" :unnarrowed t :jump-to-captured t))
 #+end_src
 

@@ -16,7 +16,6 @@
 #+hugo_draft: false
 #+hugo_tags: learning prog-modes programming
 #+hugo_categories: learning
-#+hugo_auto_set_lastmod: t
 #+startup: inlineimages
 
 This will be a part of a series on my rust-learning journey. The goal of this post is to document my process of creating a simple program that determine if the number given is a perfect number[fn:1]. And also list the perfect number until the given number.

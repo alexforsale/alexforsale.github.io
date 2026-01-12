@@ -14,7 +14,6 @@
 #+cite_export:
 #+hugo_tags: learning prog-modes programming
 #+hugo_categories: learning
-#+hugo_auto_set_lastmod: t
 #+hugo_section: posts
 #+hugo_base_dir: ../../
 
